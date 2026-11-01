@@ -24,7 +24,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
-import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
@@ -1330,7 +1329,7 @@ Future<void> caTestPreview2({
               matching: find.byType(ListTile),
               skipOffstage: false,
             );
-            int currentExpansionTileListTileFinderTotal = printFinderTotal(
+            printFinderTotal(
               currentExpansionTileListTilesFinder,
               "currentExpansionTileListTilesFinder",
             );
@@ -1405,7 +1404,7 @@ Future<void> caTestPreview2({
             matching: find.byType(ListTile),
             skipOffstage: false,
           );
-          int currentExpansionTileListTileFinderTotal = printFinderTotal(
+          printFinderTotal(
             currentExpansionTileListTilesFinder,
             "currentExpansionTileListTilesFinder",
           );
@@ -2160,19 +2159,31 @@ Future<void> gpsTestPreview({
   );
 
   // Opening the preview
+  await tester.ensureVisible(previewTooltipFinder);
   await tester.tap(previewTooltipFinder);
   await tester.pumpAndSettle();
 
   await tester.pump(const Duration(seconds: 20));
 
   // Searching for the title
-  var titleFinder = find.textContaining(title);
+  var titleFinder = find.descendant
+  (
+    of: find.byType(StatefulBuilder),
+    matching: find.textContaining(title)
+  );
+  
   // Verifying the title present
-  expect(titleFinder, findsNWidgets(2));
+  expect(titleFinder, findsNWidgets(1));
 
   // Searching for the date
-  dateForTestingIndex = 0;
-  expect(find.textContaining(lts.datesForTestingList[0]), findsNWidgets(2));
+  // dateForTestingIndex = 0;
+  logt("dateForTestingIndex: $dateForTestingIndex");
+  var dateFinder = find.descendant
+  (
+    of: find.byType(StatefulBuilder),
+    matching: find.textContaining(lts.datesForTestingList[dateForTestingIndex])
+  );
+  expect(dateFinder, findsNWidgets(1));
 
   // Verifying the ideas present
   for (var idea in ideasList) {

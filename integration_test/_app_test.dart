@@ -1,6 +1,5 @@
 import "dart:io";
 
-
 import "package:flutter/services.dart";
 import "package:flutter_test/flutter_test.dart";
 
@@ -33,41 +32,37 @@ Future<void> main() async {
   // https://docs.flutter.dev/testing/integration-tests#project-setup
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  // On mobile: keeping the app in portrait mode for usability 
-  if (Platform.isAndroid || Platform.isIOS)
-  {
-    await SystemChrome.setPreferredOrientations
-    ([
-      DeviceOrientation.portraitUp,   
-      DeviceOrientation.portraitDown
+  // On mobile: keeping the app in portrait mode for usability
+  if (Platform.isAndroid || Platform.isIOS) {
+    await SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
     ]);
   }
 
   // ── Widget/App pumping ─────────────────────────────────────────────────────────────
-   
-  Future<void> pumpHomePage(WidgetTester tester) async
-  {
+
+  Future<void> pumpHomePage(WidgetTester tester) async {
     // Pumping the homepage
     await tester.pumpWidget(
       MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          ...GlobalMaterialLocalizations.delegates,
+        ],
         supportedLocales: AppLocalizations.supportedLocales,
         home: HomePage(onUpdateLocaleCallbackFunction: (_) async {}),
         theme: appTheme,
-
-      )
+      ),
     );
     await tester.pumpAndSettle();
   }
 
-  
-  Future<void> pumpApp(WidgetTester tester) async
-  {
+  Future<void> pumpApp(WidgetTester tester) async {
     // Pumping the app
     await tester.pumpWidget(const GPSapp());
     await tester.pumpAndSettle();
   }
-
 
   // ── Constants ─────────────────────────────────────────────────────────────
 
@@ -76,16 +71,20 @@ Future<void> main() async {
 
   // File names
   const fileNameWithoutExtensionRoot = "file";
- 
+
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
-  
+
   setUp(() async {
     // Creating a temporary folder to store the files to save
-    testTmpDir = await Directory.systemTemp.createTemp("context_analysis_integration_test_");
-    PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(testTmpDir!.path);
+    testTmpDir = await Directory.systemTemp.createTemp(
+      "context_analysis_integration_test_",
+    );
+    PathProviderPlatform.instance = PathProviderPlatformRedirectForTesting(
+      testTmpDir!.path,
+    );
     // To intercept the way the date is saved
-    dateForTestingIndex = 0;
+    dateForTestingIndex = 0; 
   });
 
   // This function will be called after each test is run. The body may be asynchronous; if so, it must return a Future.
@@ -100,339 +99,340 @@ Future<void> main() async {
 
   group("Application Tests: Mobile: \n", () {
     testWidgets("CA + GPS: Session data entered in the context analysis "
-                "is available for the group problem-solving"
-      " (assuming an already selected path to the user session data folder)",
-      (WidgetTester tester) async {
+        "is available for the group problem-solving"
+        " (assuming an already selected path to the user session data folder)", (
+      WidgetTester tester,
+    ) async {
+      // Setting mock values for SharedPreferences
+      SharedPreferences.setMockInitialValues({
+        // Setting value for the first-run modal to be absent,
+        "wasFirstRunModalAcknowledged": true,
+        // to have the context analysis page, with the dashboard,
+        "wasCASessionDataSaved": true,
+        // and to have the group problem-solving page, with the dashboard.
+        "wasGPSSessionDataSaved": true,
+        // Temporary test dir as application folder path
+        "applicationFolderPath": testTmpDir!.path,
+      });
 
-        // Setting mock values for SharedPreferences
-        SharedPreferences.setMockInitialValues
-        ({
-          // Setting value for the first-run modal to be absent,
-          "wasFirstRunModalAcknowledged": true,
-          // to have the context analysis page, with the dashboard,
-          "wasCASessionDataSaved": true,
-          // and to have the group problem-solving page, with the dashboard.
-          "wasGPSSessionDataSaved": true,
-          // Temporary test dir as application folder path
-          "applicationFolderPath": testTmpDir!.path
-        });
+      if (Platform.isAndroid || Platform.isIOS) {
+        // Pumping the homepage
+        await pumpHomePage(tester);
 
-        if (Platform.isAndroid || Platform.isIOS)
-        {
-          // Pumping the homepage
-          await pumpHomePage(tester);
+        // Getting the localized strings
+        var context = tester.element(find.byType(Scaffold).first);
+        LocalizedGPSStrings lgps = .new(context);
+        LocalizedTestingStrings lts = .new(context);
 
-          // Getting the localized strings
-          var context = tester.element(find.byType(Scaffold).first);
-          LocalizedGPSStrings lgps = .new(context);
-          LocalizedTestingStrings lts = .new(context);
+        // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────────
+        var testAnalysisTitleRoot = lts.caTitleRoot;
+        var totalEntries = 20;
+        var titlesList = List.generate(
+          totalEntries,
+          (i) => "$testAnalysisTitleRoot ($i)",
+        );
+        var kwsLists = List.generate(totalEntries, (i) => ["keyword-$i"]);
+        var fileNamesWithoutExtensionList = List.generate(
+          totalEntries,
+          (i) => "${fileNameWithoutExtensionRoot}_${i}",
+        );
 
-          // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────────
-          var testAnalysisTitleRoot = lts.caTitleRoot;
-          var totalEntries = 20;
-          var titlesList = List.generate(totalEntries, (i)=> "$testAnalysisTitleRoot ($i)");
-          var kwsLists = List.generate(totalEntries, (i)=> ["keyword-$i"]);
-          var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${fileNameWithoutExtensionRoot}_${i}");
-          
-          // formToFill: false to skip the form filling
-          await caEnterSeveralTimesNewProcessDataWithoutFormData
-          (
-            tester: tester, 
-            formToFill: false,
-            titlesList: titlesList,
-            kwsLists: kwsLists,
-            fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
-          );
+        // formToFill: false to skip the form filling
+        await caEnterSeveralTimesNewProcessDataWithoutFormData(
+          tester: tester,
+          formToFill: false,
+          titlesList: titlesList,
+          kwsLists: kwsLists,
+          fileNamesWithoutExtensionList: fileNamesWithoutExtensionList,
+        );
 
-          // await tester.pump(const Duration(seconds: 2));      
+        // await tester.pump(const Duration(seconds: 2));
 
-          // ── 2. REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
-          // ───────────────────────────────────────────────────────────────────────────
-          // Reaching the GPS process page from the home page
-          await gpsFromHomePageToProcessPage(tester);          
+        // ── 2. REACHING THE GPS PROCESS PAGE  ──────────────────────────────────────
+        // ───────────────────────────────────────────────────────────────────────────
+        // Reaching the GPS process page from the home page
+        await gpsFromHomePageToProcessPage(tester);
 
-          // ── 3. SEARCHING FOR THE CA SESSION DATA IN THE GPS PROCESS  ──────────────────
-          // ──────────────────────────────────────────────────────────────────────────────          
-          // Searching the placeholder title
-          var placeholderTitleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
+        // ── 3. SEARCHING FOR THE CA SESSION DATA IN THE GPS PROCESS  ──────────────────
+        // ──────────────────────────────────────────────────────────────────────────────
+        // Searching the placeholder title
+        var placeholderTitleFinder = find.text(
+          lgps.gpsDefaultProcessSessionTitle,
+        );
 
-          // Tapping on it
-          await tester.tap(placeholderTitleFinder);
-          await tester.pumpAndSettle();
-          // Searching for the last title of the CA data         
-          // Scrolling to tap on the last title
-          var lastTitle = find.text("$testAnalysisTitleRoot (0)");
+        // Tapping on it
+        await tester.tap(placeholderTitleFinder);
+        await tester.pumpAndSettle();
+        // Searching for the last title of the CA data
+        // Scrolling to tap on the last title
+        var lastTitle = find.text("$testAnalysisTitleRoot (0)");
 
-          await tester.scrollUntilVisible
-            (
-              lastTitle, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("gps-title-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-          await tester.pumpAndSettle();
+        await tester.scrollUntilVisible(
+          lastTitle,
+          45,
+          scrollable: find.descendant(
+            of: find.byKey(const Key("gps-title-scrollview")),
+            matching: find.byType(Scrollable),
+          ),
+        );
+        await tester.pumpAndSettle();
 
-          await tester.tap(lastTitle);
-          await tester.pumpAndSettle();
-          // await tester.pump(const Duration(seconds: 2));
+        await tester.tap(lastTitle);
+        await tester.pumpAndSettle();
+        // await tester.pump(const Duration(seconds: 2));
 
-          // Searching the keywords declaration title
-          var keywordsDeclarationTitleFinder = find.descendant
-                                        (
-                                          of: find.byType(GPSKeywordsDeclaration), 
-                                          matching: find.text(lgps.gpsKeywordsTitle)
-                                        );
+        // Searching the keywords declaration title
+        var keywordsDeclarationTitleFinder = find.descendant(
+          of: find.byType(GPSKeywordsDeclaration),
+          matching: find.text(lgps.gpsKeywordsTitle),
+        );
 
-          // Tapping on it to open the overlay
-          await tester.tap(keywordsDeclarationTitleFinder);
+        // Tapping on it to open the overlay
+        await tester.tap(keywordsDeclarationTitleFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        // Verifying that the keyword has been imported
+        var inputChipTextFinder = find.descendant(
+          of: find.byType(InputChip),
+          matching: find.byType(Text),
+        );
+        expect(inputChipTextFinder, findsOne);
+        expect(find.text("keyword-0"), findsOne);
+
+        // Searching the tooltip to close the overlay
+        var closingIconFinder = find.byTooltip(
+          lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip,
+        );
+
+        // Closing the overlay
+        await tester.tap(closingIconFinder);
+        // pumpAndSettle timed out
+        // await tester.pumpAndSettle();
+        await tester.pump(const Duration(seconds: 2));
+
+        // Verifying the overlay absent
+        expect(
+          find.descendant(
+            of: find.byType(GPSKeywordsDeclaration),
+            matching: find.byType(StatefulBuilder),
+          ),
+          findsNothing,
+        );
+
+        // ── 4. ADDING ADDITIONAL GPS DATA  ──
+        // ────────────────────────────────────
+
+        // Adding ideas
+        // Searching the text field used to add ideas
+        var newIdeaTextFieldFinder = find.ancestor(
+          of: find.text(lgps.newIdeaTextFieldHint),
+          matching: find.byType(TextField),
+        );
+
+        // Adding the ideas
+        for (var idea in ideasList2Ideas) {
+          await tester.enterText(newIdeaTextFieldFinder, idea);
+          await tester.testTextInput.receiveAction(TextInputAction.done);
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 2)); 
+          await tester.pump(const Duration(seconds: 2));
 
-          // Verifying that the keyword has been imported
-          var inputChipTextFinder = find.descendant(of: find.byType(InputChip), matching: find.byType(Text));
-          expect(inputChipTextFinder, findsOne);         
-          expect(find.text("keyword-0"), findsOne);
-          
-          // Searching the tooltip to close the overlay
-          var closingIconFinder = find.byTooltip(lgps.gpsKeywordsDeclarationOverlayCloseIconButtonToolTip);
-
-          // Closing the overlay
-          await tester.tap(closingIconFinder);
-          // pumpAndSettle timed out
-          // await tester.pumpAndSettle();
-          await tester.pump(const Duration(seconds: 2)); 
-
-          // Verifying the overlay absent
-          expect
-          (
-            find.descendant
-            (
-              of: find.byType(GPSKeywordsDeclaration), 
-              matching: find.byType(StatefulBuilder)
-            )        , 
-            findsNothing
-          );
-
-          // ── 4. ADDING ADDITIONAL GPS DATA  ──
-          // ────────────────────────────────────          
-
-          // Adding ideas
-          // Searching the text field used to add ideas
-          var newIdeaTextFieldFinder = find.ancestor
-          (
-            of: find.text(lgps.newIdeaTextFieldHint), 
-            matching: find.byType(TextField)
-          );
-
-          // Adding the ideas
-          for (var idea in ideasList2Ideas)
-          {
-            await tester.enterText(newIdeaTextFieldFinder, idea);
-            await tester.testTextInput.receiveAction(TextInputAction.done);
-            // pumpAndSettle timed out
-            // await tester.pumpAndSettle();
-            await tester.pump(const Duration(seconds: 2));  
-
-            await tester.tap(newIdeaTextFieldFinder); 
-          }
-
-          // Submitting the GPS data
-          await dashboardEnterFileNameAndSubmitDataOnMobile(tester: tester, fileNameWithoutExtension: fileNameWithoutExtensionRoot);
-
-          await tester.pump(const Duration(seconds: 5));
-          // ── 5. VERIFYING THE CA DATA ON THE GPS PAGE  ───
-          // ────────────────────────────────────────────────
-
-          // Verifying the GPS page present
-          expect(find.byType(GPSPage), findsOne);
-
-          // Searching for the title imported from the CA 
-          expect(find.text("$testAnalysisTitleRoot (0)${lgps.gpsTitleSuffix}"), findsOne);
-
-          // Searching for the keyword imported from the CA 
-          expect(find.text("keyword-0"), findsOne);
-
-          // await tester.pump(const Duration(seconds: 2));
+          await tester.tap(newIdeaTextFieldFinder);
         }
+
+        // Submitting the GPS data
+        await dashboardEnterFileNameAndSubmitDataOnMobile(
+          tester: tester,
+          fileNameWithoutExtension: fileNameWithoutExtensionRoot,
+        );
+
+        await tester.pump(const Duration(seconds: 5));
+        // ── 5. VERIFYING THE CA DATA ON THE GPS PAGE  ───
+        // ────────────────────────────────────────────────
+
+        // Verifying the GPS page present
+        expect(find.byType(GPSPage), findsOne);
+
+        // Searching for the title imported from the CA
+        expect(
+          find.text("$testAnalysisTitleRoot (0)${lgps.gpsTitleSuffix}"),
+          findsOne,
+        );
+
+        // Searching for the keyword imported from the CA
+        expect(find.text("keyword-0"), findsOne);
+
+        // await tester.pump(const Duration(seconds: 2));
+      }
     });
 
     group("Sorting with US English/French content: \n", () {
       testWidgets("Sorting by date: US English/French dates \n"
-        "(assuming an already selected path to the user session data folder)",
-        (WidgetTester tester) async 
-        {
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // Setting value for the first-run modal to be absent,
-            "wasFirstRunModalAcknowledged": true,
-            // and to have the context analysis page, with the dashboard.
-            "wasCASessionDataSaved": true,
-            // Temporary test dir as application folder path
-            "applicationFolderPath": testTmpDir!.path
-          });
-
-          if (Platform.isAndroid || Platform.isIOS)
-          {
-            // Pumping the app            
-            await pumpApp(tester);
-            await tester.pumpAndSettle();
-            
-            // Getting the localized strings
-            var context = tester.element(find.byType(Scaffold).first);
-            LocalizedDashboardStrings lds = .new(context);
-            LocalizedTestingStrings lts = .new(context);
-
-            var testAnalysisTitleRoot = lts.caTitleRoot;
-
-            // ── 1. ENTERING NEW CA PROCESS DATA IN ENGLISH ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────
-
-            // Selecting English on the interface
-            await selectLanguage(tester: tester, languageCodeToSet: "en");
-            lts = .new(context);
-            testAnalysisTitleRoot = lts.caTitleRoot;
-
-            // await tester.pump(const Duration(seconds: 5));
-            int dataIndex = 1;
-            await caEnterNewProcessDataOnMobile
-            (
-              formToFill: false,
-              tester: tester,
-              title: "${testAnalysisTitleRoot} $dataIndex",
-              kwsList: [],
-              fileNameWithoutExtension: "${fileNameWithoutExtensionRoot}$dataIndex",
-            );
-            // await tester.pump(const Duration(seconds: 2));
-
-            // ── 2. ENTERING NEW CA PROCESS DATA IN FRENCH ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────
-
-            // Selecting French on the interface
-            await selectLanguage(tester: tester, languageCodeToSet: "fr");
-            lts = .new(context);
-            testAnalysisTitleRoot = lts.caTitleRoot;
-
-            // await tester.pump(const Duration(seconds: 5));
-            dataIndex = 2;
-            await caEnterNewProcessDataOnMobile
-            (
-              formToFill: false,
-              tester: tester,
-              title: "${testAnalysisTitleRoot} $dataIndex",
-              kwsList: [],
-              fileNameWithoutExtension: "${fileNameWithoutExtensionRoot}$dataIndex",
-            );
-           
-            // ── 3. ENTERING NEW CA PROCESS DATA IN ENGLISH ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────────────────
-
-            // Selecting English on the interface
-            await selectLanguage(tester: tester, languageCodeToSet: "en");
-            lts = .new(context);
-            testAnalysisTitleRoot = lts.caTitleRoot;
-
-            // await tester.pump(const Duration(seconds: 5));
-
-            dataIndex = 3;
-            await caEnterNewProcessDataOnMobile
-            (
-              formToFill: false,
-              tester: tester,
-              title: "${testAnalysisTitleRoot} $dataIndex",
-              kwsList: [],
-              fileNameWithoutExtension: "${fileNameWithoutExtensionRoot}$dataIndex",
-            );        
-          
-            // ── 4. SORTING BY DATE ──────────────────────────────────
-            // ────────────────────────────────────────────────────────
-            // Triggering the sort
-            lds = .new(context);
-            var sortByDateFinder = find.textContaining(lds.sortByDateLabel);
-            await tester.tap(sortByDateFinder);
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 2));     
-
-
-            // Searching the dates          
-            var datesFinder = find.byWidgetPredicate
-            (
-              (widget) 
-              {
-                if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains("session-date-");
-                }
-                return false;
-              }
-            );          
-
-            var totalDates = datesFinder.evaluate().length;
-
-            // Verifying the order
-            for (var index = 0; index < totalDates; index++)
-            {
-              var dashboardDateWithParenthesis = tester.widget<Text>(datesFinder.at(index)).data;
-              var dashboardDateWithoutParenthesis = dashboardDateWithParenthesis?.replaceAll("(","").replaceAll(")","");
-
-              expect(
-                // Mapping any French date to a US date
-                "(${datesFrEnMap[dashboardDateWithoutParenthesis] ?? dashboardDateWithoutParenthesis})"                
-                , 
-                "(${constJanuaryDatesListSorted[index]})"
-              );
-            }
-
-            // Re-triggering the sort
-            await tester.tap(sortByDateFinder);
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 2));
-
-            datesFinder = find.byWidgetPredicate
-            (
-              (widget) 
-              {
-                if (widget.key is ValueKey<String>) {
-                  return (widget.key as ValueKey<String>).value.contains("session-date-");
-                }
-                return false;
-              }
-            );          
-
-            // Verifying the order 
-            for (var index = 0; index < totalDates; index++)
-            {            
-              var dashboardDateWithParenthesis = tester.widget<Text>(datesFinder.at(index)).data;
-              var dashboardDateWithoutParenthesis = dashboardDateWithParenthesis?.replaceAll("(","").replaceAll(")", "");
-
-              expect(
-                // Mapping any French date to a US date
-                "(${datesFrEnMap[dashboardDateWithoutParenthesis] ?? dashboardDateWithoutParenthesis})"                 
-                , 
-                "(${constJanuaryDatesListSorted.reversed.toList()[index]})"
-              );
-            }
-          }
+          "(assuming an already selected path to the user session data folder)", (
+        WidgetTester tester,
+      ) async {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues({
+          // Setting value for the first-run modal to be absent,
+          "wasFirstRunModalAcknowledged": true,
+          // and to have the context analysis page, with the dashboard.
+          "wasCASessionDataSaved": true,
+          // Temporary test dir as application folder path
+          "applicationFolderPath": testTmpDir!.path,
         });
 
+        if (Platform.isAndroid || Platform.isIOS) {
+          // Pumping the app
+          await pumpApp(tester);
+          await tester.pumpAndSettle();
+
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedDashboardStrings lds = .new(context);
+          LocalizedTestingStrings lts = .new(context);
+
+          var testAnalysisTitleRoot = lts.caTitleRoot;
+
+          // ── 1. ENTERING NEW CA PROCESS DATA IN ENGLISH ──────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+
+          // Selecting English on the interface
+          await selectLanguage(tester: tester, languageCodeToSet: "en");
+          lts = .new(context);
+          testAnalysisTitleRoot = lts.caTitleRoot;
+
+          // await tester.pump(const Duration(seconds: 5));
+          int dataIndex = 1;
+          await caEnterNewProcessDataOnMobile(
+            formToFill: false,
+            tester: tester,
+            title: "${testAnalysisTitleRoot} $dataIndex",
+            kwsList: [],
+            fileNameWithoutExtension:
+                "${fileNameWithoutExtensionRoot}$dataIndex",
+          );
+          // await tester.pump(const Duration(seconds: 2));
+
+          // ── 2. ENTERING NEW CA PROCESS DATA IN FRENCH ──────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+
+          // Selecting French on the interface
+          await selectLanguage(tester: tester, languageCodeToSet: "fr");
+          lts = .new(context);
+          testAnalysisTitleRoot = lts.caTitleRoot;
+
+          // await tester.pump(const Duration(seconds: 5));
+          dataIndex = 2;
+          await caEnterNewProcessDataOnMobile(
+            formToFill: false,
+            tester: tester,
+            title: "${testAnalysisTitleRoot} $dataIndex",
+            kwsList: [],
+            fileNameWithoutExtension:
+                "${fileNameWithoutExtensionRoot}$dataIndex",
+          );
+
+          // ── 3. ENTERING NEW CA PROCESS DATA IN ENGLISH ──────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+
+          // Selecting English on the interface
+          await selectLanguage(tester: tester, languageCodeToSet: "en");
+          lts = .new(context);
+          testAnalysisTitleRoot = lts.caTitleRoot;
+
+          // await tester.pump(const Duration(seconds: 5));
+
+          dataIndex = 3;
+          await caEnterNewProcessDataOnMobile(
+            formToFill: false,
+            tester: tester,
+            title: "${testAnalysisTitleRoot} $dataIndex",
+            kwsList: [],
+            fileNameWithoutExtension:
+                "${fileNameWithoutExtensionRoot}$dataIndex",
+          );
+
+          // ── 4. SORTING BY DATE ──────────────────────────────────
+          // ────────────────────────────────────────────────────────
+          // Triggering the sort
+          lds = .new(context);
+          var sortByDateFinder = find.textContaining(lds.sortByDateLabel);
+          await tester.tap(sortByDateFinder);
+          await tester.pumpAndSettle();
+          // await tester.pump(const Duration(seconds: 2));
+
+          // Searching the dates
+          var datesFinder = find.byWidgetPredicate((widget) {
+            if (widget.key is ValueKey<String>) {
+              return (widget.key as ValueKey<String>).value.contains(
+                "session-date-",
+              );
+            }
+            return false;
+          });
+
+          var totalDates = datesFinder.evaluate().length;
+
+          // Verifying the order
+          for (var index = 0; index < totalDates; index++) {
+            var dashboardDateWithParenthesis = tester
+                .widget<Text>(datesFinder.at(index))
+                .data;
+            var dashboardDateWithoutParenthesis = dashboardDateWithParenthesis
+                ?.replaceAll("(", "")
+                .replaceAll(")", "");
+
+            expect(
+              // Mapping any French date to a US date
+              "(${datesFrEnMap[dashboardDateWithoutParenthesis] ?? dashboardDateWithoutParenthesis})",
+              "(${constJanuaryDatesListSorted[index]})",
+            );
+          }
+
+          // Re-triggering the sort
+          await tester.tap(sortByDateFinder);
+          await tester.pumpAndSettle();
+          // await tester.pump(const Duration(seconds: 2));
+
+          datesFinder = find.byWidgetPredicate((widget) {
+            if (widget.key is ValueKey<String>) {
+              return (widget.key as ValueKey<String>).value.contains(
+                "session-date-",
+              );
+            }
+            return false;
+          });
+
+          // Verifying the order
+          for (var index = 0; index < totalDates; index++) {
+            var dashboardDateWithParenthesis = tester
+                .widget<Text>(datesFinder.at(index))
+                .data;
+            var dashboardDateWithoutParenthesis = dashboardDateWithParenthesis
+                ?.replaceAll("(", "")
+                .replaceAll(")", "");
+
+            expect(
+              // Mapping any French date to a US date
+              "(${datesFrEnMap[dashboardDateWithoutParenthesis] ?? dashboardDateWithoutParenthesis})",
+              "(${constJanuaryDatesListSorted.reversed.toList()[index]})",
+            );
+          }
+        }
+      });
     });
 
-    group
-    ("Potential side effects", 
-    ()
-    {
+    group("Potential side effects", () {
       testWidgets("Data entered previously on the context analysis side "
-                  "is not impacted by data entered and modified on the group problem-solving side "                  
-                  "(assuming an already selected path to the user session data folder)",
-      (WidgetTester tester) async {
-
+          "is not impacted by data entered and modified on the group problem-solving side "
+          "(assuming an already selected path to the user session data folder)", (
+        WidgetTester tester,
+      ) async {
         // Setting mock values for SharedPreferences
-        SharedPreferences.setMockInitialValues
-        ({
+        SharedPreferences.setMockInitialValues({
           // Setting value for the first-run modal to be absent,
           "wasFirstRunModalAcknowledged": true,
           // to have the context analysis page, with the dashboard,
@@ -440,11 +440,10 @@ Future<void> main() async {
           // and to have the group problem-solving page, with the dashboard.
           "wasGPSSessionDataSaved": true,
           // Temporary test dir as application folder path
-          "applicationFolderPath": testTmpDir!.path
+          "applicationFolderPath": testTmpDir!.path,
         });
 
-        if (Platform.isAndroid || Platform.isIOS)
-        {
+        if (Platform.isAndroid || Platform.isIOS) {
           // Pumping the homepage
           await pumpHomePage(tester);
           // Getting the localized strings
@@ -455,135 +454,347 @@ Future<void> main() async {
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
           var totalEntries = 2;
-          var titlesList = List.generate(totalEntries, (i)=> "${lts.caTitleRoot} ($i)");
-          var kwsLists = List.generate(totalEntries, (i)=> ["${lts.kw}-$i"]);
+          var titlesList = List.generate(
+            totalEntries,
+            (i) => "${lts.caTitleRoot} ($i)",
+          );
+          var kwsLists = List.generate(totalEntries, (i) => ["${lts.kw}-$i"]);
 
           // Individual perspective testing values
           // 7 values are necessary
           List<bool> checkboxValues = List.filled(7, true);
           // a1 to a7
-          List<String> checkboxTextFieldValues = List.generate(7, (i) => "a${i+1}");
-          String indivAnotherIssueStrValue = "a8";        
+          List<String> checkboxTextFieldValues = List.generate(
+            7,
+            (i) => "a${i + 1}",
+          );
+          String indivAnotherIssueStrValue = "a8";
 
           // Group/teams perspective testing values
           String groupProblemsToSolveStrValue = "b1";
           // 4 values are necessary
-          List<Set<String>> segmentedButtonValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+          List<Set<String>> segmentedButtonValues = [
+            {lca.yes},
+            {lca.no},
+            {lca.iDontKnow},
+            {lca.no, lca.yes},
+          ];
           // b2 to b5
-          List<String> segmentedButtonTextFieldValues = List.generate(4, (i) => "b${i+2}");
+          List<String> segmentedButtonTextFieldValues = List.generate(
+            4,
+            (i) => "b${i + 2}",
+          );
 
-          var fileNamesWithoutExtensionList = List.generate(totalEntries, (i)=> "${lts.fileNameWithoutExtensionRoot}_${i}");
-          
+          var fileNamesWithoutExtensionList = List.generate(
+            totalEntries,
+            (i) => "${lts.fileNameWithoutExtensionRoot}_${i}",
+          );
+
           // formToFill: false to skip the form filling
-          await caEnterSeveralTimesNewProcessData
-          (
-            tester: tester, 
+          await caEnterSeveralTimesNewProcessData(
+            tester: tester,
             formToFill: false,
             titlesList: titlesList,
-            kwsLists: kwsLists,            
+            kwsLists: kwsLists,
             checkboxValues: checkboxValues,
             checkboxTextFieldValues: checkboxTextFieldValues,
             indivAnotherIssueStrValue: indivAnotherIssueStrValue,
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
             segmentedButtonValues: segmentedButtonValues,
             segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
-            fileNamesWithoutExtensionList: fileNamesWithoutExtensionList
+            fileNamesWithoutExtensionList: fileNamesWithoutExtensionList,
           );
-
 
           // ── 2. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
           // Reaching the GPS process page from the home page
-          await gpsFromHomePageToGPSPage
-          (tester);     
+          await gpsFromHomePageToGPSPage(tester);
 
           // Entering data
-          await gpsEnterNewProcessDataOnMobile
-          (
-            tester: tester, 
-            title: lts.gpsTitleRoot, 
-            kwsList: [lts.kwCompanionship], 
-            ideasList: [lts.idea], 
-            fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot
-          );     
+          await gpsEnterNewProcessDataOnMobile(
+            tester: tester,
+            title: lts.gpsTitleRoot,
+            kwsList: [lts.kwCompanionship],
+            ideasList: [lts.idea],
+            fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot,
+          );
 
           // ── 3. EDITING THE GPS PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-          await gpsEditDataOnMobile (
-            tester: tester, 
-            titleWithoutSuffix: lts.gpsTitleRoot, 
-            kwsList: [lts.kwCompanionship], 
-            ideasList: [lts.idea], 
-            fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot
+          await gpsEditDataOnMobile(
+            tester: tester,
+            titleWithoutSuffix: lts.gpsTitleRoot,
+            kwsList: [lts.kwCompanionship],
+            ideasList: [lts.idea],
+            fileNameWithoutExtension: lts.fileNameWithoutExtensionRoot,
           );
 
           await tester.pump(const Duration(seconds: 2));
 
           // ── 4. TESTING THE EDITED GPS KEYWORDS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-          await testKeywordsOnDashboardAndOnSession
-          (
-            context: context, 
-            tester: tester, 
-            kwsList: ["${lts.kwCompanionship}${lts.editionSuffix}"]
+          await testKeywordsOnDashboardAndOnSession(
+            context: context,
+            tester: tester,
+            kwsList: ["${lts.kwCompanionship}${lts.editionSuffix}"],
           );
 
           // ── 5. PREVIEWING AND TESTING THE GPS EDITED TITLE AND IDEA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-          await gpsTestPreview
-          (
-            context: context, 
-            tester: tester, 
-            title: "${lts.gpsTitleRoot}${lts.editionSuffix}", 
-            ideasList: ["${lts.idea}${lts.editionSuffix}"]
-          );     
+          dateForTestingIndex = 0;
+          await gpsTestPreview(
+            context: context,
+            tester: tester,
+            title: "${lts.gpsTitleRoot}${lts.editionSuffix}",
+            ideasList: ["${lts.idea}${lts.editionSuffix}"],
+          );
 
-           await tester.pump(const Duration(seconds: 5)); 
+          await tester.pump(const Duration(seconds: 5));
 
           // ── 6. VERIFYING THE CA DATA unchanged ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
-            // Going to the CA Page
+          // Going to the CA Page
           await gpsFromGPSPageToCAPage(tester);
 
-          List<String> individualStringValues = 
-          [...checkboxTextFieldValues, indivAnotherIssueStrValue]
-          .where((string) => string.isNotEmpty)
-          .toList();
+          List<String> individualStringValues = [
+            ...checkboxTextFieldValues,
+            indivAnotherIssueStrValue,
+          ].where((string) => string.isNotEmpty).toList();
 
-          List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonTextFieldValues];
+          List<String> groupStringValues = [
+            groupProblemsToSolveStrValue,
+            ...segmentedButtonTextFieldValues,
+          ];
 
-            // Verifying the data
-          for (var i = 0; i < totalEntries; i++){
-
-            var sessionItemFinder = find.ancestor
-              (
-                of: find.textContaining(titlesList[i]), 
-                matching: find.byType(SessionsListItem)
-              );
-
-
-            var previewFinder = find.descendant
-            (
-              of: sessionItemFinder,
-              matching: find.byIcon(Icons.find_in_page_rounded)
+          // Verifying the data
+          for (var i = 0; i < totalEntries; i++) {
+            var sessionItemFinder = find.ancestor(
+              of: find.textContaining(titlesList[i]),
+              matching: find.byType(SessionsListItem),
             );
 
-            await caTestPreview
-            (
-              context: context, 
-              tester: tester, 
+            var previewFinder = find.descendant(
+              of: sessionItemFinder,
+              matching: find.byIcon(Icons.find_in_page_rounded),
+            );
+
+            await caTestPreview(
+              context: context,
+              tester: tester,
               previewFinder: previewFinder,
               title: titlesList[i],
               individualStringValues: individualStringValues,
               groupStringValues: groupStringValues,
-              segmentedButtonValues: segmentedButtonValues              
+              segmentedButtonValues: segmentedButtonValues,
             );
           }
 
           // await tester.pump(const Duration(seconds: 2));
         }
-      });  
+      });
+
+      testWidgets("Data entered previously on the group problem-solving side "
+          "is not impacted by data entered and modified on the context analysis side "
+          "(assuming an already selected path to the user session data folder)", (
+        WidgetTester tester,
+      ) async {
+        // Setting mock values for SharedPreferences
+        SharedPreferences.setMockInitialValues({
+          // Setting value for the first-run modal to be absent,
+          "wasFirstRunModalAcknowledged": true,
+          // to have the context analysis page, with the dashboard,
+          "wasCASessionDataSaved": true,
+          // and to have the group problem-solving page, with the dashboard.
+          "wasGPSSessionDataSaved": true,
+          // Temporary test dir as application folder path
+          "applicationFolderPath": testTmpDir!.path,
+        });
+
+        if (Platform.isAndroid || Platform.isIOS) {
+          // Pumping the app
+          await pumpApp(tester);
+          // Getting the localized strings
+          var context = tester.element(find.byType(Scaffold).first);
+          LocalizedTestingStrings lts = .new(context);
+          LocalizedCAStrings lca = .new(context);
+
+          // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          // Reaching the GPS process page from the home page
+          await gpsFromHomePageToGPSPage(tester);
+
+          var totalEntries = 2;
+          var titlesList = List.generate(
+            totalEntries,
+            (i) => "${lts.gpsTitleRoot}-$i",
+          );
+          var kwsLists = List.generate(totalEntries, (i) => ["${lts.kw}-$i"]);
+          var ideasLists = List.generate(
+            totalEntries,
+            (i) => ["${lts.idea}-$i"],
+          );
+          var fileNamesWithoutExtensionList = List.generate(
+            totalEntries,
+            (i) => "${lts.fileNameWithoutExtensionRoot}-$i",
+          );
+
+          // Entering data
+          await gpsEnterSeveralTimesNewProcessData(
+            tester: tester,
+            titlesList: titlesList,
+            kwsLists: kwsLists,
+            ideasList: ideasLists,
+            fileNamesWithoutExtensionList: fileNamesWithoutExtensionList,
+          );
+
+          // ── 2. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          // Reaching the CA page from the GPS page
+          await gpsFromGPSPageToCAPage(tester);
+
+          // Individual perspective testing values
+          // 7 values are necessary
+          List<bool> checkboxesValues = List.filled(7, true);
+          // a1 to a7
+          List<String> checkboxesTextFieldValues = List.generate(
+            7,
+            (i) => "a${i + 1}",
+          );
+          String indivAnotherIssueStrValue = "a8";
+
+          // Group/teams perspective testing values
+          String groupProblemsToSolveStrValue = "b1";
+          // 4 values are necessary
+          List<Set<String>> segmentedButtonsValues = [
+            {lca.yes},
+            {lca.no},
+            {lca.iDontKnow},
+            {lca.no, lca.yes},
+          ];
+          // b2 to b5
+          List<String> segmentedButtonsTextFieldValues = List.generate(
+            4,
+            (i) => "b${i + 2}",
+          );
+
+          var title = lts.caTitleRoot;
+          var kwsList = kwsLists[0];
+          var fileNameWithoutExtension = lts.fileNameWithoutExtensionRoot;
+
+          await caEnterNewProcessDataOnMobile(
+            tester: tester,
+            title: title,
+            kwsList: kwsList,
+            checkboxesValues: checkboxesValues,
+            checkboxesTextFieldValues: checkboxesTextFieldValues,
+            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+            segmentedButtonsValues: segmentedButtonsValues,
+            segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
+            fileNameWithoutExtension: fileNameWithoutExtension,
+          );
+
+          // ── 3. EDITING THE CA PROCESS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          var newKwsList = ["${lts.kw}${lts.editionSuffix}"];
+          var newCheckboxesValues = [
+            true,
+            false,
+            false,
+            true,
+            true,
+            false,
+            true,
+          ];
+          var newSegmentedButtonsValues = [
+            {lca.yes, lca.no},
+            {lca.yes},
+            {lca.yes, lca.iDontKnow},
+            {lca.no, lca.iDontKnow},
+          ];
+          await caEditDataOnMobile(
+            tester: tester,
+            title: title,
+            kwsList: kwsList,
+            newKwsList: newKwsList,
+            checkboxesValues: checkboxesValues,
+            newCheckboxesValues: newCheckboxesValues,
+            checkboxesTextFieldValues: checkboxesTextFieldValues,
+            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+            segmentedButtonsValues: segmentedButtonsValues,
+            newSegmentedButtonsValues: newSegmentedButtonsValues,
+            segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
+            fileNameWithoutExtension: fileNameWithoutExtension,
+          );
+
+          await tester.pump(const Duration(seconds: 2));
+
+          // ── 4. TESTING THE EDITED CA KEYWORDS DATA ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          await testKeywordsOnDashboardAndOnSession(
+            context: context,
+            tester: tester,
+            kwsList: newKwsList,
+          );
+
+          // ── 5. PREVIEWING AND TESTING THE CA EDITED TITLE AND ANSWERS ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          var checkboxTextFieldValuesEdited = [
+            for (var item in checkboxesTextFieldValues)
+              "$item${lts.editionSuffix}",
+          ];
+
+          List<String> individualStringValuesEdited = [
+            ...checkboxTextFieldValuesEdited,
+            "$indivAnotherIssueStrValue${lts.editionSuffix}",
+          ].where((string) => string.isNotEmpty).toList();
+
+          var segmentedButtonTextFieldValuesEdited = [
+            for (var item in segmentedButtonsTextFieldValues)
+              "$item${lts.editionSuffix}",
+          ];
+          List<String> groupStringValueEdited = [
+            "$groupProblemsToSolveStrValue${lts.editionSuffix}",
+            ...segmentedButtonTextFieldValuesEdited,
+          ];
+
+          await caTestPreview2(
+            context: context,
+            tester: tester,
+            title: title,
+            checkboxesValues: newCheckboxesValues,
+            individualStringValues: individualStringValuesEdited,
+            segmentedButtonValues: newSegmentedButtonsValues,
+            groupStringValues: groupStringValueEdited,
+          );
+
+          // ── 6. VERIFYING THE GPS DATA unchanged ────────────────────────────────────────────
+          // ───────────────────────────────────────────────────────────────────────────────
+          await tester.pump(const Duration(seconds: 3));
+
+          // Date reset after incrementation for data saving
+          dateForTestingIndex = 0;
+          // Verifying the stored data for the two entries
+          for (var entryIndex = 0; entryIndex < totalEntries; entryIndex++)
+          {
+            // Going to the GPS Page (moved from outside the loop to fix an issue)
+            await gpsFromHomePageToGPSPage(tester);
+            
+            await gpsTestPreview
+            (
+              context: context,
+              tester: tester, 
+              title: titlesList[entryIndex], 
+              ideasList: ideasLists[entryIndex],              
+            );
+
+            // Next date for next test preview
+            dateForTestingIndex++;
+          }
+
+        }
+      });
     });
-     
   });
 }
