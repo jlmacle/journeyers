@@ -1119,25 +1119,22 @@ Future<void> caTestPreview2({
     var workplaceIssueCheckboxIndexes = [4, 5];
     var legacyIssueCheckboxIndexes = [6];
 
-    // Text values, potentially "", for each section
-    // List<String> balanceIssueStringValues = [for (var index in balanceIssueCheckboxIndexes) individualStringValues[index]];
-    // List<String> workplaceIssueStringValues = [for (var index in workplaceIssueCheckboxIndexes) individualStringValues[index]];
-    // List<String> legacyIssueStringValues = [for (var index in legacyIssueCheckboxIndexes) individualStringValues[index]];
-    // List<String> anotherIssueStringValues = [individualStringValues.last];
-
     // Text values related to a checkbox checked
     List<String> balanceIssueStringValuesForCheckedBoxesChecked = [
       for (var index in balanceIssueCheckboxIndexes)
         if (checkboxesValues[index] == true) individualStringValues[index],
     ];
+    logt("balanceIssueStringValuesForCheckedBoxesChecked; $balanceIssueStringValuesForCheckedBoxesChecked");
     List<String> workplaceIssueStringValuesForCheckedBoxesChecked = [
       for (var index in workplaceIssueCheckboxIndexes)
-        if (checkboxesValues[index] == true) individualStringValues[index],
+        if (checkboxesValues[index] == true) individualStringValues[index], 
     ];
+    logt("workplaceIssueStringValuesForCheckedBoxesChecked; $workplaceIssueStringValuesForCheckedBoxesChecked");
     List<String> legacyIssueStringValuesForCheckedBoxesChecked = [
       for (var index in legacyIssueCheckboxIndexes)
         if (checkboxesValues[index] == true) individualStringValues[index],
-    ];
+    ]; 
+    logt("legacyIssueStringValuesForCheckedBoxesChecked; $legacyIssueStringValuesForCheckedBoxesChecked");
 
     // Checkbox indexes related to a checkbox checked
     var balanceIssueCheckboxIndexesForCheckedBoxesChecked = [
@@ -1153,33 +1150,15 @@ Future<void> caTestPreview2({
         if (checkboxesValues[index] == true) index,
     ];
 
-    logt("individualStringValues: $individualStringValues");
-    // logt("balanceIssueStringValues: $balanceIssueStringValues");
-    // logt("workplaceIssueStringValues: $workplaceIssueStringValues");
-    // logt("legacyIssueStringValues: $legacyIssueStringValues");
-    // logt("anotherIssueStringValues: $anotherIssueStringValues");
-
     logt("---------> String Values For CheckedBoxes Checked:");
-    logt(
-      "balanceIssueStringValuesForCheckedBoxesChecked: $balanceIssueStringValuesForCheckedBoxesChecked",
-    );
-    logt(
-      "workplaceIssueStringValuesForCheckedBoxesChecked: $workplaceIssueStringValuesForCheckedBoxesChecked",
-    );
-    logt(
-      "legacyIssueStringValuesForCheckedBoxesChecked: $legacyIssueStringValuesForCheckedBoxesChecked",
-    );
+    logt("balanceIssueStringValuesForCheckedBoxesChecked: $balanceIssueStringValuesForCheckedBoxesChecked");
+    logt("workplaceIssueStringValuesForCheckedBoxesChecked: $workplaceIssueStringValuesForCheckedBoxesChecked");
+    logt("legacyIssueStringValuesForCheckedBoxesChecked: $legacyIssueStringValuesForCheckedBoxesChecked");
 
     logt("---------> Boolean Values For CheckedBoxes Checked Indexes:");
-    logt(
-      "balanceIssueCheckboxIndexesForCheckedBoxesChecked: $balanceIssueCheckboxIndexesForCheckedBoxesChecked",
-    );
-    logt(
-      "workplaceIssueCheckboxIndexesForCheckedBoxesChecked: $workplaceIssueCheckboxIndexesForCheckedBoxesChecked",
-    );
-    logt(
-      "legacyIssueCheckboxIndexesForCheckedBoxesChecked: $legacyIssueCheckboxIndexesForCheckedBoxesChecked",
-    );
+    logt("balanceIssueCheckboxIndexesForCheckedBoxesChecked: $balanceIssueCheckboxIndexesForCheckedBoxesChecked");
+    logt("workplaceIssueCheckboxIndexesForCheckedBoxesChecked: $workplaceIssueCheckboxIndexesForCheckedBoxesChecked");
+    logt("legacyIssueCheckboxIndexesForCheckedBoxesChecked: $legacyIssueCheckboxIndexesForCheckedBoxesChecked");
 
     // variable used to store the values of the section expansion tile indexes
     // e.g. if only one section expansion tile has a true value, then index = 0
