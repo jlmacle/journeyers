@@ -559,7 +559,7 @@ Future<void> main() async {
           List<String> individualStringValues = [
             ...checkboxTextFieldValues,
             indivAnotherIssueStrValue,
-          ].where((string) => string.isNotEmpty).toList();
+          ];
 
           List<String> groupStringValues = [
             groupProblemsToSolveStrValue,
@@ -578,7 +578,7 @@ Future<void> main() async {
               matching: find.byIcon(Icons.find_in_page_rounded),
             );
 
-            await caTestPreview2(
+            await caTestPreview(
               context: context,
               tester: tester,
               previewFinder: previewFinder,
@@ -749,7 +749,7 @@ Future<void> main() async {
           List<String> individualStringValuesEdited = [
             ...checkboxTextFieldValuesEdited,
             "$indivAnotherIssueStrValue${lts.editionSuffix}",
-          ].where((string) => string.isNotEmpty).toList();
+          ];
 
           var segmentedButtonTextFieldValuesEdited = [
             for (var item in segmentedButtonsTextFieldValues)
@@ -760,7 +760,7 @@ Future<void> main() async {
             ...segmentedButtonTextFieldValuesEdited,
           ];
 
-          await caTestPreview2(
+          await caTestPreview(
             context: context,
             tester: tester,
             title: title,

@@ -11,7 +11,6 @@ import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
@@ -762,229 +761,6 @@ Future<void> caEditDataOnMobile({
 }
 
 // ─── CA PREVIEW ───────────────────────────────────────────────────────────────
-// Method used to test a CA preview.
-Future<void> caTestPreview({
-  required BuildContext context,
-  required WidgetTester tester,
-  Finder? previewFinder,
-  required String title,
-  List<String> individualStringValues = const ["", "", "", "", "", "", "", ""],
-  List<Set<String>> segmentedButtonValues = const [{}, {}, {}, {}, {}],
-  List<String> groupStringValues = const ["", "", "", "", ""],
-}) async {
-  // Accessing the localized form data
-  LocalizedCAQuestionsFields? qfl = .new(context);
-  LocalizedDashboardStrings lds = .new(context);
-
-  logt("Preview: Individual perspective values", individualStringValues);
-  logt("Preview: Group/team perspective values", groupStringValues);
-  // The total number of expansion tile for the individual perspective
-  int totalIndivExpansionTiles = 0;
-
-  await tester.pump(const Duration(seconds: 2));
-  // Opening the preview
-  var previewFinderVal =
-      previewFinder ??
-      find.byTooltip(lds.previewTooltipLabel, skipOffstage: false).last;
-  // Getting the scrollable
-  var scrollable = find
-      .descendant(
-        of: find.byKey(const Key("dashboard-scrollview")),
-        matching: find.byType(Scrollable),
-      )
-      .first;
-  await tester.scrollUntilVisible(previewFinderVal, 45, scrollable: scrollable);
-  await tester.pumpAndSettle();
-  await tester.tap(previewFinderVal);
-  await tester.pumpAndSettle();
-
-  await tester.pump(const Duration(seconds: 5));
-
-  // Verifying the title present
-  var titleFinder = find.descendant(
-    of: find.byType(StatefulBuilder),
-    matching: find.textContaining(title),
-  );
-  expect(titleFinder, findsOne);
-
-  logt("Title found in the preview");
-
-  //Searching for the expansion tiles
-  var expansionTilesFinder = find.descendant(
-    of: find.byType(CAPreview),
-    matching: find.byType(ExpansionTile),
-    skipOffstage: false,
-  );
-
-  // Getting the number of non empty individual perspective values
-  var totalNonEmptyIndivPerspectiveValues = individualStringValues
-      .where((item) => item.isNotEmpty)
-      .toList()
-      .length;
-  logt(
-    "Number of non empty individual perspective values",
-    totalNonEmptyIndivPerspectiveValues,
-  );
-  // Getting the total number of expansion tiles
-  int totalExpansionTiles = expansionTilesFinder.evaluate().length;
-  logt("Number of expansion tiles", totalExpansionTiles);
-  // Expansion tile indexes for the individual perspective
-  var indivIndexes = List.generate(
-    totalNonEmptyIndivPerspectiveValues,
-    (i) => i,
-  );
-
-  // Expansion tile indexes for the group/teams perspective
-  var groupIndexes = List.generate(5, (i) => i + 4);
-
-  logt("Expansion tile indexes for the individual perspective", indivIndexes);
-  logt("Expansion tile indexes for the group/teams perspective", groupIndexes);
-  // To have the index of the data for each perspective
-  // reset at the start of the group/teams perspective
-  int previewListTileDataIndex = -1;
-
-  // Accessing the expansion tiles by index
-  for (
-    int expansionTileIndex = 0;
-    expansionTileIndex < totalExpansionTiles;
-    expansionTileIndex++
-  ) {
-    // Searching the expansion tile by index
-    var currentExpansionTileFinder = find
-        .descendant(
-          of: find.byType(CAPreview),
-          matching: find.byType(ExpansionTile),
-          skipOffstage: false,
-        )
-        .at(expansionTileIndex);
-
-    // Getting the expansion tile title
-    ExpansionTile expansionTileWidget = tester.widget<ExpansionTile>(
-      currentExpansionTileFinder,
-    );
-    Text expansionTileTitleWidget = expansionTileWidget.title as Text;
-    String expansionTileTitle = expansionTileTitleWidget.data!;
-    logt("\n Expansion tile title", expansionTileTitle);
-    // Getting all the list tiles for the expansion tile
-    var listTilesFinder = find.descendant(
-      of: currentExpansionTileFinder,
-      matching: find.byType(ListTile),
-      skipOffstage: false,
-    );
-
-    // Getting the total number of list tiles for this expansion tile
-    int totalListTiles = listTilesFinder.evaluate().length;
-    logt("Number of list tiles for: $expansionTileTitle: $totalListTiles. \n"
-        "The expansion tile is included. The first index is skipped.");
-    
-
-    if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) {
-      totalIndivExpansionTiles++;
-    }
-
-    // Accessing each list tile by index
-    // Index starting at 1 to skip the expansion tile
-    for (
-      int listTileIndex = 1;
-      listTileIndex < totalListTiles;
-      listTileIndex++
-    ) {
-      // No expansion tile if the checkbox is not checked
-      // Resetting at the first group/teams expansion tile
-      if (expansionTileIndex == totalIndivExpansionTiles) {
-        logt("Resetting previewListTileDataIndex at expansionTileIndex: $expansionTileIndex");
-        previewListTileDataIndex = 0;
-      } else {
-        previewListTileDataIndex++;
-      }
-
-      // Searching the tiles by index
-      var currentListTile = find
-          .descendant(
-            of: currentExpansionTileFinder,
-            matching: find.byType(ListTile),
-            skipOffstage: false,
-          )
-          .at(listTileIndex);
-
-      // Getting the list tile title
-      ListTile listTileWidget = tester.widget<ListTile>(currentListTile);
-      Text listTileTitleWidget = listTileWidget.title as Text;
-      String listTileTitle = listTileTitleWidget.data!;
-      logt("List tiles title for: $expansionTileTitle", listTileTitle);
-      logt(
-        "expansionTileIndex: $expansionTileIndex, listTileIndex",
-        listTileIndex,
-      );
-      // Testing if the expansion tile is related to the individual perspective
-      if (qfl.level3TitlesIndividualForPreview.contains(expansionTileTitle)) {
-        // The last individual perspective expansion tile is for a text field only data
-        // For a text field only, the notes are in the title
-        if (expansionTileTitle == qfl.level3TitleAnotherIssueForDataSaving &&
-            listTileIndex == 1) {
-          expect(
-            listTileTitle,
-            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}",
-          );
-        }
-        // Otherwise the notes are in the subtitle, for the individual perspective
-        else {
-          // Getting the list tile subtitle
-          Text listTileSubTitleWidget = listTileWidget.subtitle as Text;
-          String listTileSubTitle = listTileSubTitleWidget.data!;
-          logt("List tiles subtitle for $expansionTileTitle", listTileSubTitle);
-          expect(
-            listTileSubTitle,
-            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${individualStringValues[previewListTileDataIndex]}",
-          );
-        }
-      }
-      // Group/teams expansion tiles
-      else {
-        // The first group/teams perspective expansion tile is for a text field only data
-        // For a text field only, the notes are in the title
-        if (expansionTileTitle ==
-                qfl.level3TitleGroupsProblematicsForDataSaving &&
-            listTileIndex == 1) {
-          logt("List tiles title", expansionTileTitle);
-          expect(
-            listTileTitle,
-            "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}",
-          );
-        }
-        // Otherwise the notes are in the title with the segmented button answers
-        else {
-          var segButtonValue =
-              segmentedButtonValues[previewListTileDataIndex - 1];
-
-          if (segButtonValue.isNotEmpty) {
-            logt("List tiles title", expansionTileTitle);
-            var segButtonAnswersWithNotes =
-                "${AppLocalizations.of(context)?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): "}${_segmentedButtonToString(segButtonValue)}\n"
-                "${AppLocalizations.of(context)?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:"}${groupStringValues[previewListTileDataIndex]}";
-            expect(listTileTitle, segButtonAnswersWithNotes);
-          } else {
-            logt("List tiles title", expansionTileTitle);
-            expect(
-              listTileTitle,
-              AppLocalizations.of(context)?.ca_preview_notes_introduction ??
-                  "Issue with the l10n for Notes:",
-            );
-          }
-        }
-      }
-    }
-  }
-
-  // Closing the preview
-  var previewClosingTooltipLabelFinder = find.byTooltip(
-    lds.previewClosingTooltipLabel,
-  );
-  await tester.tap(previewClosingTooltipLabelFinder);
-  await tester.pumpAndSettle();
-
-  // await tester.pump(const Duration(seconds: 2));
-}
 
 // Method used to get the finder of the individual expansion tiles
 Future<Finder> caPreviewGetExpansionTilesIndividualPerspective() async {
@@ -1017,7 +793,7 @@ Future<Finder> caPreviewGetExpansionTilesGroupPerspective() async {
 }
 
 // Method used to test the content of a context analysis preview
-Future<void> caTestPreview2({
+Future<void> caTestPreview({
   required BuildContext context,
   required WidgetTester tester,
   Finder? previewFinder,
@@ -1472,13 +1248,20 @@ Future<void> caTestPreview2({
         var currentDataWidget = getLastTextFromFinder(tester, currentExpansionTileGroupPerpectiveFinder);          
         var currentData = currentDataWidget.data;       
 
-        var currentSegmentedButtonsOptionsValues = segmentedButtonsValues[currentExpansionTileIndex - 1]; // - Text field only
-        var currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
-        var expectedSegmentedButtonsOptionsData  = "${lca.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}";
-        
-        var expectedNotesData = "${lca.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";
-        
-        var expectedData = "$expectedSegmentedButtonsOptionsData\n$expectedNotesData";
+        var currentSegmentedButtonsOptionsValues = segmentedButtonsValues[currentExpansionTileIndex - 1]; // - index of Text field only
+        logt("currentSegmentedButtonsOptionsValues: $currentSegmentedButtonsOptionsValues");
+
+        var  currentSegmentedButtonsOptionsSerializedAndSortedValues = "";
+        var expectedSegmentedButtonsOptionsData = "";
+        // if options selected
+        if (currentSegmentedButtonsOptionsValues.isNotEmpty)
+        { 
+          currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
+          expectedSegmentedButtonsOptionsData  = "${lca.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}\n";          
+        }        
+          
+        var expectedNotesData = "${lca.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";        
+        var expectedData = "${expectedSegmentedButtonsOptionsData}${expectedNotesData}";
 
         logt("currentData: $currentData");
         logt("expectedData : $expectedData");

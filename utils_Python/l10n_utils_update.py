@@ -32,7 +32,7 @@ print(f"Language translations for each language: {LANGUAGE_VALUES_FOR_EACH_BASE_
 INDENT_LEVEL_1 = "  "
 INDENT_LEVEL_2 = "    "
 CLASS_BEGIN = (
-  'import "package:flutter/material.dart"; \n'
+  'import "package:material_ui/material_ui.dart"; \n'
   "\n"
   'import "package:journeyers/l10n/app_localizations.dart"; \n'
   "\n"
