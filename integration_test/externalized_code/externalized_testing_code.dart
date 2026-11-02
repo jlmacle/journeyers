@@ -1024,7 +1024,7 @@ Future<void> caTestPreview2({
   required String title,
   required List<bool> checkboxesValues,
   required List<String> individualStringValues,
-  required List<Set<String>> segmentedButtonValues,
+  required List<Set<String>> segmentedButtonsValues,
   required List<String> groupStringValues,
 }) async {
 
@@ -1038,7 +1038,7 @@ Future<void> caTestPreview2({
   logt("---------> Parameters");
   logt("Preview: Checkboxes values", checkboxesValues);
   logt("Preview: Individual perspective values", individualStringValues);
-  logt("Preview: Segmented buttons values", segmentedButtonValues);
+  logt("Preview: Segmented buttons values", segmentedButtonsValues);
   logt("Preview: Group/teams perspective values", groupStringValues);
   // await tester.pump(const Duration(seconds: 2));
 
@@ -1119,25 +1119,22 @@ Future<void> caTestPreview2({
     var workplaceIssueCheckboxIndexes = [4, 5];
     var legacyIssueCheckboxIndexes = [6];
 
-    // Text values, potentially "", for each section
-    // List<String> balanceIssueStringValues = [for (var index in balanceIssueCheckboxIndexes) individualStringValues[index]];
-    // List<String> workplaceIssueStringValues = [for (var index in workplaceIssueCheckboxIndexes) individualStringValues[index]];
-    // List<String> legacyIssueStringValues = [for (var index in legacyIssueCheckboxIndexes) individualStringValues[index]];
-    // List<String> anotherIssueStringValues = [individualStringValues.last];
-
     // Text values related to a checkbox checked
     List<String> balanceIssueStringValuesForCheckedBoxesChecked = [
       for (var index in balanceIssueCheckboxIndexes)
         if (checkboxesValues[index] == true) individualStringValues[index],
     ];
+    logt("balanceIssueStringValuesForCheckedBoxesChecked; $balanceIssueStringValuesForCheckedBoxesChecked");
     List<String> workplaceIssueStringValuesForCheckedBoxesChecked = [
       for (var index in workplaceIssueCheckboxIndexes)
-        if (checkboxesValues[index] == true) individualStringValues[index],
+        if (checkboxesValues[index] == true) individualStringValues[index], 
     ];
+    logt("workplaceIssueStringValuesForCheckedBoxesChecked; $workplaceIssueStringValuesForCheckedBoxesChecked");
     List<String> legacyIssueStringValuesForCheckedBoxesChecked = [
       for (var index in legacyIssueCheckboxIndexes)
         if (checkboxesValues[index] == true) individualStringValues[index],
-    ];
+    ]; 
+    logt("legacyIssueStringValuesForCheckedBoxesChecked; $legacyIssueStringValuesForCheckedBoxesChecked");
 
     // Checkbox indexes related to a checkbox checked
     var balanceIssueCheckboxIndexesForCheckedBoxesChecked = [
@@ -1153,33 +1150,15 @@ Future<void> caTestPreview2({
         if (checkboxesValues[index] == true) index,
     ];
 
-    logt("individualStringValues: $individualStringValues");
-    // logt("balanceIssueStringValues: $balanceIssueStringValues");
-    // logt("workplaceIssueStringValues: $workplaceIssueStringValues");
-    // logt("legacyIssueStringValues: $legacyIssueStringValues");
-    // logt("anotherIssueStringValues: $anotherIssueStringValues");
-
     logt("---------> String Values For CheckedBoxes Checked:");
-    logt(
-      "balanceIssueStringValuesForCheckedBoxesChecked: $balanceIssueStringValuesForCheckedBoxesChecked",
-    );
-    logt(
-      "workplaceIssueStringValuesForCheckedBoxesChecked: $workplaceIssueStringValuesForCheckedBoxesChecked",
-    );
-    logt(
-      "legacyIssueStringValuesForCheckedBoxesChecked: $legacyIssueStringValuesForCheckedBoxesChecked",
-    );
+    logt("balanceIssueStringValuesForCheckedBoxesChecked: $balanceIssueStringValuesForCheckedBoxesChecked");
+    logt("workplaceIssueStringValuesForCheckedBoxesChecked: $workplaceIssueStringValuesForCheckedBoxesChecked");
+    logt("legacyIssueStringValuesForCheckedBoxesChecked: $legacyIssueStringValuesForCheckedBoxesChecked");
 
     logt("---------> Boolean Values For CheckedBoxes Checked Indexes:");
-    logt(
-      "balanceIssueCheckboxIndexesForCheckedBoxesChecked: $balanceIssueCheckboxIndexesForCheckedBoxesChecked",
-    );
-    logt(
-      "workplaceIssueCheckboxIndexesForCheckedBoxesChecked: $workplaceIssueCheckboxIndexesForCheckedBoxesChecked",
-    );
-    logt(
-      "legacyIssueCheckboxIndexesForCheckedBoxesChecked: $legacyIssueCheckboxIndexesForCheckedBoxesChecked",
-    );
+    logt("balanceIssueCheckboxIndexesForCheckedBoxesChecked: $balanceIssueCheckboxIndexesForCheckedBoxesChecked");
+    logt("workplaceIssueCheckboxIndexesForCheckedBoxesChecked: $workplaceIssueCheckboxIndexesForCheckedBoxesChecked");
+    logt("legacyIssueCheckboxIndexesForCheckedBoxesChecked: $legacyIssueCheckboxIndexesForCheckedBoxesChecked");
 
     // variable used to store the values of the section expansion tile indexes
     // e.g. if only one section expansion tile has a true value, then index = 0
@@ -1468,7 +1447,7 @@ Future<void> caTestPreview2({
     );
 
     // For all segmented button values (Notes displayed, potentially empty)
-    for (var currentExpansionTileIndex = 0; currentExpansionTileIndex < segmentedButtonValues.length; currentExpansionTileIndex++) {
+    for (var currentExpansionTileIndex = 0; currentExpansionTileIndex < segmentedButtonsValues.length; currentExpansionTileIndex++) {
       // Getting the expansion tile
       var currentExpansionTileGroupPerpectiveFinder =
           expansionTilesGroupPerpectiveFinder.at(currentExpansionTileIndex);
@@ -1493,7 +1472,7 @@ Future<void> caTestPreview2({
         var currentDataWidget = getLastTextFromFinder(tester, currentExpansionTileGroupPerpectiveFinder);          
         var currentData = currentDataWidget.data;       
 
-        var currentSegmentedButtonsOptionsValues = segmentedButtonValues[currentExpansionTileIndex - 1]; // - Text field only
+        var currentSegmentedButtonsOptionsValues = segmentedButtonsValues[currentExpansionTileIndex - 1]; // - Text field only
         var currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
         var expectedSegmentedButtonsOptionsData  = "${lca.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}";
         
