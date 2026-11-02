@@ -525,7 +525,7 @@ Future<void> main() async {
         (
           formToFill: false,
           tester: tester, 
-          title: testAnalysisTitle2,
+          title: testAnalysisTitleRoot,
           kwsList: [kwCompanionship],              
           fileNameWithoutExtension: fileName1WithoutExtension
         );
@@ -533,7 +533,7 @@ Future<void> main() async {
         // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
         // Searching for the finder with the title
-        Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
+        Finder sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitleRoot);
         expect(sessionListItemFinder, findsOne);
 
         // await tester.pump(const Duration(seconds: 4));
@@ -558,7 +558,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
 
         // Verifying the sessions list item absent
-        sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitle2);
+        sessionListItemFinder = await dashboardGetSessionListItemFinderByTitle(tester: tester, title: testAnalysisTitleRoot);
         expect(sessionListItemFinder, findsNothing);
 
         // Verifying the Filter Chip absent
@@ -751,7 +751,7 @@ Future<void> main() async {
           await caEnterNewProcessDataOnMobile
           (
             tester: tester, 
-            title: testAnalysisTitle2,
+            title: testAnalysisTitleRoot,
             kwsList: kwsList2Keywords,
             fileNameWithoutExtension: fileName1WithoutExtension
           );
@@ -762,13 +762,23 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2)); 
-          await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitleRoot, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
           // Default parameter values for empty CA form fields
           var context = tester.element(find.byType(Scaffold).first);
-          await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2);
+          
+          await caTestPreview
+          (
+            context: context, 
+            tester: tester, 
+            title: testAnalysisTitleRoot, 
+            checkboxesValues: [], 
+            individualStringValues: [], 
+            segmentedButtonsValues: [], 
+            groupStringValues: []
+          );
 
           // await tester.pump(const Duration(seconds: 2));
 
@@ -828,7 +838,7 @@ Future<void> main() async {
           await caEnterNewProcessDataOnMobile
           (
             tester: tester, 
-            title: testAnalysisTitle2,
+            title: testAnalysisTitleRoot,
             kwsList: kwsList2Keywords,
             checkboxesValues: checkboxesValues,
             checkboxesTextFieldValues: checkboxesTextFieldValues,
@@ -845,7 +855,7 @@ Future<void> main() async {
           
           // To avoid intermittent test failures
           await tester.pump(const Duration(seconds: 2));
-          await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+          await testTitleAndKeywords(title: testAnalysisTitleRoot, kws: kwsList2Keywords);
 
           // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────────────
@@ -853,8 +863,16 @@ Future<void> main() async {
           List<String> individualStringValues = [...checkboxesTextFieldValues, indivAnotherIssueStrValue];
           List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
-          await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2 , individualStringValues: individualStringValues, 
-          segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
+          await caTestPreview
+          (
+            context: context, 
+            tester: tester, 
+            title: testAnalysisTitleRoot , 
+            checkboxesValues: checkboxesValues, 
+            individualStringValues: individualStringValues, 
+            segmentedButtonsValues: segmentedButtonsValues,
+            groupStringValues: groupStringValues            
+          );
 
           // await tester.pump(const Duration(seconds: 2));
         }
@@ -909,18 +927,18 @@ Future<void> main() async {
         List<String> segmentedButtonsTextFieldValues = ["b2", "", "b4",""];
 
         await caEnterNewProcessDataOnMobile
-          (
-            tester: tester, 
-            title: testAnalysisTitle2,
-            kwsList: kwsList2Keywords,
-            checkboxesValues: checkboxesValues,
-            checkboxesTextFieldValues: checkboxesTextFieldValues,
-            indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-            groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-            segmentedButtonsValues: segmentedButtonsValues,
-            segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-            fileNameWithoutExtension: fileName1WithoutExtension
-          );
+        (
+          tester: tester, 
+          title: testAnalysisTitleRoot,
+          kwsList: kwsList2Keywords,
+          checkboxesValues: checkboxesValues,
+          checkboxesTextFieldValues: checkboxesTextFieldValues,
+          indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+          groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+          segmentedButtonsValues: segmentedButtonsValues,
+          segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
+          fileNameWithoutExtension: fileName1WithoutExtension
+        );
         
         // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────
@@ -928,20 +946,26 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitleRoot, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
-          [...checkboxesTextFieldValues, indivAnotherIssueStrValue]
-          .where((string) => string.isNotEmpty)
-          .toList();
+          [...checkboxesTextFieldValues, indivAnotherIssueStrValue];
 
         List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
-        await caTestPreview(context: context, tester: tester, title:testAnalysisTitle2 ,individualStringValues: individualStringValues, 
-        segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
+        await caTestPreview
+        (
+          context: context, 
+          tester: tester, 
+          title:testAnalysisTitleRoot,
+          checkboxesValues: checkboxesValues,
+          individualStringValues: individualStringValues, 
+          segmentedButtonsValues: segmentedButtonsValues, 
+          groupStringValues: groupStringValues, 
+          );
 
         // await tester.pump(const Duration(seconds: 2));
       }
@@ -998,7 +1022,7 @@ Future<void> main() async {
         await caEnterNewProcessDataOnMobile
         (
           tester: tester, 
-          title: testAnalysisTitle2,
+          title: testAnalysisTitleRoot,
           kwsList: kwsList2Keywords,
           checkboxesValues: checkboxesValues,
           checkboxesTextFieldValues: checkboxesTextFieldValues,
@@ -1015,20 +1039,26 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitleRoot, kws: kwsList2Keywords);
 
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
-          [...checkboxesTextFieldValues, indivAnotherIssueStrValue]
-          .where((string) => string.isNotEmpty)
-          .toList();
+          [...checkboxesTextFieldValues, indivAnotherIssueStrValue];
 
         List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
-        await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
-        segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
+        await caTestPreview
+        (
+          context: context, 
+          tester: tester, 
+          title: testAnalysisTitleRoot, 
+          individualStringValues: individualStringValues, 
+          segmentedButtonsValues: segmentedButtonsValues, 
+          groupStringValues: groupStringValues, 
+          checkboxesValues: checkboxesValues
+        );
 
         // await tester.pump(const Duration(seconds: 2));
       }
@@ -1085,7 +1115,7 @@ Future<void> main() async {
         await caEnterNewProcessDataOnMobile
         (
           tester: tester, 
-          title: testAnalysisTitle2,
+          title: testAnalysisTitleRoot,
           kwsList: kwsList2Keywords,
           checkboxesValues: checkboxesValues,
           checkboxesTextFieldValues: checkboxesTextFieldValues,
@@ -1102,20 +1132,26 @@ Future<void> main() async {
         
         // To avoid intermittent test failures
         await tester.pump(const Duration(seconds: 2));
-        await testTitleAndKeywords(title: testAnalysisTitle2, kws: kwsList2Keywords);
+        await testTitleAndKeywords(title: testAnalysisTitleRoot, kws: kwsList2Keywords);
         
         // ── 3. TESTING THE PREVIEW ─────────────────────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────────────
         // Putting all non-empty string values together, to retrieve them by index
         List<String> individualStringValues = 
-          [...checkboxesTextFieldValues, indivAnotherIssueStrValue]
-          .where((string) => string.isNotEmpty)
-          .toList();
+          [...checkboxesTextFieldValues, indivAnotherIssueStrValue];
 
         List<String> groupStringValues = [groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues];
 
-        await caTestPreview(context: context, tester: tester, title: testAnalysisTitle2, individualStringValues: individualStringValues, 
-        segmentedButtonValues: segmentedButtonsValues, groupStringValues: groupStringValues);
+        await caTestPreview
+        (
+          context: context, 
+          tester: tester, 
+          title: testAnalysisTitleRoot, 
+          checkboxesValues: checkboxesValues,
+          individualStringValues: individualStringValues, 
+          segmentedButtonsValues: segmentedButtonsValues, 
+          groupStringValues: groupStringValues          
+        );
 
         // await tester.pump(const Duration(seconds: 2));
       }
@@ -1708,9 +1744,10 @@ Future<void> main() async {
               context: context, 
               tester: tester, 
               title: title,
+              checkboxesValues: checkboxesValues,
               individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
-              segmentedButtonValues: newsegmentedButtonsValues
+              segmentedButtonsValues: newsegmentedButtonsValues,              
             );          
           } // platform-related if
 
@@ -2031,9 +2068,10 @@ Future<void> main() async {
               context: context,
               tester: tester, 
               title: title,
+              checkboxesValues: checkboxesValues,
               individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
-              segmentedButtonValues: newsegmentedButtonsValues
+              segmentedButtonsValues: newsegmentedButtonsValues 
             );          
           } // platform-related if
 
@@ -2356,9 +2394,10 @@ Future<void> main() async {
               context: context,
               tester: tester, 
               title: title,
+              checkboxesValues: checkboxesValues,
               individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
-              segmentedButtonValues: newsegmentedButtonsValues
+              segmentedButtonsValues: newsegmentedButtonsValues              
             ); 
 
             // ── STARTING A NEW CA PROCESS ──────────────────
