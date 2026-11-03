@@ -3,7 +3,7 @@ import "package:flutter/widgets.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/utils/string/string_utils.dart";
 
-class LocalizedCAQuestionsFields
+class LocalizedCAFormQuestions
 {
   AppLocalizations? _l10n;
 
@@ -134,7 +134,7 @@ class LocalizedCAQuestionsFields
   /// The set of the text fields only items.
   Set<String> textFieldOnlyItems = {};
 
-  LocalizedCAQuestionsFields(BuildContext context)
+  LocalizedCAFormQuestions(BuildContext context)
   {    
     /// Question asked in the form: As an individual: What problem am I trying to solve?
     level2TitleIndividual = AppLocalizations.of(context)?.ca_process_individual_perspective_title_question

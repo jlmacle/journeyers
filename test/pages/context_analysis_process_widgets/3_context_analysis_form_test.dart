@@ -6,8 +6,8 @@ import "package:material_ui/material_ui.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_ca_questions_fields.dart";
-import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_ca_form_questions.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
@@ -92,7 +92,7 @@ void main() {
 
         // Acccessing the localized strings
         var context = tester.element(find.byType(Scaffold).first);
-        LocalizedCAQuestionsFields lqf = .new(context);
+        LocalizedCAFormQuestions lfq = .new(context);
 
         var localeLanguageCode = getLocaleLanguageCode(tester);
 
@@ -127,10 +127,10 @@ void main() {
         );
 
         // Verifying consistency between hard-coded string and localized string
-        expect(level2TitleIndividual, lqf.level2TitleIndividual);
+        expect(level2TitleIndividual, lfq.level2TitleIndividual);
 
         // Verifying the first title correct
-        expect(firstExpansionTileTextWidget.data, lqf.level2TitleIndividual);
+        expect(firstExpansionTileTextWidget.data, lfq.level2TitleIndividual);
 
         // Verifying that the second expansion tile title is correct
         var secondExpansionTileQuestionFinder = find
@@ -161,10 +161,10 @@ void main() {
         logt("level2TitleGroup", level2TitleGroup);
 
         // Verifying consistency between hard-coded string and localized string
-        expect(level2TitleGroup, lqf.level2TitleGroup);
+        expect(level2TitleGroup, lfq.level2TitleGroup);
 
         // Verifying the second title correct
-        expect(secondExpansionTileTextWidget.data, lqf.level2TitleGroup);
+        expect(secondExpansionTileTextWidget.data, lfq.level2TitleGroup);
       });
 
       testWidgets("Individual and group tiles carry the correct sub-text", (
@@ -254,7 +254,7 @@ void main() {
 
           // Getting the localized strings
           final context = tester.element(find.byType(Scaffold));
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           // Opening the individual perspective expansion tile
           await caOpenIndividualExpansionTile(context, tester);
@@ -315,34 +315,34 @@ void main() {
           // Verifying consistency between hard-coded strings and localized strings
           expect(
             individualPerspectiveBalanceIssue,
-            lqf.level3TitleBalanceIssue,
+            lfq.level3TitleBalanceIssue,
           );
           expect(
             individualPerspectiveWorkplaceIssue,
-            lqf.level3TitleWorkplaceIssue,
+            lfq.level3TitleWorkplaceIssue,
           );
-          expect(individualPerspectiveLegacyIssue, lqf.level3TitleLegacyIssue);
+          expect(individualPerspectiveLegacyIssue, lfq.level3TitleLegacyIssue);
           expect(
             individualPerspectiveAnotherIssue,
-            lqf.level3TitleAnotherIssue,
+            lfq.level3TitleAnotherIssue,
           );
 
           // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
           expect(
             tester.widget<Text>(customHeadingTextsFinders.at(2)).data,
-            lqf.level3TitleBalanceIssue,
+            lfq.level3TitleBalanceIssue,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinders.at(3)).data,
-            lqf.level3TitleWorkplaceIssue,
+            lfq.level3TitleWorkplaceIssue,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinders.at(4)).data,
-            lqf.level3TitleLegacyIssue,
+            lfq.level3TitleLegacyIssue,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinders.at(5)).data,
-            lqf.level3TitleAnotherIssue,
+            lfq.level3TitleAnotherIssue,
           );
         },
       );
@@ -418,7 +418,7 @@ void main() {
           );
 
           // Getting the localized strings
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           var localeLanguageCode = getLocaleLanguageCode(tester);
 
@@ -458,37 +458,37 @@ void main() {
           // Verifying consistency between hard-coded strings and localized strings
           expect(
             level3TitleBalanceIssueItem1,
-            lqf.level3TitleBalanceIssueItem1,
+            lfq.level3TitleBalanceIssueItem1,
           );
           expect(
             level3TitleBalanceIssueItem2,
-            lqf.level3TitleBalanceIssueItem2,
+            lfq.level3TitleBalanceIssueItem2,
           );
           expect(
             level3TitleBalanceIssueItem3,
-            lqf.level3TitleBalanceIssueItem3,
+            lfq.level3TitleBalanceIssueItem3,
           );
           expect(
             level3TitleBalanceIssueItem4,
-            lqf.level3TitleBalanceIssueItem4,
+            lfq.level3TitleBalanceIssueItem4,
           );
 
           // Verifying the level 3 items present
           expect(
             tester.widget<Text>(textsFinder.at(3)).data,
-            lqf.level3TitleBalanceIssueItem1,
+            lfq.level3TitleBalanceIssueItem1,
           );
           expect(
             tester.widget<Text>(textsFinder.at(4)).data,
-            lqf.level3TitleBalanceIssueItem2,
+            lfq.level3TitleBalanceIssueItem2,
           );
           expect(
             tester.widget<Text>(textsFinder.at(5)).data,
-            lqf.level3TitleBalanceIssueItem3,
+            lfq.level3TitleBalanceIssueItem3,
           );
           expect(
             tester.widget<Text>(textsFinder.at(6)).data,
-            lqf.level3TitleBalanceIssueItem4,
+            lfq.level3TitleBalanceIssueItem4,
           );
         },
       );
@@ -512,7 +512,7 @@ void main() {
           );
 
           // Getting the localized strings
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           var localeLanguageCode = getLocaleLanguageCode(tester);
 
@@ -547,21 +547,21 @@ void main() {
           // Verifying consistency between hard-coded strings and localized strings
           expect(
             level3TitleWorkplaceIssueItem1,
-            lqf.level3TitleWorkplaceIssueItem1,
+            lfq.level3TitleWorkplaceIssueItem1,
           );
           expect(
             level3TitleWorkplaceIssueItem2,
-            lqf.level3TitleWorkplaceIssueItem2,
+            lfq.level3TitleWorkplaceIssueItem2,
           );
 
           // Verifying the level 3 items present
           expect(
             tester.widget<Text>(textFinders.at(8)).data,
-            lqf.level3TitleWorkplaceIssueItem1,
+            lfq.level3TitleWorkplaceIssueItem1,
           );
           expect(
             tester.widget<Text>(textFinders.at(9)).data,
-            lqf.level3TitleWorkplaceIssueItem2,
+            lfq.level3TitleWorkplaceIssueItem2,
           );
         },
       );
@@ -585,7 +585,7 @@ void main() {
           );
 
           // Getting the localized strings
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           var localeLanguageCode = getLocaleLanguageCode(tester);
 
@@ -606,12 +606,12 @@ void main() {
 
           logt("level3TitleLegacyIssueItem1", level3TitleLegacyIssueItem1);
           // Verifying consistency between hard-coded strings and localized strings
-          expect(level3TitleLegacyIssueItem1, lqf.level3TitleLegacyIssueItem1);
+          expect(level3TitleLegacyIssueItem1, lfq.level3TitleLegacyIssueItem1);
 
           // Verifying the level 3 item present
           expect(
             tester.widget<Text>(textFinders.at(11)).data,
-            lqf.level3TitleLegacyIssueItem1,
+            lfq.level3TitleLegacyIssueItem1,
           );
         },
       );
@@ -827,7 +827,7 @@ void main() {
 
           // Acccessing the localized strings
           var context = tester.element(find.byType(Scaffold).first);
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           // Opening the group/team perspective expansion tile
           await caOpenGroupExpansionTile(context, tester);
@@ -890,38 +890,38 @@ void main() {
             groupPerspectiveEarningAbility,
           );
           // Verifying consistency between hard-coded strings and localized strings
-          expect(groupPerspectiveProblems, lqf.level3TitleGroupsProblematics);
-          expect(groupPerspectiveSameProblems, lqf.level3TitleSameProblem);
-          expect(groupPerspectiveHarmonyHome, lqf.level3TitleHarmonyAtHome);
+          expect(groupPerspectiveProblems, lfq.level3TitleGroupsProblematics);
+          expect(groupPerspectiveSameProblems, lfq.level3TitleSameProblem);
+          expect(groupPerspectiveHarmonyHome, lfq.level3TitleHarmonyAtHome);
           expect(
             groupPerspectiveAppreciabilityWork,
-            lqf.level3TitleAppreciabilityAtWork,
+            lfq.level3TitleAppreciabilityAtWork,
           );
           expect(
             groupPerspectiveEarningAbility,
-            lqf.level3TitleIncomeEarningAbility,
+            lfq.level3TitleIncomeEarningAbility,
           );
 
           // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(2)).data,
-            lqf.level3TitleGroupsProblematics,
+            lfq.level3TitleGroupsProblematics,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(3)).data,
-            lqf.level3TitleSameProblem,
+            lfq.level3TitleSameProblem,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(4)).data,
-            lqf.level3TitleHarmonyAtHome,
+            lfq.level3TitleHarmonyAtHome,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(5)).data,
-            lqf.level3TitleAppreciabilityAtWork,
+            lfq.level3TitleAppreciabilityAtWork,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(6)).data,
-            lqf.level3TitleIncomeEarningAbility,
+            lfq.level3TitleIncomeEarningAbility,
           );
         },
       );
@@ -1043,7 +1043,7 @@ void main() {
 
           // Acccessing the localized strings
           var context = tester.element(find.byType(Scaffold).first);
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           // Expanding the expansion tile
           await caOpenIndividualExpansionTile(context, tester);
@@ -1162,7 +1162,7 @@ void main() {
           // Clicking on the first balance item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleBalanceIssueItem1,
+            checkboxText: lfq.level3TitleBalanceIssueItem1,
           );
           // Verifying the formatting for the balance issue
           var expectedAllBalanceTextsFormatting = [
@@ -1281,7 +1281,7 @@ void main() {
           // Clicking on the second balance item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleBalanceIssueItem2,
+            checkboxText: lfq.level3TitleBalanceIssueItem2,
           );
           // Verifying the formatting
           expectedAllBalanceTextsFormatting = [
@@ -1339,7 +1339,7 @@ void main() {
           // Re-clicking on the second balance item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleBalanceIssueItem2,
+            checkboxText: lfq.level3TitleBalanceIssueItem2,
           );
           // Verifying the formatting
           expectedAllBalanceTextsFormatting = [
@@ -1395,7 +1395,7 @@ void main() {
           // Re-clicking on the first balance item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleBalanceIssueItem1,
+            checkboxText: lfq.level3TitleBalanceIssueItem1,
           );
           // Verifying the formatting
           expectedAllBalanceTextsFormatting = [
@@ -1520,7 +1520,7 @@ void main() {
 
           // Acccessing the localized strings
           var context = tester.element(find.byType(Scaffold).first);
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           // Expanding the expansion tile
           await caOpenIndividualExpansionTile(context, tester);
@@ -1646,7 +1646,7 @@ void main() {
           // Clicking on the first workplace item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleWorkplaceIssueItem1,
+            checkboxText: lfq.level3TitleWorkplaceIssueItem1,
           );
           // Verifying the formatting for the workplace issue
           var expectedAllWorkplaceTextsFormatting = [
@@ -1764,7 +1764,7 @@ void main() {
           // Clicking on the second workplace item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleWorkplaceIssueItem2,
+            checkboxText: lfq.level3TitleWorkplaceIssueItem2,
           );
           // Verifying the formatting
           expectedAllWorkplaceTextsFormatting = [
@@ -1807,7 +1807,7 @@ void main() {
           // Re-clicking on the second workplace item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleWorkplaceIssueItem2,
+            checkboxText: lfq.level3TitleWorkplaceIssueItem2,
           );
           // Verifying the formatting
           expectedAllWorkplaceTextsFormatting = [
@@ -1853,7 +1853,7 @@ void main() {
           // Re-clicking on the first workplace item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleWorkplaceIssueItem1,
+            checkboxText: lfq.level3TitleWorkplaceIssueItem1,
           );
           // Verifying the formatting
           expectedAllWorkplaceTextsFormatting = List.filled(3, isNotUnderlined);
@@ -1968,7 +1968,7 @@ void main() {
 
           // Acccessing the localized strings
           var context = tester.element(find.byType(Scaffold).first);
-          LocalizedCAQuestionsFields lqf = .new(context);
+          LocalizedCAFormQuestions lfq = .new(context);
 
           // Expanding the expansion tile
           await caOpenIndividualExpansionTile(context, tester);
@@ -2093,7 +2093,7 @@ void main() {
           // Clicking on the first legacy item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleLegacyIssueItem1,
+            checkboxText: lfq.level3TitleLegacyIssueItem1,
           );
           // Verifying the formatting for the legacy issue
           var expectedAllLegacyTextsFormatting = [isUnderlined, isUnderlined];
@@ -2205,7 +2205,7 @@ void main() {
           // Re-clicking on the first legacy item and verifying the new values
           await caCheckboxChangeValue(
             tester: tester,
-            checkboxText: lqf.level3TitleLegacyIssueItem1,
+            checkboxText: lfq.level3TitleLegacyIssueItem1,
           );
           // Verifying the formatting
           expectedAllLegacyTextsFormatting = List.filled(2, isNotUnderlined);

@@ -139,3 +139,5 @@ devtools_options.yaml
 # Python virtual environments
 journeyers/
 utils_Python/pyEnv/
+# Widget Preview related
+.widget_preview/
