@@ -1623,7 +1623,7 @@ Future<void> main() async {
             textFieldsFinder = find.byType(TextField, skipOffstage: false);
             totalTextFields = textFieldsFinder.evaluate().length;
 
-            if (testingDebug) pu.printd("Testing Debug: totalTextFields: $totalTextFields (expected: 16)");
+            logt("totalTextFields: $totalTextFields (expected: 16)");
 
             // null for keywords and file name
             // Should have 16 values
