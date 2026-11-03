@@ -451,7 +451,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              if (testingDebug) pu.printd("Testing Debug: totalTitles for $kwCompanionship: $totalTitles");
+              logt("totalTitles for $kwCompanionship: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
