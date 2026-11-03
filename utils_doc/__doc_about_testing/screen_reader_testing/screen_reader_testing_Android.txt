@@ -9,7 +9,7 @@ The language switch is read: ✔️
 "Collapsed", "English", "Button"
 
 // ── NEW SESSION BUTTON  ───────────────────────────────────────────────
-The new session button label is read:  ✔️
+The new session button label is read as if in one line:  ✔️
 
 // ── DASHBOARD  ───────────────────────────────────────────────
 The dashboard title is read: ✔️
