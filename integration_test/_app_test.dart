@@ -12,7 +12,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
