@@ -13,8 +13,8 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_ca_questions_fields.dart";
-import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_ca_form_questions.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
@@ -1433,7 +1433,7 @@ Future<void> main() async {
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
             LocalizedCAStrings lca = .new(context);
-            LocalizedCAQuestionsFields lqf = .new(context);
+            LocalizedCAFormQuestions lfq = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1479,7 +1479,7 @@ Future<void> main() async {
             await tester.tap(previewFinder);
             await tester.pumpAndSettle();
             //Scrolling to the second half of the screen 
-            await tester.scrollUntilVisible(find.text(lqf.level3TitleLegacyIssueForDataSaving), 45, scrollable: find.byType(Scrollable).last);
+            await tester.scrollUntilVisible(find.text(lfq.level3TitleLegacyIssueForDataSaving), 45, scrollable: find.byType(Scrollable).last);
             await tester.pumpAndSettle();
 
             await tester.pump(const Duration(seconds: 2));
@@ -2100,7 +2100,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
-            LocalizedCAQuestionsFields? qfl = .new(context);
+            LocalizedCAFormQuestions? lfq = .new(context);
             LocalizedCAStrings lca = .new(context);
             LocalizedTestingStrings lts = .new(context);
 
@@ -2477,7 +2477,7 @@ Future<void> main() async {
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: qfl.childrenOfLevel3TitleBalanceIssue.toList(),
+              listOfTextsToFind: lfq.childrenOfLevel3TitleBalanceIssue.toList(),
               scrollable: firstScrollable
             );
 
@@ -2485,7 +2485,7 @@ Future<void> main() async {
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: qfl.childrenOfLevel3TitleWorkplaceIssue.toList(),
+              listOfTextsToFind: lfq.childrenOfLevel3TitleWorkplaceIssue.toList(),
               scrollable: firstScrollable
             );
 
@@ -2493,7 +2493,7 @@ Future<void> main() async {
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
-              listOfTextsToFind: qfl.childrenOfLevel3TitleLegacyIssue.toList(),
+              listOfTextsToFind: lfq.childrenOfLevel3TitleLegacyIssue.toList(),
               scrollable: firstScrollable
             );
 

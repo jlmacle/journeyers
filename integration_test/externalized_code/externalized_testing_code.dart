@@ -3,8 +3,8 @@ import "package:flutter_test/flutter_test.dart";
 
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_ca_questions_fields.dart";
-import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_ca_form_questions.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
@@ -38,8 +38,8 @@ Future<void> caOpenIndividualExpansionTile(
   BuildContext context,
   WidgetTester tester,
 ) async {
-  LocalizedCAQuestionsFields lqf = .new(context);
-  var tileFinder = find.text(lqf.level2TitleIndividual, skipOffstage: false);
+  LocalizedCAFormQuestions lfq = .new(context);
+  var tileFinder = find.text(lfq.level2TitleIndividual, skipOffstage: false);
   await tester.scrollUntilVisible(
     tileFinder,
     45,
@@ -61,8 +61,8 @@ Future<void> caOpenGroupExpansionTile(
   BuildContext context,
   WidgetTester tester,
 ) async {
-  LocalizedCAQuestionsFields lqf = .new(context);
-  var tileFinder = find.text(lqf.level2TitleGroup, skipOffstage: false);
+  LocalizedCAFormQuestions lfq = .new(context);
+  var tileFinder = find.text(lfq.level2TitleGroup, skipOffstage: false);
   await tester.scrollUntilVisible(
     tileFinder,
     45,
@@ -458,11 +458,11 @@ Future<void> caResetCASegmentedButtons({
   logt("Entering caResetCASegmentedButtons");
 
   // Getting the localized strings
-  LocalizedCAQuestionsFields lqf = .new(context);
+  LocalizedCAFormQuestions lfq = .new(context);
 
   // Scrolling to reach the title
   await tester.scrollUntilVisible(
-    find.text(lqf.level3TitleSameProblem),
+    find.text(lfq.level3TitleSameProblem),
     45,
     scrollable: find.byType(Scrollable).last,
   );

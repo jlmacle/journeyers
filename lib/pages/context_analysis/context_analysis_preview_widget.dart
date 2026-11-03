@@ -9,8 +9,8 @@ import "package:path/path.dart" as path;
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
-import "package:journeyers/l10n/localized_ca_questions_fields.dart";
-import "package:journeyers/l10n/localized_ca_strings.dart";
+import "package:journeyers/l10n/localized_ca_form_questions.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -41,7 +41,7 @@ class CAPreview extends StatefulWidget {
 
 class _CAPreviewState extends State<CAPreview> {
   // Getting the localized data
-  LocalizedCAQuestionsFields? qfl;
+  LocalizedCAFormQuestions? lfq;
 
   bool _previewDataLoading = true;
   final Map<String, dynamic> _sectionsIndividual = {};
@@ -60,7 +60,7 @@ class _CAPreviewState extends State<CAPreview> {
     super.initState();
 
     // Fetching the context for l10
-    qfl = .new(widget.context);
+    lfq = .new(widget.context);
 
     if (widgetSequenceDebug) pu.printdLine();
     if (widgetSequenceDebug) pu.printd("CAPreview");
@@ -194,7 +194,7 @@ class _CAPreviewState extends State<CAPreview> {
         _sectionsIndividual["title"] = secondValue;
       }
       // A title level 3?: "A Balance Issue?" for ex.
-      else if (qfl!.level3TitlesIndividualForPreview.contains(secondValue)) {
+      else if (lfq!.level3TitlesIndividualForPreview.contains(secondValue)) {
         // Adding a new map to the list of the key "questions", with the title level 3 as value for the key "title",
         // and an empty list for the key "items".
         _sectionsIndividual["questions"].add({
@@ -205,12 +205,12 @@ class _CAPreviewState extends State<CAPreview> {
       }
       // A title level 3 item?: "To balance studies and household life?" for ex.
       // Could be a checkbox or a text field.
-      else if (qfl!.questionsToInputItemsMapping.keys.contains(secondValue)) {
+      else if (lfq!.questionsToInputItemsMapping.keys.contains(secondValue)) {
         currentTitleLevel3Item = secondValue;
         // Checking if an "X" is in front of the title level 3, and if the item is also a checkbox
         if (firstValue == "X" &&
-            qfl!.questionsToInputItemsMapping[currentTitleLevel3Item] ==
-                qfl!.labelCheckbox) {
+            lfq!.questionsToInputItemsMapping[currentTitleLevel3Item] ==
+                lfq!.labelCheckbox) {
           checkedBox = true;
         } else {
           checkedBox = false;
@@ -218,9 +218,9 @@ class _CAPreviewState extends State<CAPreview> {
 
         // Retrieving the map with the same title level 3
         for (var map in _sectionsIndividual["questions"]) {
-          // The qfl!.titles level 3 with sub items are also the ones with checkboxes and text fields
+          // The lfq!.titles level 3 with sub items are also the ones with checkboxes and text fields
           if (map["title"] == currentTitleLevel3 &&
-              qfl!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
+              lfq!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
             // Adding a map to the items list, with data related to whether the checkbox is checked or not
             // and an empty value for the "notes" key.
             if (checkedBox) {
@@ -239,7 +239,7 @@ class _CAPreviewState extends State<CAPreview> {
           }
           // if no sub items, that should be the text field only
           else if (map["title"] == currentTitleLevel3 &&
-              !qfl!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
+              !lfq!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
             // Adding a map to the items list, with the notesTextField with an empty value.
             map["items"].add({"notesTextField": ""});
           }
@@ -248,7 +248,7 @@ class _CAPreviewState extends State<CAPreview> {
       // That should be a field with notes, either from a checkbox, or from a text field only
       else {
         // If the current title level 3 has sub items, then a note for a checkbox
-        if (qfl!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
+        if (lfq!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
           for (var map in _sectionsIndividual["questions"]) {
             // Searching for the current title level 3
             if (map["title"] == currentTitleLevel3) {
@@ -329,7 +329,7 @@ class _CAPreviewState extends State<CAPreview> {
       String secondValue = groupPerspectiveItem[1];
 
       // A title Level 2?: "As a member of groups/teams: What problem(s) are we trying to solve?", in the case of the group perspective.
-      if (qfl!.level2TitlesForPreview.contains(secondValue)) {
+      if (lfq!.level2TitlesForPreview.contains(secondValue)) {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
         _sectionsGroup["title"] = secondValue;
@@ -337,7 +337,7 @@ class _CAPreviewState extends State<CAPreview> {
         previousSecondValueFromSegButton = false;
       }
       // A title level 3?: "What problem(s) are the groups/teams trying to solve?" for ex.
-      else if (qfl!.level3TitlesGroupForPreview.contains(secondValue)) {
+      else if (lfq!.level3TitlesGroupForPreview.contains(secondValue)) {
         _sectionsGroup["questions"].add({"title": secondValue, "items": {}});
         currentTitleLevel3 = secondValue;
         previousSecondValueFromSegButton = false;
