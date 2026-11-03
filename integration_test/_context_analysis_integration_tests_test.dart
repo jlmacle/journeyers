@@ -582,7 +582,7 @@ Future<void> main() async {
           case("fr"): { snackbarMessage = "Données supprimées"; }        
         }
         
-        if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+        logt("snackbarMessage: $snackbarMessage");
         
         // Verifying consistency between hard-coded string and localized string
         // DashboardPage: lds.snackbarMessageDataDeleted
