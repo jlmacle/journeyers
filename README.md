@@ -18,7 +18,7 @@ Please note that the code needs cleaning.<br>
 
 Adapting the software to a different set of questions is feasible, and is planned to be made easier.<br>
 Also, this is free and unencumbered software <a href="https://github.com/jlmacle/journeyers/blob/main/LICENSE"> released into the public domain</a>.<br>
-Finally, this project is a portfolio, and is developped with consideration toward others, while constraints are taken into account as well.<br>
+Please note, this project is a portfolio, and is developped with consideration toward others, while constraints are taken into account as well.<br>
 <br>
 <a href="https://github.com/jlmacle/journeyers/wiki">More notes on the wiki.</a>
 <br>
@@ -46,7 +46,7 @@ Veuillez noter que le code nécessite d'être nettoyé.<br>
 <br>
 Il est possible d'adapter le logiciel à un ensemble différent de questions, et il est prévu de rendre cela plus facile.<br>
 De plus, il s'agit d'un logiciel gratuit et libre, <a href="https://github.com/jlmacle/journeyers/blob/main/LICENSE">dans le domaine public</a>.<br>
-Enfin, ce projet est un portfolio, et est développé avec considération envers les autres; cependant des contraintes sont aussi prises en compte.<br>
+Veuillez noter que ce projet est un portfolio, et est développé avec considération envers les autres; cependant des contraintes sont aussi prises en compte.<br>
 <br>
 <a href="https://github.com/jlmacle/journeyers/wiki">Plus de notes sur le wiki.</a><br>
 <br>
