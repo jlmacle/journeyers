@@ -253,7 +253,7 @@ Future<void> main() async {
             var titlesFinder = await dashboardGetAllSessionsTitles(tester);        
 
             var totalTitles = titlesFinder.evaluate().length;
-            if (testingDebug) pu.printd("Testing Debug: totalTitles: $totalTitles");
+            logt("totalTitles: $totalTitles");
 
             // Verifying the alphabetical order
             for (var index = 0; index < totalTitles; index++)
