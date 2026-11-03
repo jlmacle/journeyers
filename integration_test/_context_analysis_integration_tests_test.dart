@@ -1228,7 +1228,7 @@ Future<void> main() async {
               case("fr"): { snackbarMessage = "Titre mis à jour"; }        
             }
             
-            if (testingDebug) pu.printd("Testing Debug: snackbarMessage: $snackbarMessage");
+            logt("snackbarMessage: $snackbarMessage");
             
             // Verifying consistency between hard-coded string and localized string
             // DashboardPage: lds.snackbarMessageTitleUpdated
