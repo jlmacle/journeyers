@@ -1737,7 +1737,7 @@ Future<void> main() async {
             );
             await tester.pumpAndSettle();
             
-            if (testingDebug) pu.printd("Testing Debug: Scrolled to title");
+            logt("Scrolled to title");
             // await tester.pump(const Duration(seconds: 10));
 
             // ── Verifying the edited data present ──────────────────            
