@@ -5,6 +5,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -448,6 +449,7 @@ class ParticipantsListsDashboardState
                           ),
                           label: Text(
                             lps.newListButtonLabel,
+                            semanticsLabel: removeNewLines(lps.newListButtonLabel),
                             textAlign: TextAlign.center,
                           ),
                           style: FilledButton.styleFrom(

@@ -6,6 +6,7 @@ import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
@@ -453,10 +454,8 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                                 horizontal: 16,
                               ),
                               child: Text(
-                                AppLocalizations.of(
-                                      context,
-                                    )?.text_lists_new_list_placeholder_when_no_list_data ??
-                                    "Issue with the placeholder text when no participant's name has been added to the new list.",
+                                lps.noParticipantsError,
+                                semanticsLabel: removeNewLines(lps.noParticipantsError),
                                 textAlign: TextAlign.center,
                                 style: widget.themeData.textTheme.bodyLarge,
                               ),

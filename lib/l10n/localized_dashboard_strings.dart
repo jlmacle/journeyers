@@ -21,6 +21,7 @@ class LocalizedDashboardStrings
   // ─── PREVIEW ───────────────────────────────────────
   var previewTooltipLabel = "";
   var previewClosingTooltipLabel = "";
+  var languageMismatch = "";
 
   // ─── DATA DELETION ───────────────────────────────────────
   var deleteTooltipLabel = "";
@@ -60,7 +61,8 @@ class LocalizedDashboardStrings
     // ─── PREVIEW ───────────────────────────────────────
     previewTooltipLabel = _l10n?.l10n_preview ?? "Issue with the l10n for the 'Preview' tooltip";
     previewClosingTooltipLabel = _l10n?.dashboard_preview_close_preview_tooltip ?? "Issue with the l10n for the preview 'Close the preview' tooltip";
-    
+    languageMismatch =  _l10n?.dashboard_preview_mixed_languages_error_message ??
+                  "Issue with the error message when previewing with a different interface language setting than the language used for the saved data";
     // ─── DATA DELETION ───────────────────────────────────────
     deleteTooltipLabel = _l10n?.dashboard_tooltip_delete ?? "Issue with the l10n for the 'Delete data' tooltip";
     bulkDeletionText = _l10n?.dashboard_bulk_delete ?? "Issue with the l10n for the 'Delete data' text";

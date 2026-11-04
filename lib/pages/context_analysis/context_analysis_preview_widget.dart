@@ -8,10 +8,11 @@ import "package:path/path.dart" as path;
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_form_questions.dart";
 import "package:journeyers/l10n/localized_ca_other_strings.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/string/string_utils.dart";
@@ -527,6 +528,7 @@ class _CAPreviewState extends State<CAPreview> {
   Widget build(BuildContext context) {
     // Getting the localized strings
     LocalizedCAOtherStrings los= .new(context);
+    LocalizedDashboardStrings lds = .new(context);
 
     return _previewDataLoading
         // 1. PREVIEW DATA NOT LOADED
@@ -544,11 +546,9 @@ class _CAPreviewState extends State<CAPreview> {
         ? Center(
             // TEXT WIDGET WITH ERROR MESSAGE
             child: Text(
-              textAlign: .center,
-              AppLocalizations.of(
-                    context,
-                  )?.dashboard_preview_mixed_languages_error_message ??
-                  "Issue with the error message when previewing with a different interface language setting than the language used for the saved data",
+              lds.languageMismatch,
+              semanticsLabel: removeNewLines(lds.languageMismatch),
+              textAlign: .center,              
             ),
           )
         // 2.2.2. CASE WITH PREVIEW WITH NO MISMATCH
