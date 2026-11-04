@@ -175,7 +175,7 @@ void main() {
 
         // Acccessing the localized strings
         var context = tester.element(find.byType(Scaffold).first);
-        LocalizedCAStrings lca = .new(context);
+        LocalizedCAOtherStrings los= .new(context);
 
         var localeLanguageCode = getLocaleLanguageCode(tester);
 
@@ -214,13 +214,13 @@ void main() {
         // Verifying consistency between hard-coded string and localized string
         expect(
           invitationToUnfoldExpansionTile,
-          lca.invitationToUnfoldExpansionTile,
+          los.invitationToUnfoldExpansionTile,
         );
 
         // Verifying the first subtext correct
         expect(
           firstUnfoldedExpansionTileSubTextWidget.data,
-          lca.invitationToUnfoldExpansionTile,
+          los.invitationToUnfoldExpansionTile,
         );
 
         // Verifying that the second expansion tile subtext is correct
@@ -239,7 +239,7 @@ void main() {
         // Verifying the second sub-text correct
         expect(
           secondUnfoldedExpansionTileSubTextWidget.data,
-          lca.invitationToUnfoldExpansionTile,
+          los.invitationToUnfoldExpansionTile,
         );
       });
     });
@@ -327,7 +327,7 @@ void main() {
             lfq.level3TitleAnotherIssue,
           );
 
-          // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+          // Verifying the level 3 titles present (skipping los.invitationToUnfoldExpansionTile)
           expect(
             tester.widget<Text>(customHeadingTextsFinders.at(2)).data,
             lfq.level3TitleBalanceIssue,
@@ -625,7 +625,7 @@ void main() {
 
           // Getting the localized strings
           final context = tester.element(find.byType(Scaffold));
-          LocalizedCAStrings lca = .new(context);
+          LocalizedCAOtherStrings los= .new(context);
 
           // Opening the individual perspective expansion tile
           await caOpenIndividualExpansionTile(context, tester);
@@ -654,13 +654,13 @@ void main() {
           // Verifying consistency between hard-coded string and localized string
           expect(
             caFormPleaseDevelopTextFieldHint,
-            lca.caFormPleaseDevelopTextFieldHint,
+            los.caFormPleaseDevelopTextFieldHint,
           );
 
           // Verifying text hint text present
           expect(
             tester.widget<Text>(textFinders.at(13)).data,
-            lca.caFormPleaseDevelopTextFieldHint,
+            los.caFormPleaseDevelopTextFieldHint,
           );
         },
       );
@@ -674,7 +674,7 @@ void main() {
 
           // Getting the localized strings
           final context = tester.element(find.byType(Scaffold));
-          LocalizedCAStrings lca = .new(context);
+          LocalizedCAOtherStrings los= .new(context);
 
           // Opening the individual perspective expansion tile
           await caOpenIndividualExpansionTile(context, tester);
@@ -765,53 +765,53 @@ void main() {
           // Verifying consistency between hard-coded strings and localized strings
           expect(
             pastOutcomesHouseholdTextFieldHint,
-            lca.pastOutcomesHouseholdTextFieldHint,
+            los.pastOutcomesHouseholdTextFieldHint,
           );
           expect(
             pastOutcomesWorkplaceTextFieldHint,
-            lca.pastOutcomesWorkplaceTextFieldHint,
+            los.pastOutcomesWorkplaceTextFieldHint,
           );
           expect(
             helpingAndHouseholdTextFieldHint,
-            lca.helpingAndHouseholdTextFieldHint,
+            los.helpingAndHouseholdTextFieldHint,
           );
           expect(
             caFormPleaseDevelopTextFieldHint,
-            lca.caFormPleaseDevelopTextFieldHint,
+            los.caFormPleaseDevelopTextFieldHint,
           );
 
           // Verifying the hint texts present
           expect(
             tester.widget<Text>(textFinders.at(4)).data,
-            lca.pastOutcomesHouseholdTextFieldHint,
+            los.pastOutcomesHouseholdTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(7)).data,
-            lca.pastOutcomesHouseholdTextFieldHint,
+            los.pastOutcomesHouseholdTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(10)).data,
-            lca.pastOutcomesHouseholdTextFieldHint,
+            los.pastOutcomesHouseholdTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(13)).data,
-            lca.helpingAndHouseholdTextFieldHint,
+            los.helpingAndHouseholdTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(17)).data,
-            lca.pastOutcomesWorkplaceTextFieldHint,
+            los.pastOutcomesWorkplaceTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(20)).data,
-            lca.pastOutcomesWorkplaceTextFieldHint,
+            los.pastOutcomesWorkplaceTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(24)).data,
-            lca.caFormPleaseDevelopTextFieldHint,
+            los.caFormPleaseDevelopTextFieldHint,
           );
           expect(
             tester.widget<Text>(textFinders.at(27)).data,
-            lca.caFormPleaseDevelopTextFieldHint,
+            los.caFormPleaseDevelopTextFieldHint,
           );
         },
       );
@@ -902,7 +902,7 @@ void main() {
             lfq.level3TitleIncomeEarningAbility,
           );
 
-          // Verifying the level 3 titles present (skipping lca.invitationToUnfoldExpansionTile)
+          // Verifying the level 3 titles present (skipping los.invitationToUnfoldExpansionTile)
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(2)).data,
             lfq.level3TitleGroupsProblematics,

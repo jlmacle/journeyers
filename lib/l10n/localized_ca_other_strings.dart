@@ -2,7 +2,7 @@ import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/l10n/app_localizations.dart";
 
-class LocalizedCAStrings
+class LocalizedCAOtherStrings
 {
   AppLocalizations? _l10n;
 
@@ -22,6 +22,9 @@ class LocalizedCAStrings
   var helpingAndHouseholdTextFieldHint = "";
   var caFormPleaseDevelopTextFieldHint = "";
 
+  // Submit button label
+  var caSubmitButtonLabel = "";
+
   // Segmented button options
   var yes = "";
   var no = "";
@@ -37,7 +40,7 @@ class LocalizedCAStrings
   var caPreviewNotesIntroduction  = "";     
   var caPreviewAnswersIntroduction  = "";
 
-  LocalizedCAStrings(BuildContext context)
+  LocalizedCAOtherStrings(BuildContext context)
   {
     _l10n = AppLocalizations.of(context);
 
@@ -61,6 +64,11 @@ class LocalizedCAStrings
     yes =  _l10n?.l10n_yes ?? "Issue with the l10n for 'Yes'";
     no = _l10n?.l10n_no ?? "Issue with the l10n for 'No'";
     iDontKnow = _l10n?.l10n_I_don_t_know ?? "Issue with the l10n for 'I don't know'";
+
+    // Submit button label
+    caSubmitButtonLabel = _l10n?.ca_process_file_name_save_button_text_on_desktop ??
+                                      "Issue with the l10n for the save button text, in the c.a. process (on desktop)";
+
     
     // ─── DASHBOARD ───────────────────────────────────────
     // CA dashboard title

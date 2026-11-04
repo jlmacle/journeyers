@@ -10,6 +10,7 @@ import "package:intl/intl.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_form_questions.dart";
 import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
@@ -272,7 +273,8 @@ class CAFormState extends State<CAForm> {
   @override
   Widget build(BuildContext context) {
     // Accessing the localized data
-    LocalizedCAStrings lca = .new(context);
+    LocalizedCAOtherStrings los= .new(context);
+    LocalizedCAFormQuestions lfq = .new(context);
 
     return Column(
       children: [
@@ -307,15 +309,11 @@ class CAFormState extends State<CAForm> {
               child: Column(
                 children: [
                   CustomHeading(
-                    headingText:
-                        AppLocalizations.of(
-                          context,
-                        )?.ca_process_individual_perspective_title_question ??
-                        "Issue with the title question for the individual perspective",
+                    headingText: lfq.level2TitleIndividual,                       
                     headingLevel: 2,
                   ),
                   CustomHeading(
-                    headingText: lca.invitationToUnfoldExpansionTile,
+                    headingText: los.invitationToUnfoldExpansionTile,
                     headingLevel: 5,
                   ),
                 ],
@@ -345,7 +343,7 @@ class CAFormState extends State<CAForm> {
                 // Initializing the text field value with the DTO's value
                 textFieldStartValue:
                     _dtoCAForm!.indivBalanceStudiesHousehold.text,
-                textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
+                textFieldHint: los.pastOutcomesHouseholdTextFieldHint,
                 // Updating DTO and UI (heading and item styling)
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onBalanceItemChecked(
@@ -375,7 +373,7 @@ class CAFormState extends State<CAForm> {
                     _dtoCAForm!.indivBalanceAccessingIncomeHousehold.checked,
                 textFieldStartValue:
                     _dtoCAForm!.indivBalanceAccessingIncomeHousehold.text,
-                textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
+                textFieldHint: los.pastOutcomesHouseholdTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onBalanceItemChecked(
                       data: _dtoCAForm!.indivBalanceAccessingIncomeHousehold,
@@ -403,7 +401,7 @@ class CAFormState extends State<CAForm> {
                     _dtoCAForm!.indivBalanceEarningIncomeHousehold.checked,
                 textFieldStartValue:
                     _dtoCAForm!.indivBalanceEarningIncomeHousehold.text,
-                textFieldHint: lca.pastOutcomesHouseholdTextFieldHint,
+                textFieldHint: los.pastOutcomesHouseholdTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onBalanceItemChecked(
                       data: _dtoCAForm!.indivBalanceEarningIncomeHousehold,
@@ -431,7 +429,7 @@ class CAFormState extends State<CAForm> {
                     _dtoCAForm!.indivBalanceHelpingOthersHousehold.checked,
                 textFieldStartValue:
                     _dtoCAForm!.indivBalanceHelpingOthersHousehold.text,
-                textFieldHint: lca.helpingAndHouseholdTextFieldHint,
+                textFieldHint: los.helpingAndHouseholdTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onBalanceItemChecked(
                       data: _dtoCAForm!.indivBalanceHelpingOthersHousehold,
@@ -474,7 +472,7 @@ class CAFormState extends State<CAForm> {
                     _dtoCAForm!.indivAtWorkMoreAppreciated.checked,
                 textFieldStartValue:
                     _dtoCAForm!.indivAtWorkMoreAppreciated.text,
-                textFieldHint: lca.pastOutcomesWorkplaceTextFieldHint,
+                textFieldHint: los.pastOutcomesWorkplaceTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onWorkplaceItemChecked(
                       data: _dtoCAForm!.indivAtWorkMoreAppreciated,
@@ -502,7 +500,7 @@ class CAFormState extends State<CAForm> {
                     _dtoCAForm!.indivAtWorkRemainingAppreciated.checked,
                 textFieldStartValue:
                     _dtoCAForm!.indivAtWorkRemainingAppreciated.text,
-                textFieldHint: lca.pastOutcomesWorkplaceTextFieldHint,
+                textFieldHint: los.pastOutcomesWorkplaceTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onWorkplaceItemChecked(
                       data: _dtoCAForm!.indivAtWorkRemainingAppreciated,
@@ -543,7 +541,7 @@ class CAFormState extends State<CAForm> {
                     "Issue with the better legacy question, in the individual perspective",
                 checkboxStartValue: _dtoCAForm!.indivBetterLegacies.checked,
                 textFieldStartValue: _dtoCAForm!.indivBetterLegacies.text,
-                textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
+                textFieldHint: los.caFormPleaseDevelopTextFieldHint,
                 onCheckboxValueChangedCallbackFunction: (v) async =>
                     await _onLegacyItemChecked(
                       data: _dtoCAForm!.indivBetterLegacies,
@@ -569,11 +567,7 @@ class CAFormState extends State<CAForm> {
               // Another issue question
               CustomHeading(
                 key: anotherIssueHeadingKey,
-                headingText:
-                    AppLocalizations.of(
-                      context,
-                    )?.ca_process_individual_perspective_another_issue_section_question ??
-                    "Issue with the section question for an issue of another type, in the individual perspective",
+                headingText: lfq.level3TitleAnotherIssue,
                 headingLevel: 3,
               ),
               CATextFieldSanitizedAndPadded(
@@ -583,7 +577,7 @@ class CAFormState extends State<CAForm> {
                     .stringSanitizerBundlesErrorsMappingForCA,
                 textFieldStyle: analysisTextFieldStyle,
                 textFieldStartValue: _dtoCAForm!.indivAnotherIssueStr,
-                textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
+                textFieldHint: los.caFormPleaseDevelopTextFieldHint,
                 textFieldHintStyle: analysisTextFieldHintStyle,
                 errorMessageStyle: analysisTextFieldErrorMessageStyle,
                 textFieldMaxLength: CAFormMiscConstants.chars1Page,
@@ -639,7 +633,7 @@ class CAFormState extends State<CAForm> {
                     headingLevel: 2,
                   ),
                   CustomHeading(
-                    headingText: lca.invitationToUnfoldExpansionTile,
+                    headingText: los.invitationToUnfoldExpansionTile,
                     headingLevel: 5,
                   ),
                 ],
@@ -649,11 +643,7 @@ class CAFormState extends State<CAForm> {
               /**** ➡️ Sub-point  ****/
               // Question about the group problems
               CustomHeading(
-                headingText:
-                    AppLocalizations.of(
-                      context,
-                    )?.ca_process_group_perspective_problems ??
-                    "Issue with the question for the problem(s) the groups/teams are trying to solve",
+                headingText: lfq.level3TitleGroupsProblematics,
                 headingLevel: 3,
               ),
               CATextFieldSanitizedAndPadded(
@@ -704,7 +694,7 @@ class CAFormState extends State<CAForm> {
                 segButtonStartValue:
                     _dtoCAForm!.groupSameProblemsToSolve.selection,
                 textFieldStartValue: _dtoCAForm!.groupSameProblemsToSolve.text,
-                textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
+                textFieldHint: los.caFormPleaseDevelopTextFieldHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async =>
                     await _onSegmentedButtonSelected(
                       _dtoCAForm!.groupSameProblemsToSolve,
@@ -746,7 +736,7 @@ class CAFormState extends State<CAForm> {
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupHarmonyHome.selection,
                 textFieldStartValue: _dtoCAForm!.groupHarmonyHome.text,
-                textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
+                textFieldHint: los.caFormPleaseDevelopTextFieldHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async =>
                     await _onSegmentedButtonSelected(
                       _dtoCAForm!.groupHarmonyHome,
@@ -791,7 +781,7 @@ class CAFormState extends State<CAForm> {
                 segButtonStartValue:
                     _dtoCAForm!.groupAppreciabilityAtWork.selection,
                 textFieldStartValue: _dtoCAForm!.groupAppreciabilityAtWork.text,
-                textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
+                textFieldHint: los.caFormPleaseDevelopTextFieldHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async =>
                     await _onSegmentedButtonSelected(
                       _dtoCAForm!.groupAppreciabilityAtWork,
@@ -833,7 +823,7 @@ class CAFormState extends State<CAForm> {
                 segButtonTextOptionsfontSize: 16,
                 segButtonStartValue: _dtoCAForm!.groupEarningAbility.selection,
                 textFieldStartValue: _dtoCAForm!.groupEarningAbility.text,
-                textFieldHint: lca.caFormPleaseDevelopTextFieldHint,
+                textFieldHint: los.caFormPleaseDevelopTextFieldHint,
                 onSegmentedButtonOptionsSelectedCallbackFunction: (v) async =>
                     await _onSegmentedButtonSelected(
                       _dtoCAForm!.groupEarningAbility,

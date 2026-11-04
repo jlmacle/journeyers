@@ -808,7 +808,7 @@ Future<void> caTestPreview({
 
   // Accessing the localized strings
   LocalizedDashboardStrings lds = .new(context);
-  LocalizedCAStrings lca = .new(context);
+  LocalizedCAOtherStrings los= .new(context);
 
   logt("Entering caTestPreview2");
   logt("---------> Parameters");
@@ -871,7 +871,7 @@ Future<void> caTestPreview({
     );
     expect(
       caPreviewNoDataInIndividualPerspectiveText.data,
-      lca.caPreviewNoDataInIndividualPerspective,
+      los.caPreviewNoDataInIndividualPerspective,
     );
     logt("Found placeholder text for absence of individual data in preview");
   }
@@ -1132,11 +1132,11 @@ Future<void> caTestPreview({
             // Verifying Notes and data aggregated as expected
             logt("currentListTileNotesData: ${currentListTileNotesData}");
             logt(
-              "${lca.caPreviewNotesIntroduction}${currentSectionExpansionTileIndividualPerspectiveAnswersValues[valueIndex]}",
+              "${los.caPreviewNotesIntroduction}${currentSectionExpansionTileIndividualPerspectiveAnswersValues[valueIndex]}",
             );
             expect(
               currentListTileNotesData,
-              "${lca.caPreviewNotesIntroduction}${currentSectionExpansionTileIndividualPerspectiveAnswersValues[valueIndex]}",
+              "${los.caPreviewNotesIntroduction}${currentSectionExpansionTileIndividualPerspectiveAnswersValues[valueIndex]}",
             );
             logt("Passed for 'Notes' and data in the text");
           }
@@ -1193,10 +1193,10 @@ Future<void> caTestPreview({
           // Verifying Notes and data aggregated as expected
           var expectedData = individualStringValues.last;
           logt("currentListTileNotesData: ${currentListTileNotesData}");
-          logt("${lca.caPreviewNotesIntroduction}${expectedData}");
+          logt("${los.caPreviewNotesIntroduction}${expectedData}");
           expect(
             currentListTileNotesData,
-            "${lca.caPreviewNotesIntroduction}${expectedData}",
+            "${los.caPreviewNotesIntroduction}${expectedData}",
           );
           logt("Passed for 'Notes' and data in the text");
         }
@@ -1212,7 +1212,7 @@ Future<void> caTestPreview({
     // ---------------------------------------------------------------------------
 
     // String groupProblemsToSolveStrValue = "b1";
-    // List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+    // List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.no,los.yes}];
     // List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}")
 
     var expansionTilesGroupPerpectiveFinder =
@@ -1234,7 +1234,7 @@ Future<void> caTestPreview({
           var currentNotesDataWidget = getLastTextFromFinder(tester, currentExpansionTileGroupPerpectiveFinder);          
           var currentNotesData = currentNotesDataWidget.data;
 
-          var expectedNotesData = "${lca.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";
+          var expectedNotesData = "${los.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";
 
           logt("currentNotesData: $currentNotesData");
           logt("expectedNotesData: $expectedNotesData");
@@ -1257,10 +1257,10 @@ Future<void> caTestPreview({
         if (currentSegmentedButtonsOptionsValues.isNotEmpty)
         { 
           currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
-          expectedSegmentedButtonsOptionsData  = "${lca.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}\n";          
+          expectedSegmentedButtonsOptionsData  = "${los.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}\n";          
         }        
           
-        var expectedNotesData = "${lca.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";        
+        var expectedNotesData = "${los.caPreviewNotesIntroduction}${groupStringValues[currentExpansionTileIndex]}";        
         var expectedData = "${expectedSegmentedButtonsOptionsData}${expectedNotesData}";
 
         logt("currentData: $currentData");

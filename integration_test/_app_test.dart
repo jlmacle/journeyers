@@ -449,7 +449,7 @@ Future<void> main() async {
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedTestingStrings lts = .new(context);
-          LocalizedCAStrings lca = .new(context);
+          LocalizedCAOtherStrings los= .new(context);
 
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -474,10 +474,10 @@ Future<void> main() async {
           String groupProblemsToSolveStrValue = "b1";
           // 4 values are necessary
           List<Set<String>> segmentedButtonsValues = [
-            {lca.yes},
-            {lca.no},
-            {lca.iDontKnow},
-            {lca.no, lca.yes},
+            {los.yes},
+            {los.no},
+            {los.iDontKnow},
+            {los.no, los.yes},
           ];
           // b2 to b5
           List<String> segmentedButtonTextFieldValues = List.generate(
@@ -617,7 +617,7 @@ Future<void> main() async {
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedTestingStrings lts = .new(context);
-          LocalizedCAStrings lca = .new(context);
+          LocalizedCAOtherStrings los= .new(context);
 
           // ── 1. ENTERING NEW GPS PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -667,10 +667,10 @@ Future<void> main() async {
           String groupProblemsToSolveStrValue = "b1";
           // 4 values are necessary
           List<Set<String>> segmentedButtonsValues = [
-            {lca.yes},
-            {lca.no},
-            {lca.iDontKnow},
-            {lca.no, lca.yes},
+            {los.yes},
+            {los.no},
+            {los.iDontKnow},
+            {los.no, los.yes},
           ];
           // b2 to b5
           List<String> segmentedButtonsTextFieldValues = List.generate(
@@ -708,10 +708,10 @@ Future<void> main() async {
             true,
           ];
           var newSegmentedButtonsValues = [
-            {lca.yes, lca.no},
-            {lca.yes},
-            {lca.yes, lca.iDontKnow},
-            {lca.no, lca.iDontKnow},
+            {los.yes, los.no},
+            {los.yes},
+            {los.yes, los.iDontKnow},
+            {los.no, los.iDontKnow},
           ];
           await caEditDataOnMobile(
             tester: tester,
