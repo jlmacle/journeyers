@@ -1,5 +1,7 @@
 import "package:material_ui/material_ui.dart";
 
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
+
 /// {@category Custom widgets}
 /// A customizable focusable text.
 
@@ -45,6 +47,7 @@ class _CustomFocusableTextState extends State<CustomFocusableText> {
         focusNode: _textFocusNode,
         child: Text(
           widget.text,
+          semanticsLabel: removeNewLines(widget.text),
           style: widget.textStyle,
           textAlign: widget.textAlignment,
         ),

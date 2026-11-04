@@ -37,6 +37,7 @@ class LocalizedParticipantsStrings {
 
   var saveListTooltipLabel = "";
   var listLabelAlreadyExistsError = "";
+  var noParticipantsError = "";
   var savedAsSnackBarMessage = "";
   var savedFailedSnackBarMessage = "";
 
@@ -114,6 +115,10 @@ class LocalizedParticipantsStrings {
     listLabelAlreadyExistsError =
         _l10n?.text_lists_new_list_same_list_name_message ??
         "Issue with the message, at saving time, when a list name has already been used.";
+    
+    noParticipantsError = _l10n?.text_lists_new_list_placeholder_when_no_list_data ??
+                                    "Issue with the placeholder text when no participant's name has been added to the new list.";
+
     savedAsSnackBarMessage =
         _l10n?.text_lists_new_list_saved_as_snackbar_message ??
         "Issue with the l10n for the part of the SnackBar message, at list saving time.";
@@ -121,6 +126,7 @@ class LocalizedParticipantsStrings {
         _l10n?.text_lists_new_list_save_failed_snackbar_message ??
         "Issue with the 'Save failed' SnackBar message, at list saving time.";
 
+       
     // ─── LIST LOADING ───────────────────────────────────────
     loadingButtonLabel =
         _l10n?.text_lists_dashboard_list_loading_button_text ??

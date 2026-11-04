@@ -1,8 +1,8 @@
 import "dart:io";
 
 import "package:flutter/foundation.dart";
-import "package:material_ui/material_ui.dart";
 import "package:flutter/services.dart";
+import "package:material_ui/material_ui.dart";
 
 import "package:gap/gap.dart";
 import "package:shared_preferences/shared_preferences.dart";
@@ -10,6 +10,7 @@ import "package:shared_preferences/shared_preferences.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
@@ -208,6 +209,9 @@ class CAProcessState extends State<CAProcess> {
 
   @override
   Widget build(BuildContext context) {
+    // Accessing the localized data
+    LocalizedCAOtherStrings los = .new(context);
+
     // TODO: to modify for tablets
     if (defaultTargetPlatform == TargetPlatform.windows ||
         defaultTargetPlatform == TargetPlatform.linux ||
@@ -333,11 +337,7 @@ class CAProcessState extends State<CAProcess> {
                                 )
                               // Saving file for desktop platforms
                               : SessionFileNameOnDesktopPlatforms(
-                                  savebuttonText:
-                                      AppLocalizations.of(
-                                        context,
-                                      )?.ca_process_file_name_save_button_text_on_desktop ??
-                                      "Issue with the l10n for the save button text, in the c.a. process (on desktop)",
+                                  savebuttonText: los.caSubmitButtonLabel,                                      
                                   parentCallbackFunctionToSaveDataAndMetadata:
                                       _saveDataAndMetadata,
                                 ),

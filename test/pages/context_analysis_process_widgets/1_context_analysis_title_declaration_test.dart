@@ -40,7 +40,7 @@ void main() {
 
       // Getting the localized strings
       var context = tester.element(find.byType(Scaffold).first);
-      LocalizedCAStrings lca = .new(context);
+      LocalizedCAOtherStrings los= .new(context);
 
       // Hint text hard-coded strings
       var hintText = "";
@@ -61,10 +61,10 @@ void main() {
       logt("hintText", hintText);
 
       // Verifying consistency between hard-coded string and localized string
-      expect(hintText, lca.caTitleTextFieldHint);
+      expect(hintText, los.caTitleTextFieldHint);
 
       // Verifying the text field hint present
-      expect(find.text(lca.caTitleTextFieldHint), findsOneWidget);
+      expect(find.text(los.caTitleTextFieldHint), findsOneWidget);
     });
 
     testWidgets("Starts not autofocused (to avoid the keyboard on mobile)", (

@@ -8,10 +8,11 @@ import "package:path/path.dart" as path;
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
-import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/l10n/localized_ca_form_questions.dart";
 import "package:journeyers/l10n/localized_ca_other_strings.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/string/string_utils.dart";
@@ -128,6 +129,9 @@ class _CAPreviewState extends State<CAPreview> {
   Future<void> _perspectiveDataToDataStructures(
     Map<String, List<dynamic>> perspectiveData,
   ) async {
+    // Getting the localized strings
+    LocalizedCAFormQuestions lfq = .new(context);
+
     List<dynamic> individualPerspective =
         perspectiveData["individualPerspective"]!;
     List<dynamic> groupPerspective = perspectiveData["groupPerspective"]!;
@@ -170,31 +174,22 @@ class _CAPreviewState extends State<CAPreview> {
     //****** except for the last input item made of a text field.                                   ******//
     // The second value can be a title level 2, a title level 3, a title level 3 item, or a note
     for (var individualPerspectiveItem in individualPerspective) {
+
       String firstValue = individualPerspectiveItem[0];
       String secondValue = individualPerspectiveItem[1];
 
       // A title Level 2?: "As an individual: What problem am I trying to solve?", in the case of the individual perspective.
 
       if ([
-        lineReturnToSpace(
-              AppLocalizations.of(
-                context,
-              )?.ca_process_individual_perspective_title_question,
-            ) ??
-            "Issue with the title question for the individual perspective",
-        lineReturnToSpace(
-              AppLocalizations.of(
-                context,
-              )?.ca_process_group_perspective_title_question,
-            ) ??
-            "Issue with the title question for the group perspective",
+        lineReturnToSpace(lfq.level2TitleIndividual),
+        lineReturnToSpace(lfq.level2TitleGroup) 
       ].contains(secondValue)) {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
         _sectionsIndividual["title"] = secondValue;
       }
       // A title level 3?: "A Balance Issue?" for ex.
-      else if (lfq!.level3TitlesIndividualForPreview.contains(secondValue)) {
+      else if (lfq.level3TitlesIndividualForPreview.contains(secondValue)) {
         // Adding a new map to the list of the key "questions", with the title level 3 as value for the key "title",
         // and an empty list for the key "items".
         _sectionsIndividual["questions"].add({
@@ -205,12 +200,12 @@ class _CAPreviewState extends State<CAPreview> {
       }
       // A title level 3 item?: "To balance studies and household life?" for ex.
       // Could be a checkbox or a text field.
-      else if (lfq!.questionsToInputItemsMapping.keys.contains(secondValue)) {
+      else if (lfq.questionsToInputItemsMapping.keys.contains(secondValue)) {
         currentTitleLevel3Item = secondValue;
         // Checking if an "X" is in front of the title level 3, and if the item is also a checkbox
         if (firstValue == "X" &&
-            lfq!.questionsToInputItemsMapping[currentTitleLevel3Item] ==
-                lfq!.labelCheckbox) {
+            lfq.questionsToInputItemsMapping[currentTitleLevel3Item] ==
+                lfq.labelCheckbox) {
           checkedBox = true;
         } else {
           checkedBox = false;
@@ -220,7 +215,7 @@ class _CAPreviewState extends State<CAPreview> {
         for (var map in _sectionsIndividual["questions"]) {
           // The lfq!.titles level 3 with sub items are also the ones with checkboxes and text fields
           if (map["title"] == currentTitleLevel3 &&
-              lfq!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
+              lfq.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
             // Adding a map to the items list, with data related to whether the checkbox is checked or not
             // and an empty value for the "notes" key.
             if (checkedBox) {
@@ -239,7 +234,7 @@ class _CAPreviewState extends State<CAPreview> {
           }
           // if no sub items, that should be the text field only
           else if (map["title"] == currentTitleLevel3 &&
-              !lfq!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
+              !lfq.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
             // Adding a map to the items list, with the notesTextField with an empty value.
             map["items"].add({"notesTextField": ""});
           }
@@ -248,7 +243,7 @@ class _CAPreviewState extends State<CAPreview> {
       // That should be a field with notes, either from a checkbox, or from a text field only
       else {
         // If the current title level 3 has sub items, then a note for a checkbox
-        if (lfq!.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
+        if (lfq.level3TitlesWithSubItems.contains(currentTitleLevel3)) {
           for (var map in _sectionsIndividual["questions"]) {
             // Searching for the current title level 3
             if (map["title"] == currentTitleLevel3) {
@@ -329,7 +324,7 @@ class _CAPreviewState extends State<CAPreview> {
       String secondValue = groupPerspectiveItem[1];
 
       // A title Level 2?: "As a member of groups/teams: What problem(s) are we trying to solve?", in the case of the group perspective.
-      if (lfq!.level2TitlesForPreview.contains(secondValue)) {
+      if (lfq.level2TitlesForPreview.contains(secondValue)) {
         currentTitleLevel2 = secondValue;
         // Adding the level 2 title, as value of the "title" key.
         _sectionsGroup["title"] = secondValue;
@@ -337,7 +332,7 @@ class _CAPreviewState extends State<CAPreview> {
         previousSecondValueFromSegButton = false;
       }
       // A title level 3?: "What problem(s) are the groups/teams trying to solve?" for ex.
-      else if (lfq!.level3TitlesGroupForPreview.contains(secondValue)) {
+      else if (lfq.level3TitlesGroupForPreview.contains(secondValue)) {
         _sectionsGroup["questions"].add({"title": secondValue, "items": {}});
         currentTitleLevel3 = secondValue;
         previousSecondValueFromSegButton = false;
@@ -532,7 +527,8 @@ class _CAPreviewState extends State<CAPreview> {
   @override
   Widget build(BuildContext context) {
     // Getting the localized strings
-    LocalizedCAStrings lca = .new(context);
+    LocalizedCAOtherStrings los= .new(context);
+    LocalizedDashboardStrings lds = .new(context);
 
     return _previewDataLoading
         // 1. PREVIEW DATA NOT LOADED
@@ -550,11 +546,9 @@ class _CAPreviewState extends State<CAPreview> {
         ? Center(
             // TEXT WIDGET WITH ERROR MESSAGE
             child: Text(
-              textAlign: .center,
-              AppLocalizations.of(
-                    context,
-                  )?.dashboard_preview_mixed_languages_error_message ??
-                  "Issue with the error message when previewing with a different interface language setting than the language used for the saved data",
+              lds.languageMismatch,
+              semanticsLabel: removeNewLines(lds.languageMismatch),
+              textAlign: .center,              
             ),
           )
         // 2.2.2. CASE WITH PREVIEW WITH NO MISMATCH
@@ -602,7 +596,7 @@ class _CAPreviewState extends State<CAPreview> {
                           key: const Key(
                             "ca-preview-no-data-in-individual-perspective",
                           ),
-                          lca.caPreviewNoDataInIndividualPerspective,
+                          los.caPreviewNoDataInIndividualPerspective,
                           style: styleDataAbsent,
                         ),
                       )
@@ -653,13 +647,13 @@ class _CAPreviewState extends State<CAPreview> {
                                     item["text"] ??
                                         ((item["notesTextField"] != null &&
                                                 item["notesTextField"] != "")
-                                            ? "${lca.caPreviewNotesIntroduction}${item["notesTextField"]}"
+                                            ? "${los.caPreviewNotesIntroduction}${item["notesTextField"]}"
                                             : ""),
                                     style: styleExpandedTitleSubTitle,
                                   ),
                                   subtitle: (item["notes"] != null)
                                       ? Text(
-                                          "${lca.caPreviewNotesIntroduction}${item["notes"]}",
+                                          "${los.caPreviewNotesIntroduction}${item["notes"]}",
                                           style: styleExpandedTitleSubTitle,
                                         )
                                       : null,
@@ -705,9 +699,9 @@ class _CAPreviewState extends State<CAPreview> {
                           leading: const Icon(Icons.text_snippet),
                           title: Text(
                             question["items"]["segValue"] == null
-                                ? "${lca.caPreviewNotesIntroduction}${question["items"]["notes"] ?? ""}"
-                                : "${lca.caPreviewAnswersIntroduction}${question["items"]["segValue"] ?? ""}"
-                                      "\n${lca.caPreviewNotesIntroduction}${question["items"]["notes"] ?? ""}",
+                                ? "${los.caPreviewNotesIntroduction}${question["items"]["notes"] ?? ""}"
+                                : "${los.caPreviewAnswersIntroduction}${question["items"]["segValue"] ?? ""}"
+                                      "\n${los.caPreviewNotesIntroduction}${question["items"]["notes"] ?? ""}",
                           ),
                         ),
                       ],

@@ -9,6 +9,7 @@ import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/project_specific/global_keys/global_keys.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_page.dart";
@@ -81,7 +82,7 @@ class CAPageState extends State<CAPage>
         builder: (BuildContext context) 
         {
           // Getting the localized strings
-          LocalizedCAStrings lca = .new(context);
+          LocalizedCAOtherStrings los= .new(context);
 
           return 
           AlertDialog
@@ -108,7 +109,8 @@ class CAPageState extends State<CAPage>
                   padding: const EdgeInsets.only(bottom: 24.0),
                   child: Text
                   (
-                    lca.caAppStartMessage,
+                    los.caAppStartMessage,
+                    semanticsLabel: removeNewLines(los.caAppStartMessage),
                     textAlign: TextAlign.center,                                          
                     style: dialogStyle, 
                   ),

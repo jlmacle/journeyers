@@ -9,8 +9,10 @@ import "package:gap/gap.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_app_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/l10n/l10n_utils.dart";
@@ -123,6 +125,9 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) 
   {
+    // Accessing the localized strings
+    LocalizedAppStrings las = .new(context);
+
     if (kIsWeb) 
     {
       _eol = "\n";
@@ -168,7 +173,8 @@ class _HomePageState extends State<HomePage>
                 // AppBar subtitle
                 Text
                 (
-                  AppLocalizations.of(context)?.app_sub_title ?? "Issue with the application subtitle text",
+                  las.appSubTitle,
+                  semanticsLabel: removeNewLines(las.appSubTitle),
                   textAlign: TextAlign.center,
                   style: appBarSubTitleStyle
                 ),

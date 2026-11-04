@@ -816,7 +816,7 @@ Future<void> main() async {
           await tester.pumpAndSettle();
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
-          LocalizedCAStrings lca = .new(context);
+          LocalizedCAOtherStrings los= .new(context);
 
           // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -831,7 +831,7 @@ Future<void> main() async {
           // Group/teams perspective testing values
           String groupProblemsToSolveStrValue = "b1";
           // 4 values are necessary
-          List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+          List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.no,los.yes}];
           // b2 to b5
           List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
@@ -909,7 +909,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
-        LocalizedCAStrings lca = .new(context);
+        LocalizedCAOtherStrings los= .new(context);
 
         // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -923,7 +923,7 @@ Future<void> main() async {
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonsValues = [{lca.yes},{},{lca.iDontKnow},{}];
+        List<Set<String>> segmentedButtonsValues = [{los.yes},{},{los.iDontKnow},{}];
         List<String> segmentedButtonsTextFieldValues = ["b2", "", "b4",""];
 
         await caEnterNewProcessDataOnMobile
@@ -1002,7 +1002,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
-        LocalizedCAStrings lca = .new(context);
+        LocalizedCAOtherStrings los= .new(context);
 
         // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -1016,7 +1016,7 @@ Future<void> main() async {
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "b1";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonsValues = [{},{lca.no},{},{lca.iDontKnow}];
+        List<Set<String>> segmentedButtonsValues = [{},{los.no},{},{los.iDontKnow}];
         List<String> segmentedButtonsTextFieldValues = ["", "b3", "", "b5"];
 
         await caEnterNewProcessDataOnMobile
@@ -1095,7 +1095,7 @@ Future<void> main() async {
         await tester.pumpAndSettle();
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
-        LocalizedCAStrings lca = .new(context);
+        LocalizedCAOtherStrings los= .new(context);
 
         // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -1109,7 +1109,7 @@ Future<void> main() async {
         // Group/teams perspective testing values
         String groupProblemsToSolveStrValue = "";
         // 4 values are necessary
-        List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{},{lca.iDontKnow}];
+        List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{},{los.iDontKnow}];
         List<String> segmentedButtonsTextFieldValues = ["b2", "b3", "", "b5"];
         
         await caEnterNewProcessDataOnMobile
@@ -1432,7 +1432,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
-            LocalizedCAStrings lca = .new(context);
+            LocalizedCAOtherStrings los= .new(context);
             LocalizedCAFormQuestions lfq = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
@@ -1452,7 +1452,7 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
+            List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.yes,los.no}];
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
@@ -1571,9 +1571,9 @@ Future<void> main() async {
             // ── Leaving the checkboxes as is ────────────────────────────
  
             // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonsValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
-            List<Set<String>> newsegmentedButtonsValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow , lca.no, lca.yes}];
-            List<String> segmentedButtonsAddedValues = [lca.no, lca.yes, lca.yes, lca.iDontKnow];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
+            List<Set<String>> newsegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow , los.no, los.yes}];
+            List<String> segmentedButtonsAddedValues = [los.no, los.yes, los.yes, los.iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
               of: find.byType(ExpansionTile).last, 
@@ -1584,7 +1584,7 @@ Future<void> main() async {
 
             logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
-            var optionsToSelect = [lca.yes,lca.no,lca.iDontKnow];
+            var optionsToSelect = [los.yes,los.no,los.iDontKnow];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
               var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
@@ -1776,7 +1776,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
-            LocalizedCAStrings lca = .new(context);
+            LocalizedCAOtherStrings los= .new(context);
 
             // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1795,7 +1795,7 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
+            List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.yes,los.no}];
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
@@ -1897,9 +1897,9 @@ Future<void> main() async {
             // ── Leaving the checkboxes as is ────────────────────────────
  
             // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonsValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
-            List<Set<String>> newsegmentedButtonsValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow ,lca.no, lca.yes}];
-            List<String> segmentedButtonsAddedValues = [lca.no, lca.yes, lca.yes, lca.iDontKnow];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
+            List<Set<String>> newsegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow ,los.no, los.yes}];
+            List<String> segmentedButtonsAddedValues = [los.no, los.yes, los.yes, los.iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
               of: find.byType(ExpansionTile).last, 
@@ -1910,7 +1910,7 @@ Future<void> main() async {
 
             logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
-            var optionsToSelect = [lca.yes,lca.no,lca.iDontKnow];
+            var optionsToSelect = [los.yes,los.no,los.iDontKnow];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
               var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
@@ -2102,7 +2102,7 @@ Future<void> main() async {
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
             LocalizedCAFormQuestions? lfq = .new(context);
-            LocalizedCAStrings lca = .new(context);
+            LocalizedCAOtherStrings los= .new(context);
             LocalizedTestingStrings lts = .new(context);
 
             // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
@@ -2121,7 +2121,7 @@ Future<void> main() async {
             // b1 for the text field only (group persp.)
             String groupProblemsToSolveStrValue = "b1";
             // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.yes,lca.no}];
+            List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.yes,los.no}];
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
@@ -2223,9 +2223,9 @@ Future<void> main() async {
             // ── Leaving the checkboxes as is ────────────────────────────
  
             // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonsValues = [{"lca.yes"},{"lca.no"},{"I don't know"},{"lca.yes","lca.no"}];
-            List<Set<String>> newsegmentedButtonsValues = [{lca.no,lca.yes},{lca.no,lca.yes},{lca.iDontKnow,lca.yes},{lca.iDontKnow,lca.no,lca.yes}];
-            List<String> segmentedButtonsAddedValues = [lca.no, lca.yes, lca.yes, lca.iDontKnow];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
+            List<Set<String>> newsegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow,los.no,los.yes}];
+            List<String> segmentedButtonsAddedValues = [los.no, los.yes, los.yes, los.iDontKnow];
 
             segmentedButtonsFinder = find.descendant(
               of: find.byType(ExpansionTile).last, 
@@ -2236,7 +2236,7 @@ Future<void> main() async {
 
             if (testingDebug) pu.printd("Testing Debug: totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
 
-            var optionsToSelect = [lca.yes,lca.no,lca.iDontKnow];
+            var optionsToSelect = [los.yes,los.no,los.iDontKnow];
             for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
             {
               var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
@@ -2620,7 +2620,7 @@ Future<void> main() async {
             await tester.pumpAndSettle();
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
-            LocalizedCAStrings lca = .new(context);
+            LocalizedCAOtherStrings los= .new(context);
             LocalizedDashboardStrings lds = .new(context);
 
             // Building data for the form
@@ -2635,7 +2635,7 @@ Future<void> main() async {
              // Group/teams perspective testing values
             String groupProblemsToSolveStrValue = "b1";
               // 4 values are necessary   
-            List<Set<String>> segmentedButtonsValues = [{lca.yes},{lca.no},{lca.iDontKnow},{lca.no,lca.yes}];
+            List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.no,los.yes}];
               // b2 to b5
             List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
