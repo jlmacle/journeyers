@@ -1683,7 +1683,8 @@ Future<void> main() async {
             // await tester.pump(const Duration(seconds: 5));
 
             var textToFind = "a7$editionSuffix";
-            if (testingDebug) pu.printd("Testing Debug: Scrolling toward textToFind: $textToFind for screen copy");
+
+            logt("Scrolling toward textToFind: $textToFind for screen copy");
             var textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
