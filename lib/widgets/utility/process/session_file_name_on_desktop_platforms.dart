@@ -1,6 +1,7 @@
 import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 
 /// {@category Utility widgets}
 /// {@category Process}
@@ -33,6 +34,7 @@ class _SessionFileNameOnDesktopPlatformsState
       },
       child: Text(
         widget.savebuttonText,
+        semanticsLabel: removeNewLines(widget.savebuttonText),
         style: elevatedButtonSaveDataOnDesktopStyle,
         textAlign: TextAlign.center,
       ),

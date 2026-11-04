@@ -11,6 +11,7 @@ class LocalizedUtilsStrings {
 
   // ─── FILE NAME ───────────────────────────────────────
   var fileNameTextFieldHint = "";
+  var folderSelectionMessage = "";
 
   // ─── OVERLAYS ───────────────────────────────────────
   var keywordsOverlayCloseButtonTooltip = "";
@@ -27,6 +28,9 @@ class LocalizedUtilsStrings {
     fileNameTextFieldHint =
         _l10n?.file_name_process_text_field_hint_on_mobile ??
         "Issue with the text field hint inviting to add a file name without extension";
+
+    folderSelectionMessage = _l10n?.folder_picker_on_mobile ??
+                  "Issue with the label for folder selection/creation, for app storage";
 
     // ─── OVERLAYS ───────────────────────────────────────
     keywordsOverlayCloseButtonTooltip =

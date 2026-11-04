@@ -1,6 +1,7 @@
 import "package:material_ui/material_ui.dart";
 
 import "package:journeyers/app_themes.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/placeholder_functions.dart";
 
 /// {@category Utils - Generic}
@@ -40,6 +41,7 @@ void showAddToSetOverlay({
             child: Text(
               // Title
               overlayTitle,
+              semanticsLabel: removeNewLines(overlayTitle),
               // Title style
               style: overlayTitleStyle,
               textAlign: TextAlign.center,
