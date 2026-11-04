@@ -1968,7 +1968,8 @@ Future<void> main() async {
                 && tfIndex != 15
               ) 
               {
-                if (testingDebug) pu.printd("Testing Debug: tfIndex: $tfIndex");
+                logt("tfIndex: $tfIndex");
+
                 if (testingDebug) pu.printd("dataList[tfIndex]!: ${dataList[tfIndex]!}");
 
                 var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
