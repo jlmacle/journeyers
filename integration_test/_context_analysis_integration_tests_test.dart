@@ -2169,7 +2169,7 @@ Future<void> main() async {
             var checkboxesFinder = find.byType(Checkbox);
             var totalCheckboxes = checkboxesFinder.evaluate().length;
 
-            if (testingDebug) pu.printd("Testing Debug: totalCheckboxes: $totalCheckboxes");
+            logt("totalCheckboxes: $totalCheckboxes");
 
             for (var cbIndex = 0; cbIndex < totalCheckboxes; cbIndex++)
             {
