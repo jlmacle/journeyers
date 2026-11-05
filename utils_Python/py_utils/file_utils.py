@@ -20,10 +20,18 @@ def get_files_in_directory(directory_path: str, file_extension: str, search_is_r
 
     if search_is_recursive:
         # rglob for recursive search
-        return list(path_to_potential_dir.rglob(f'*{file_extension}'))
+        files_matching_criteria = [ file
+            for file in path_to_potential_dir.rglob(f'*{file_extension}')
+            if file.name.startswith("app_")
+        ]
+        return files_matching_criteria
     else:
         # glob for non-recursive search
-        return list(path_to_potential_dir.glob(f'*{file_extension}'))
+        files_matching_criteria = [ file
+            for file in path_to_potential_dir.glob(f'*{file_extension}')
+            if "app_" in file.name
+        ]
+        return files_matching_criteria
 
 def create_file_if_necessary_and_write_content(file_path: str, text: str) -> None:
     """
