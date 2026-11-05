@@ -2302,7 +2302,7 @@ Future<void> main() async {
               ) 
               {
                 logt("tfIndex: $tfIndex");
-                if (testingDebug) pu.printd("dataList[tfIndex]!: ${dataList[tfIndex]!}");
+                logt("dataList[tfIndex]!: ${dataList[tfIndex]!}");
 
                 var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
                 await tester.ensureVisible(currentTextFieldFinder);
