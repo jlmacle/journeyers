@@ -2050,7 +2050,7 @@ Future<void> main() async {
 
             // await tester.pump(const Duration(seconds: 5));
 
-            if (testingDebug) pu.printd("Scrolling toward title for preview");
+            logt("Scrolling toward title for preview");
 
             // Scrolling up
             var scrollableFinder = find.descendant
