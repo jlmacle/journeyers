@@ -14,8 +14,6 @@ class LocalizedGPSStrings {
   var participantIdentifiersSingleDeletionLabel = "";
   var participantIdentifiersSingleDeletionTooltipLabel = "";
   var participantIdentifiersSingleDeletionIconTooltipLabel = "";
-  var participantIdentifiersBulkDeletionLabel = "";
-  var participantIdentifiersBulkDeletionTooltipLabel = "";
   var participantIdentifiersEditLabel = "";
   var participantIdentifiersEditTooltipLabel = "";
   var participantIdentifierEditDialogTitle = "";
@@ -78,13 +76,6 @@ class LocalizedGPSStrings {
     participantIdentifiersSingleDeletionIconTooltipLabel =
         _l10n?.gps_process_edit_identifiers_clear_name_delete_icon_label ??
         "Issue with the l10n for 'Please click to remove the name from the group'";
-    participantIdentifiersBulkDeletionLabel =
-        _l10n?.gps_process_edit_identifiers_clear_all ??
-        "Issue with the l10n for 'Clear\nAll'";
-    participantIdentifiersBulkDeletionTooltipLabel =
-        _l10n?.gps_process_edit_identifiers_clear_all_tooltip ??
-        "Issue with the l10n for the 'Please click to remove all members from the group' tooltip";
-
     participantIdentifiersEditLabel =
         _l10n?.gps_process_edit_identifiers_edit_name ??
         "Issue with the l10n for 'Edit name'";

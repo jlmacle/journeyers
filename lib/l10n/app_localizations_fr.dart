@@ -216,13 +216,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Veuillez cliquer pour retirer le nom du groupe';
 
   @override
-  String get gps_process_edit_identifiers_clear_all_tooltip =>
-      'Veuillez cliquer pour retirer tous les noms du groupe';
-
-  @override
-  String get gps_process_edit_identifiers_clear_all => 'Effacer\nTout';
-
-  @override
   String get gps_process_edit_identifiers_edit_tooltip =>
       'Veuillez cliquer pour démarrer le mode d\'édition des noms';
 
@@ -782,13 +775,6 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
   @override
   String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
       'Veuillez cliquer pour retirer le nom du groupe';
-
-  @override
-  String get gps_process_edit_identifiers_clear_all_tooltip =>
-      'Veuillez cliquer pour retirer tous les noms du groupe';
-
-  @override
-  String get gps_process_edit_identifiers_clear_all => 'Effacer\nTout';
 
   @override
   String get gps_process_edit_identifiers_edit_tooltip =>
