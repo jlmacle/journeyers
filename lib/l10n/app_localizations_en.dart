@@ -213,13 +213,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please click to remove the name from the group';
 
   @override
-  String get gps_process_edit_identifiers_clear_all_tooltip =>
-      'Please click to remove all members from the group';
-
-  @override
-  String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
-
-  @override
   String get gps_process_edit_identifiers_edit_tooltip =>
       'Please click to enter name edition mode';
 
@@ -771,13 +764,6 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
   @override
   String get gps_process_edit_identifiers_clear_name_delete_icon_label =>
       'Please click to remove the name from the group';
-
-  @override
-  String get gps_process_edit_identifiers_clear_all_tooltip =>
-      'Please click to remove all members from the group';
-
-  @override
-  String get gps_process_edit_identifiers_clear_all => 'Clear\nAll';
 
   @override
   String get gps_process_edit_identifiers_edit_tooltip =>
