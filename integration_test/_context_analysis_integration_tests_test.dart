@@ -2361,7 +2361,9 @@ Future<void> main() async {
             if (testingDebug) pu.printd("Scrolled to $textToFind");
 
             textToFind = "b1$editionSuffix";
-            if (testingDebug) pu.printd("Testing Debug: Scrolling toward textToFind: $textToFind for screen copy");
+
+            logt("Scrolling toward textToFind: $textToFind for screen copy");
+
             textToFindFinder = find.textContaining(textToFind);
             await tester.scrollUntilVisible
             (
