@@ -1554,7 +1554,8 @@ Future<void> main() async {
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
           await tester.pump(const Duration(seconds: 2));
-          if (testingDebug) pu.printd("Testing Debug: idea1 edited");
+
+          logt("Idea1 edited");
 
           // ── Editing idea2 : deletion ─────────────────────────
           // ─────────────────────────────────────────────────────
