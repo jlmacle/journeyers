@@ -3178,8 +3178,9 @@ Future<void> main() async {
                 },
               ];
               for (var i = 0; i <= 2; i++) {
-                if (testingDebug)
-                  pu.printd("Testing Debug: Data: ${listDataMapsList[i]}");
+
+                logt("Data: ${listDataMapsList[i]}");
+
                 if (testingDebug)
                   pu.printd(
                     "Testing Debug: Title: ${listDataMapsList[i]["List${i + 1}"]?["names"]}",
