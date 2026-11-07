@@ -3181,11 +3181,7 @@ Future<void> main() async {
 
                 logt("Data: ${listDataMapsList[i]}");
                 logt("Title: ${listDataMapsList[i]["List${i + 1}"]?["names"]}");
-
-                if (testingDebug)
-                  pu.printd(
-                    "Testing Debug: Kws: ${listDataMapsList[i]["List${i + 1}"]?["keywords"]}",
-                  );
+                logt("Kws: ${listDataMapsList[i]["List${i + 1}"]?["keywords"]}");
               }
               await gpsAddParticipantsListsAndKeywordsAndVerifyListLoadedFromProcessPage(
                 tester: tester,
