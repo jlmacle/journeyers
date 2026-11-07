@@ -2378,7 +2378,8 @@ Future<void> main() async {
             );            
             await tester.pumpAndSettle();
             expect(textToFindFinder, findsOne);
-            if (testingDebug) pu.printd("Scrolled to $textToFind");
+
+            logt("Scrolled to $textToFind");
 
             // await tester.pump(const Duration(seconds: 10));
 
