@@ -2358,7 +2358,8 @@ Future<void> main() async {
             );            
             await tester.pumpAndSettle();
             // await tester.pump(const Duration(seconds: 10));
-            if (testingDebug) pu.printd("Scrolled to $textToFind");
+
+            logt("Scrolled to $textToFind");
 
             textToFind = "b1$editionSuffix";
 
