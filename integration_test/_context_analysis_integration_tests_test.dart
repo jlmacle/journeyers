@@ -2483,7 +2483,8 @@ Future<void> main() async {
               }              
             }
 
-            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveBalanceIssue");
+            logt("Data: $individualPerspectiveBalanceIssue");
+
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveWorkplaceIssue");
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveLegacyIssue");
             if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
