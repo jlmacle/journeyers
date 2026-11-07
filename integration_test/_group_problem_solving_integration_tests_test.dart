@@ -1577,7 +1577,8 @@ Future<void> main() async {
 
           // await tester.pump(const Duration(seconds: 10));
 
-          if (testingDebug) pu.printd("Testing Debug: idea2 deleted");
+          logt("Idea2 deleted");
+
           // Waiting on Snackbar removal
           await tester.pump(const Duration(seconds: 5));
 
