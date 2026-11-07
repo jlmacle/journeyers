@@ -1592,7 +1592,8 @@ Future<void> main() async {
           // pumpAndSettle timed out
           // await tester.pumpAndSettle();
           await tester.pump(const Duration(seconds: 2));
-          if (testingDebug) pu.printd("Testing Debug: idea3 added");
+
+          logt("Idea3 added");
 
           // ── Closing the ideas list  ───────────────────────
           // ───────────────────────────────────────────────────
