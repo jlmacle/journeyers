@@ -2486,8 +2486,7 @@ Future<void> main() async {
             logt("Data: $individualPerspectiveBalanceIssue");
             logt("Data: $individualPerspectiveWorkplaceIssue");
             logt("Data: $individualPerspectiveLegacyIssue");
-
-            if (testingDebug) pu.printd("Testing Debug: data: $individualPerspectiveAnotherIssue");
+            logt("Data: $individualPerspectiveAnotherIssue");
 
           
             await caCheckboxesVerifyEmptyContent
