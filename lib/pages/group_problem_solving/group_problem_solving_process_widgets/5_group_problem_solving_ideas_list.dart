@@ -255,10 +255,8 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
                           });
                           setState(() {});
                           _ideaNewTec.clear();
-                          if (editDebug)
-                            pu.printd(
-                              "Editing: GPSIdeasList: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList",
-                            );
+
+                          loge("GPSIdeasList: _showEditOverlay: onSubmitted: _enteredIdeasList : $_ideasEnteredList");
                         },
                       ),
                     ),
