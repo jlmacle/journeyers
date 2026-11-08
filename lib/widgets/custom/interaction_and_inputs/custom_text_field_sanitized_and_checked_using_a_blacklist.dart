@@ -394,10 +394,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
             filePathWhenEdition,
           ),
         );
-        if (editDebug)
-          pu.printd(
-            "Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (after file deletion): $sessionDataRetrieved",
-          );
+
+        loge("TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (after file deletion): $sessionDataRetrieved");
 
         // Saving the updated metadata
         await du.saveAllSessionsMetadata(
