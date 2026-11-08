@@ -386,10 +386,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
 
         // Deleting the previous file
         await deleteFile(filePath: filePathWhenEdition);
-        if (editDebug)
-          pu.printd(
-            "Editing: TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (before file deletion): $sessionDataRetrieved",
-          );
+        loge("TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: sessionDataRetrieved (before file deletion): $sessionDataRetrieved");
 
         // Deleting the metadata
         sessionDataRetrieved.removeWhere(
