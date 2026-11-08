@@ -416,11 +416,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
 
     loge("DeleteFile: filePath: $filePath");
     loge("DeleteFile: fileNameWithExtension: $fileNameWithExtension");
-
-    if (editDebug)
-      pu.printd(
-        "Editing: deleteFile: fileNameWithoutExtension: $fileNameWithoutExtension",
-      );
+    loge("DeleteFile: fileNameWithoutExtension: $fileNameWithoutExtension");
 
     // Removing existing file and metadata before saving
     try {
