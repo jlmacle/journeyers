@@ -210,10 +210,9 @@ class _GPSIdeasListState extends State<GPSIdeasList> {
 
                                     setLocalState(() {});
                                   }
-                                  if (editDebug)
-                                    pu.printd(
-                                      "Editing: GPSIdeasList: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes",
-                                    );
+
+                                  loge("GPSIdeasList: onCheckboxChangedCallbackFunction: _ideasSelectedForDeletionIndexes : $_ideasSelectedForDeletionIndexes");
+
                                 },
                             // parentCallbackFunctionToUpdateTheListItemValue: onUpdateTheIdeaValue,
                             parentCallbackFunctionToUpdateTheListItemValue:
