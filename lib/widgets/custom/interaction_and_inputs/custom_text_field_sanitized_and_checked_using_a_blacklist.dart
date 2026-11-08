@@ -414,7 +414,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
     String fileNameWithExtension = path.basename(filePath);
     String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
 
-    if (editDebug) pu.printd("Editing: deleteFile: filePath: $filePath");
+    loge("DeleteFile: filePath: $filePath");
+
     if (editDebug)
       pu.printd(
         "Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension",
