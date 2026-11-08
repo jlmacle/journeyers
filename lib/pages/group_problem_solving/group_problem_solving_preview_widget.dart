@@ -132,11 +132,7 @@ class _GPSPreviewState extends State<GPSPreview> {
     if (widgetSequenceDebug) pu.printd("GPSPreview: didUpdateWidget");
 
     loge("GPSPreview: didUpdateWidget: widget.ideas: ${widget.gpsPreviewIdeasStored}");
-
-    if (editDebug)
-      pu.printd(
-        "Editing: GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}",
-      );
+    loge("GPSPreview: didUpdateWidget: oldWidget.ideas: ${oldWidget.gpsPreviewIdeasStored}");
 
     super.didUpdateWidget(oldWidget);
 
