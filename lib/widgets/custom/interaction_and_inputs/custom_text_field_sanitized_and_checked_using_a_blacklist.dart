@@ -415,11 +415,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
     String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
 
     loge("DeleteFile: filePath: $filePath");
+    loge("DeleteFile: fileNameWithExtension: $fileNameWithExtension");
 
-    if (editDebug)
-      pu.printd(
-        "Editing: deleteFile: fileNameWithExtension: $fileNameWithExtension",
-      );
     if (editDebug)
       pu.printd(
         "Editing: deleteFile: fileNameWithoutExtension: $fileNameWithoutExtension",
