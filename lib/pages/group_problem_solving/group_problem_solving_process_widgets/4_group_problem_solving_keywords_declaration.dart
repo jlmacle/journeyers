@@ -7,6 +7,7 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/sheets_and_overlays/sheets_and_overlays_utils.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 /// {@category Group problem-solving}
 /// A widget used to declare keywords, or to retrieve keywords from previous context analyses.
@@ -64,10 +65,9 @@ class _GPSKeywordsDeclarationState extends State<GPSKeywordsDeclaration> {
 
     if (widget.keywordsWhenEdition.isNotEmpty) {
       _keywords = widget.keywordsWhenEdition;
-      if (editDebug)
-        pu.printd(
-          "Editing: GPSKeywordsDeclaration: initState: widget.keywordsWhenEdition.isNotEmpty: _keywords: $_keywords",
-        );
+
+    loge("GPSKeywordsDeclaration: initState: widget.keywordsWhenEdition.isNotEmpty: _keywords: $_keywords");
+
     } else {
       _keywords = Set.from(widget.currentKeywords);
     }
