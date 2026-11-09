@@ -159,7 +159,8 @@ Future<List<String>> retrieveGPSIdeas(
         .toList();
   }
 
-  if (editDebug) pu.printd("Editing: retrieveGPSIdeas: original ideas: $ideas");
+  loge("retrieveGPSIdeas: original ideas: $ideas");
+
   if (editDebug)
     pu.printd(
       "Editing: retrieveGPSIdeas: original fileNameWithoutExtension: $fileNameWithoutExtension",
