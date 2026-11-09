@@ -48,8 +48,8 @@ Future<void> retrieveCASessionData({
 
   loge("retrieveCASessionData: titleWhenEdition: $titleWhenEdition");
   loge("retrieveCASessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
+  loge("retrieveCASessionData: dtoWhenEdition:");
 
-  if (editDebug) pu.printd("Editing: retrieveCASessionData: dtoWhenEdition: ");
   if (editDebug) dtoWhenEdition.printToConsole();
   if (editDebug)
     pu.printd(
