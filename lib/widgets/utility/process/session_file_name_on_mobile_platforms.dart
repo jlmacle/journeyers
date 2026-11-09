@@ -115,10 +115,8 @@ class _SessionFileNameOnMobilePlatformsState
     _getApplicationFolderPath();
 
     // Edited file name value if relevant
-    if (editDebug && widget.fileNameWithoutExtensionWhenEdition != "")
-      pu.printd(
-        "Editing: SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWithoutExtensionWhenEdition}",
-      );
+    if (widget.fileNameWithoutExtensionWhenEdition != "") loge("SessionFileNameOnMobilePlatforms: initState: file name when edition: ${widget.fileNameWithoutExtensionWhenEdition}");
+    
     _fileNameTec.text = widget.fileNameWithoutExtensionWhenEdition;
   }
 
