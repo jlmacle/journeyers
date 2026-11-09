@@ -51,10 +51,7 @@ Future<void> retrieveCASessionData({
   loge("retrieveCASessionData: dtoWhenEdition:");
 
   if (editDebug) dtoWhenEdition.printToConsole();
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension",
-    );
+  loge("retrieveCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
 
   // CA process page re-build with the loaded data
   onRetrievedCASessionDataBeforeEditionCallbackFunction(
