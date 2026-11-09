@@ -10,6 +10,7 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 // Method used to retrieve context analysis session data before edition
 Future<void> retrieveCASessionData({
@@ -45,10 +46,8 @@ Future<void> retrieveCASessionData({
 
   Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();
 
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveCASessionData: titleWhenEdition: $titleWhenEdition",
-    );
+  loge("retrieveCASessionData: titleWhenEdition: $titleWhenEdition");
+
   if (editDebug)
     pu.printd(
       "Editing: retrieveCASessionData: keywordsWhenEdition: $keywordsSetWhenEdition",
