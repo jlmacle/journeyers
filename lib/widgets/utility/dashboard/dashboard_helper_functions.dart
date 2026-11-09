@@ -160,11 +160,8 @@ Future<List<String>> retrieveGPSIdeas(
   }
 
   loge("retrieveGPSIdeas: original ideas: $ideas");
+  loge("retrieveGPSIdeas: original fileNameWithoutExtension: $fileNameWithoutExtension");
 
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveGPSIdeas: original fileNameWithoutExtension: $fileNameWithoutExtension",
-    );
   if (editDebug) pu.printd("Editing: retrieveGPSIdeas: original title: $title");
 
   return ideas;
