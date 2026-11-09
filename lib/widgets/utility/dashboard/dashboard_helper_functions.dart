@@ -100,8 +100,8 @@ Future<void> retrieveGPSSessionData({
 
   loge("retrieveGPSSessionData: titleWhenEdition: $titleWhenEdition");
   loge("retrieveGPSSessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
- 
-  if (editDebug) pu.printd("Editing: retrieveGPSSessionData: dtoWhenEdition: ");
+  loge("retrieveGPSSessionData: dtoWhenEdition:");
+
   if (editDebug) dtoWhenEdition.printToConsole();
   if (editDebug)
     pu.printd(
