@@ -101,12 +101,8 @@ Future<void> retrieveGPSSessionData({
   loge("retrieveGPSSessionData: titleWhenEdition: $titleWhenEdition");
   loge("retrieveGPSSessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
   loge("retrieveGPSSessionData: dtoWhenEdition:");
-
   if (editDebug) dtoWhenEdition.printToConsole();
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveGPSSessionData: fileNameWithoutExtension: $fileNameWithoutExtension",
-    );
+  loge("retrieveGPSSessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
 
   // GPS process page re-build with the loaded data
   onRetrievedGPSSessionDataBeforeEditionCallbackFunction(
