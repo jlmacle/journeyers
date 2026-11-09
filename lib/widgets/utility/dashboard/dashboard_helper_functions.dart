@@ -99,11 +99,8 @@ Future<void> retrieveGPSSessionData({
   Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();
 
   loge("retrieveGPSSessionData: titleWhenEdition: $titleWhenEdition");
-
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveGPSSessionData: keywordsWhenEdition: $keywordsSetWhenEdition",
-    );
+  loge("retrieveGPSSessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
+ 
   if (editDebug) pu.printd("Editing: retrieveGPSSessionData: dtoWhenEdition: ");
   if (editDebug) dtoWhenEdition.printToConsole();
   if (editDebug)
