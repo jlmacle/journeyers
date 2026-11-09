@@ -126,10 +126,9 @@ Future<List<String>> retrieveGPSIdeas(
   List<dynamic> sessionsMetadataAll = await du.retrieveAllDashboardMetadata(
     typeOfDashboardContext: DashboardUtils.gpsContext,
   );
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveGPSIdeas: sessionsMetadataAll : $sessionsMetadataAll",
-    );
+
+  loge("retrieveGPSIdeas: sessionsMetadataAll : $sessionsMetadataAll");
+
   var sessionToEditMetadata =
       sessionsMetadataAll
               .where(
