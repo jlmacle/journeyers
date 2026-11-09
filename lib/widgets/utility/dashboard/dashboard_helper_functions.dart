@@ -136,10 +136,8 @@ Future<List<String>> retrieveGPSIdeas(
               )
               .first
           as Map<String, dynamic>;
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveGPSIdeas: sessionToEditMetadata : $sessionToEditMetadata",
-    );
+
+  loge("retrieveGPSIdeas: sessionToEditMetadata : $sessionToEditMetadata");
 
   var title = sessionToEditMetadata[DashboardUtils.keyTitle];
 
