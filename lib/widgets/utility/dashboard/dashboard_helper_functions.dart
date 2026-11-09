@@ -47,11 +47,8 @@ Future<void> retrieveCASessionData({
   Set<String> keywordsSetWhenEdition = keywordsWhenEdition.toSet();
 
   loge("retrieveCASessionData: titleWhenEdition: $titleWhenEdition");
+  loge("retrieveCASessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
 
-  if (editDebug)
-    pu.printd(
-      "Editing: retrieveCASessionData: keywordsWhenEdition: $keywordsSetWhenEdition",
-    );
   if (editDebug) pu.printd("Editing: retrieveCASessionData: dtoWhenEdition: ");
   if (editDebug) dtoWhenEdition.printToConsole();
   if (editDebug)
