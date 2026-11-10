@@ -196,7 +196,9 @@ class ParticipantsListsDB {
     // readAsStringSync - Widget testing fails with readAsString
     var stringData = f.readAsStringSync();
     var decodedData = jsonDecode(stringData);
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: loadDataStructure: decoded data: $decodedData"); 
+
+    logl("ParticipantsListsDB: loadDataStructure: decoded data: $decodedData"); 
+
     return decodedData;
   } 
 
