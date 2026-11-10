@@ -68,7 +68,7 @@ class ParticipantsListsDB {
     // DB does exist already
     else
     {
-      if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file DB exists");
+      logl("ParticipantsListsDB: _getFile: file DB exists");
       if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file content: ${file.readAsStringSync()}");
     }
     return file;
