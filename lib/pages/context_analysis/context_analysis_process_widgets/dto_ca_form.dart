@@ -168,8 +168,8 @@ class DTOCAForm {
       "groupPerspective": groupData,
     });
 
+    logd("");
     if (sessionDataDebug) {
-      pu.printd("Session Data");
       pu.printd("Session Data: enteredData");
       pu.printd("Session Data: $enteredData");
       pu.printd("Session Data");
