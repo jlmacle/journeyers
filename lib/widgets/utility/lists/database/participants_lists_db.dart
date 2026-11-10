@@ -41,7 +41,7 @@ class ParticipantsListsDB {
     {
       try
       {
-        if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file DB not existant. File creation");
+        logl("ParticipantsListsDB: _getFile: file DB not existant. File creation");
 
         if (isInTestEnvironment) _fileName = "participants_lists_test_data.json";
         file = File("${dir.path}/$_fileName");       
