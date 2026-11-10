@@ -187,7 +187,8 @@ class ParticipantsListsDB {
 
     if (f == null) 
     {
-      if (listDebug) pu.printd("List debug: ParticipantsListsDB: loadDataStructure: no data to load"); 
+      logl("ParticipantsListsDB: loadDataStructure: no data to load");
+
       return [];
     }
 
