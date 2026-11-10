@@ -169,8 +169,8 @@ class DTOCAForm {
     });
 
     logd("");
+    logd("enteredData");
     if (sessionDataDebug) {
-      pu.printd("Session Data: enteredData");
       pu.printd("Session Data: $enteredData");
       pu.printd("Session Data");
     }
