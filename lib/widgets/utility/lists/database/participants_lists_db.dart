@@ -69,7 +69,7 @@ class ParticipantsListsDB {
     else
     {
       logl("ParticipantsListsDB: _getFile: file DB exists");
-      if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file content: ${file.readAsStringSync()}");
+      logl("ParticipantsListsDB: _getFile: file content: ${file.readAsStringSync()}");
     }
     return file;
   }
@@ -187,7 +187,8 @@ class ParticipantsListsDB {
 
     if (f == null) 
     {
-      if (listDebug) pu.printd("List debug: ParticipantsListsDB: loadDataStructure: no data to load"); 
+      logl("ParticipantsListsDB: loadDataStructure: no data to load");
+
       return [];
     }
 
