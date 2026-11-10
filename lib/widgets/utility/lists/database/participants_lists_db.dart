@@ -56,7 +56,7 @@ class ParticipantsListsDB {
         // readAsStringSync - Widget testing fails with readAsString
         content = file.readAsStringSync();
 
-        if (listDebug) pu.printd("List debug: ParticipantsListsDB: _getFile: file content: $content");
+        logl("ParticipantsListsDB: _getFile: file content: $content");
       }
       catch(e,s)
       {
