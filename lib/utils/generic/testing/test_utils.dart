@@ -164,6 +164,18 @@ void loge(String msg, [Object? anExpressionResult]) {
 }
 
 /// {@category Utils - Generic}
+/// A method used to log data related to the listDebug boolean.
+/// logl(msg); -> List debug: : "msg"
+/// logl(msg, anExpressionFResult);  -> List debug: "msg": anExpressionFResult
+void logl(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (listDebug) pu.printd("List debug:  $msg");
+  } else {
+    if (listDebug) pu.printd("List debug:  $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
 /// A method used to log data related to the sessionDataDebug boolean.
 /// logd(msg); -> Session Data: "msg"
 /// logd(msg, anExpressionFResult);  -> Session Data: "msg": anExpressionFResult
