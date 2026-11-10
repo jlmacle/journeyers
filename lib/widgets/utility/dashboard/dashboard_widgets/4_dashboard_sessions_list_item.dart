@@ -104,10 +104,7 @@ class _SessionsListItemState extends State<SessionsListItem> {
   void _updateTmpFilePath(String tmpFilePathFromPreview) {
     tmpFilePath = tmpFilePathFromPreview;
 
-    if (sessionDataDebug)
-      pu.printd(
-        "Session Data: SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview",
-      );
+    logd("SessionsListItem: updateTmpFilePath: tmpFilePath: $tmpFilePathFromPreview");
   }
 
   @override
