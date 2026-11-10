@@ -89,7 +89,7 @@ Future<void> sortDashboardSessionsByTitle
 Future<void> sortListsByLabel
 ({required List<dynamic> list, required bool byAscendingLabel}) async 
 {
-  if (listDebug) pu.printd("List debug: Lists display: sortListsByLabel: list: $list"); 
+  logl("Lists display: sortListsByLabel: list: $list"); 
 
   if (byAscendingLabel) 
   {
