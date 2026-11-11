@@ -8,6 +8,7 @@ import "package:journeyers/l10n/localized_participants_strings.dart";
 import "package:journeyers/l10n/localized_utils_strings.dart";
 import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/lists/database/participants_lists_db.dart";
 import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/new_participants_list/new_participants_list_deletion_by_bulk.dart";
@@ -65,10 +66,9 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
       setState(() {
         _listOfPreviousGroupedTexts = listOfGroupedTexts;
         _loadingDB = false;
-        if (listDebug)
-          pu.printd(
-            "List debug: NewParticipantsList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts",
-          );
+
+        logl("NewParticipantsList: _loadListOfGroupedTexts: _listOfGroupedTexts: $_listOfPreviousGroupedTexts");
+
       });
     } catch (e) {
       setState(() {
