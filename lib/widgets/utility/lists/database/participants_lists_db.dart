@@ -633,7 +633,9 @@ class ParticipantsListsDB {
     {
       if (!updatedParticipantsList.contains(actualParticipant))
       {
-        if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: participant removal: $actualParticipant not in $updatedParticipantsList");
+
+        logl("ParticipantsListsDB: updateParticipants: participant removal: $actualParticipant not in $updatedParticipantsList");
+
         // removing from subItemsDataList
         String? keyForRemoval = actualNamesKeysMap[actualParticipant];
         var indexForRemoval = keyActualIndexMap[keyForRemoval!];
