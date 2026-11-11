@@ -611,7 +611,8 @@ class ParticipantsListsDB {
   {
     var newKey = "";
 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
+    logl("ParticipantsListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
+
     List<String> updatedParticipantsList = updatedParticipants.toList();
     var subItemsDataList = listData[subItemsDataListKey];
     if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants (before): subItemsDataList: $subItemsDataList");
