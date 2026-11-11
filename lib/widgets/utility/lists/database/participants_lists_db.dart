@@ -681,7 +681,8 @@ class ParticipantsListsDB {
       }
     }
 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants (after): subItemsDataList: $subItemsDataList");
+    logl("ParticipantsListsDB: updateParticipants (after): subItemsDataList: $subItemsDataList");
+
     return subItemsDataList;
   }
 
