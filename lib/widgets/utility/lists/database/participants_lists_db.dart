@@ -595,8 +595,7 @@ class ParticipantsListsDB {
   /// Method used to add, or remove, one or several participants of the list.
   Future<String> updateListName(String updatedListName, Map<String, dynamic> listData) async
   {
-
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName: updatedListName: $updatedListName");
+    logl("ParticipantsListsDB: updateListName: updatedListName: $updatedListName");
 
     var listLabel = listData[itemTextKey];
     if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName (before): listLabel: $listLabel");
