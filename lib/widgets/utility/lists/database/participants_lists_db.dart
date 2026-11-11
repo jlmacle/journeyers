@@ -621,7 +621,7 @@ class ParticipantsListsDB {
     // Getting a map names/keys from the stored subItemsDataList
     Map<String, String> actualNamesKeysMap = getNamesKeys(subItemsDataList);
 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: actualNamesKeysMap: $actualNamesKeysMap");
+    logl("ParticipantsListsDB: updateParticipants: actualNamesKeysMap: $actualNamesKeysMap");
 
     // Verifying if some participants are to be removed from the subItemsDataList
     List<String> actualParticipants = actualNamesKeysMap.keys.toList();
