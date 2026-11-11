@@ -627,7 +627,8 @@ class ParticipantsListsDB {
     List<String> actualParticipants = actualNamesKeysMap.keys.toList();
     Map<String, int> keyActualIndexMap  = getListKeyIndexMap(subItemsDataList);
 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: actualParticipants: $actualParticipants");
+    logl("ParticipantsListsDB: updateParticipants: actualParticipants: $actualParticipants");
+
     for (String actualParticipant in actualParticipants)
     {
       if (!updatedParticipantsList.contains(actualParticipant))
