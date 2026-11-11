@@ -615,7 +615,8 @@ class ParticipantsListsDB {
 
     List<String> updatedParticipantsList = updatedParticipants.toList();
     var subItemsDataList = listData[subItemsDataListKey];
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants (before): subItemsDataList: $subItemsDataList");
+
+    logl("ParticipantsListsDB: updateParticipants (before): subItemsDataList: $subItemsDataList");
 
     // Getting a map names/keys from the stored subItemsDataList
     Map<String, String> actualNamesKeysMap = getNamesKeys(subItemsDataList);
