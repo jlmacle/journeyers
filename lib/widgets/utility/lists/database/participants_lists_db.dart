@@ -651,7 +651,9 @@ class ParticipantsListsDB {
     // Getting actualParticipantsList from updated subItemsDataList
     actualNamesKeysMap = getNamesKeys(subItemsDataList);
     var actualParticipantsList = actualNamesKeysMap.keys.toList();
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
+
+    logl("ParticipantsListsDB: updateParticipants: updatedParticipants: $updatedParticipants");
+
     for (String updatedParticipant in updatedParticipants)
     {
       if (!actualParticipantsList.contains(updatedParticipant))
