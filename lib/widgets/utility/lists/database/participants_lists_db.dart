@@ -599,9 +599,9 @@ class ParticipantsListsDB {
 
     var listLabel = listData[itemTextKey];
 
-    logl("ParticipantsListsDB: updateListName (before): listLabel: $listLabel");
-    
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateListName (after): listLabel: $listLabel");
+    logl("ParticipantsListsDB: updateListName (before): listLabel: $listLabel");    
+    logl("ParticipantsListsDB: updateListName (after): listLabel: $listLabel");
+
     return listLabel;
   }
 
