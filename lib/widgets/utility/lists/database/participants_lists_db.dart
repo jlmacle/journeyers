@@ -658,7 +658,7 @@ class ParticipantsListsDB {
     {
       if (!actualParticipantsList.contains(updatedParticipant))
       {
-        if (listDebug) pu.printd("List debug: ParticipantsListsDB: updateParticipants: participant addition: $updatedParticipant not in $actualParticipantsList");
+        logl("ParticipantsListsDB: updateParticipants: participant addition: $updatedParticipant not in $actualParticipantsList");
         
         // Sub-item data needs to be added
         Map<String, dynamic> subItemData = {};
