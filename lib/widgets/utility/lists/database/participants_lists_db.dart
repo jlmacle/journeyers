@@ -710,7 +710,7 @@ class ParticipantsListsDB {
   /// Removes a list data.
   Future<void> removeListData(List<String> listKeys) async {
 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: removeListData: ");
+    logl("ParticipantsListsDB: removeListData:");
 
     List<dynamic> data = await loadDataStructure();
 
@@ -725,7 +725,7 @@ class ParticipantsListsDB {
       }
     }
 
-    if (listDebug) pu.printd("List debug: ParticipantsListsDB: removeListData: data (updated): $data"); 
+    logl("ParticipantsListsDB: removeListData: data (updated): $data"); 
 
     // Saving the data
     var f = await _getFile();
