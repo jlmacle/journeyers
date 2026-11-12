@@ -101,10 +101,7 @@ class ParticipantsListsDashboardState
       _listsDataAll.add(listData);
     }
 
-    if (listDebug)
-      pu.printd(
-        "List debug: Participants Lists: Lists display: getStoredListsData: _allListsData: $_listsDataAll",
-      );
+    logl("Participants Lists: Lists display: getStoredListsData: _allListsData: $_listsDataAll");
 
     // Getting the used keywords from the retrieved data
     _keywordsAll = await _keywordsGetAll(_listsDataAll);
