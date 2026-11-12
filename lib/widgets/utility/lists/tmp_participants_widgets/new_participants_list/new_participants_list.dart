@@ -557,10 +557,8 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                           _enteredTextItemsList.add(value.trim());
                         });
                         _newTextItemTec.clear();
-                        if (listDebug)
-                          pu.printd(
-                            "List debug: NewParticipantsList: build: _enteredTextItemsList: $_enteredTextItemsList",
-                          );
+
+                        logl("NewParticipantsList: build: _enteredTextItemsList: $_enteredTextItemsList");
                       },
                     ),
                   ),
