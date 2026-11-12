@@ -83,8 +83,9 @@ class ParticipantsListsDashboardState
 
     // Retrieving data
     _listData = await _listsDB.loadDataStructure();
-    if (listDebug)
-      pu.printd("List debug: ParticipantsListsDashboard: _listData: _listData");
+
+    logl("ParticipantsListsDashboard: _listData: _listData");
+
     // Getting the list labels
     final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
     if (listDebug)
