@@ -276,9 +276,8 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
     } catch (e, stackTrace) {
 
       logl("NewParticipantsList: Error: Save failed: $e");
+      logl("NewParticipantsList: Error: $stackTrace");
 
-      if (listDebug)
-        pu.printd("List debug: NewParticipantsList: Error: $stackTrace");
       setState(() => _dataSaving = false);
 
       if (!mounted) return;
