@@ -88,10 +88,8 @@ class ParticipantsListsDashboardState
 
     // Getting the list labels
     final labels = await _listsDB.getSortedLabels(dataStructure: _listData);
-    if (listDebug)
-      pu.printd(
-        "List debug: ParticipantsListsDashboard: getStoredListsData: labels: $labels",
-      );
+    
+    logl("ParticipantsListsDashboard: getStoredListsData: labels: $labels");
 
     // Building _allListsData
     // Reverse sorting to have the most recent label first
