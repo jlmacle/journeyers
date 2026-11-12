@@ -517,10 +517,8 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                                               // setState // todo later at bulk widget level
                                               setState(() {});
                                             }
-                                            if (listDebug)
-                                              pu.printd(
-                                                "List debug: NewParticipantsList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes",
-                                              );
+
+                                            logl("NewParticipantsList: build: _textsSelectedForDeletionIndexes: $_textsSelectedForDeletionIndexes");
                                           },
                                       parentCallbackFunctionToUpdateTheListItemValue:
                                           _onUpdateTheListItemValue,
