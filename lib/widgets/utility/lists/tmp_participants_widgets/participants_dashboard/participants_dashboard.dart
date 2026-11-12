@@ -354,10 +354,9 @@ class ParticipantsListsDashboardState
 
   @override
   Widget build(BuildContext context) {
-    if (listDebug)
-      pu.printd(
-        "List debug: ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading",
-      );
+
+    logl("ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading");
+
     if (listDebug)
       pu.printd(
         "List debug: ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered",
