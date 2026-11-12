@@ -108,8 +108,8 @@ class _ParticipantsListsItemState extends State<ParticipantsListsItem> {
     required String? listKey,
     required Map<String, dynamic> listData,
   }) async {
-    if (listDebug)
-      pu.printd("List Debug: ParticipantsListsItem: _onListNameUpdated");
+
+    logl("ParticipantsListsItem: _onListNameUpdated");
 
     // Calling the parent callback for state
     await widget.onListNameUpdatedCallbackFunction(
