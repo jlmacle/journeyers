@@ -281,10 +281,8 @@ class ParticipantsListsDashboardState
     required String? listKey,
     required Map<String, dynamic> listData,
   }) async {
-    if (listDebug)
-      pu.printd(
-        "List debug: Lists display: updateParticipants: updatedItems: $updatedItems",
-      );
+    logl("Lists display: updateParticipants: updatedItems: $updatedItems");
+
     // To accomodate widget testing
     if (listKey != null) {
       // Updating the DB
