@@ -419,11 +419,7 @@ class _NewParticipantsListState extends State<NewParticipantsList> {
                   NewParticipantsListKeywordsDeclaration(
                     keywordsCurrent: const {},
                     keywordsOnUpdateCallbackFunction: (newKeywords) {
-                      if (listDebug)
-                        pu.printd(
-                          "List debug: NewParticipantsList: build: newKeywords: $newKeywords",
-                        );
-
+                      logl("NewParticipantsList: build: newKeywords: $newKeywords");
                       _newKeywords = newKeywords.toList()..sort();
                     },
                   ),
