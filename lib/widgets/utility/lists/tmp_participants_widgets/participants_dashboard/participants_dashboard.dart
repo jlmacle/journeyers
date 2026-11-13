@@ -356,11 +356,7 @@ class ParticipantsListsDashboardState
   Widget build(BuildContext context) {
 
     logl("ParticipantsListsDashboard: build: _isDataLoading: $_isDataLoading");
-
-    if (listDebug)
-      pu.printd(
-        "List debug: ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered",
-      );
+    logl("ParticipantsListsDashboard: build: _listsDataFiltered: $_listsDataFiltered");
 
     // Getting the localized strings
     LocalizedParticipantsStrings lps = .new(context);
