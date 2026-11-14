@@ -23,6 +23,7 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/dto_gps_form.dart";
+import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -485,6 +486,7 @@ class GPSProcessState extends State<GPSProcess> {
                                 ? lgps.participantIdentifiersSingleDeletionTooltipLabel
                                 : lgps.participantIdentifiersEditTooltipLabel,
                             text: lgps.participantIdentifiersEditLabel,
+                            semanticsLabel: removeNewLines(lgps.participantIdentifiersEditLabel),
                             color: _isEditMode
                                 ? Colors.green.shade900
                                 : const Color(
@@ -695,6 +697,7 @@ class GPSProcessState extends State<GPSProcess> {
   // Method used to build the header buttons
   Widget _buildHeaderButton({
     required String text,
+    String? semanticsLabel = "",
     String? tooltipMessage,
     required Color color,
     required VoidCallback onPressed,
@@ -716,7 +719,7 @@ class GPSProcessState extends State<GPSProcess> {
           child: Center(
             child: Text(
               text,
-              semanticsLabel: "",
+              semanticsLabel: semanticsLabel,
               style: const TextStyle(fontSize: 12),
               textAlign: TextAlign.center,
             ),
