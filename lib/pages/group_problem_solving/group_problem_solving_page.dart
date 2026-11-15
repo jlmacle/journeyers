@@ -50,7 +50,8 @@ class GPSPageState extends State<GPSPage>
 
   _getRuntimeData() async 
   {
-    if (runtimeDataDebug) pu.printd("Runtime Data: _getRuntimeData()");
+    logr("_getRuntimeData()");
+
     _gpsSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
     setState(() {_runtimeDataLoading = false;});
