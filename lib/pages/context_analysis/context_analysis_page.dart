@@ -69,7 +69,8 @@ class CAPageState extends State<CAPage>
     _caSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.caContext);
     setState(() {_runtimeDataLoading = false;});
 
-    if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: _firstRunModalAcknowledged: $_firstRunModalAcknowledged");
+    logr("CAPAge: _firstRunModalAcknowledged: $_firstRunModalAcknowledged");
+
     if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: _caSessionDataSaved: $_caSessionDataSaved");
 
     // IF FIRST-RUN MODAL NOT ACKNOWLEDGED:
