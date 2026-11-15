@@ -55,7 +55,7 @@ class GPSPageState extends State<GPSPage>
     _gpsSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.gpsContext);
 
     setState(() {_runtimeDataLoading = false;});
-    if (runtimeDataDebug) pu.printd("Runtime Data: _gpsSessionDataSaved: $_gpsSessionDataSaved");
+    logr("_gpsSessionDataSaved: $_gpsSessionDataSaved");
   }
 
   // ─── METHODS USED TO REFRESH VIEWS ───────────────────────────────────────
