@@ -87,10 +87,8 @@ class _GPSappState extends State<GPSapp> {
  
       _currentLocale = const Locale("en");
     }
-    if (runtimeDataDebug)
-      pu.printd(
-        "Runtime Data: GPSapp: current locale language code: ${_currentLocale!.languageCode}",
-      );
+
+    logr("GPSapp: current locale language code: ${_currentLocale!.languageCode}");
 
     return MaterialApp(
       // To visualize the semantics tree
