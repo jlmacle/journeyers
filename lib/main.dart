@@ -80,8 +80,9 @@ class _GPSappState extends State<GPSapp> {
     if (!availableTranslationsCodes.contains(
       _currentLocale!.languageCode.toLowerCase(),
     )) {
-      if (runtimeDataDebug)
-        pu.printd("availableTranslationsCodes: $availableTranslationsCodes");
+
+      logr("availableTranslationsCodes: $availableTranslationsCodes");
+      
       if (runtimeDataDebug)
         pu.printd(
           "_currentLocale!.languageCode.toLowerCase(): ${_currentLocale!.languageCode.toLowerCase()}",
