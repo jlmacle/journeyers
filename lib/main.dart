@@ -9,6 +9,7 @@ import "package:material_ui/material_ui.dart";
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/l10n/app_localizations.dart";
 import "package:journeyers/pages/homepage.dart";
 
@@ -68,8 +69,8 @@ class _GPSappState extends State<GPSapp> {
     if (newLocale != _currentLocale) {
       setState(() {
         _currentLocale = newLocale;
-        if (runtimeDataDebug)
-          pu.printd("Runtime Data: GPSapp: _setLocale: new locale: $newLocale");
+
+        logr("GPSapp: _setLocale: new locale: $newLocale");
       });
     }
   }
