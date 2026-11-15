@@ -129,7 +129,7 @@ Text getTextBeforeLastFromFinder(WidgetTester tester, Finder finder)
 /// {@category Utils - Generic}
 /// A method used to log data related to the accessibilityDebug boolean.
 /// loga(msg); -> Accessibility: "msg"
-/// loga(msg, anExpressionFResult);  -> Accessibility: "msg": anExpressionFResult
+/// loga(msg, anExpressionResult);  -> Accessibility: "msg": anExpressionResult
 void loga(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (accessibilityDebug) pu.printd("Accessibility: $msg");
@@ -142,7 +142,7 @@ void loga(String msg, [Object? anExpressionResult]) {
 /// {@category Utils - Generic}
 /// A method used to log data related to the csvBuildingDebug boolean.
 /// logc(msg); -> CSV Building: "msg"
-/// logc(msg, anExpressionFResult);  -> CSV Building: "msg": anExpressionFResult
+/// logc(msg, anExpressionResult);  -> CSV Building: "msg": anExpressionResult
 void logc(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (csvBuildingDebug) pu.printd("CSV Building: $msg");
@@ -153,8 +153,8 @@ void logc(String msg, [Object? anExpressionResult]) {
 
 /// {@category Utils - Generic}
 /// A method used to log data related to the editDebug boolean.
-/// loge(msg); -> Editing: : "msg"
-/// loge(msg, anExpressionFResult);  -> Editing: "msg": anExpressionFResult
+/// loge(msg); -> Editing: "msg"
+/// loge(msg, anExpressionResult);  -> Editing: "msg": anExpressionResult
 void loge(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (editDebug) pu.printd("Editing:  $msg");
@@ -165,8 +165,8 @@ void loge(String msg, [Object? anExpressionResult]) {
 
 /// {@category Utils - Generic}
 /// A method used to log data related to the listDebug boolean.
-/// logl(msg); -> List debug: : "msg"
-/// logl(msg, anExpressionFResult);  -> List debug: "msg": anExpressionFResult
+/// logl(msg); -> List debug: "msg"
+/// logl(msg, anExpressionResult);  -> List debug: "msg": anExpressionResult
 void logl(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (listDebug) pu.printd("List debug:  $msg");
@@ -176,9 +176,21 @@ void logl(String msg, [Object? anExpressionResult]) {
 }
 
 /// {@category Utils - Generic}
+/// A method used to log data related to the runtimeDataDebug boolean.
+/// logr(msg); -> Runtime Data: "msg"
+/// logr(msg, anExpressionResult);  -> Runtime Data: "msg": anExpressionResult
+void logr(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (runtimeDataDebug) pu.printd("Runtime Data:  $msg");
+  } else {
+    if (runtimeDataDebug) pu.printd("Runtime Data:  $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
 /// A method used to log data related to the sessionDataDebug boolean.
 /// logd(msg); -> Session Data: "msg"
-/// logd(msg, anExpressionFResult);  -> Session Data: "msg": anExpressionFResult
+/// logd(msg, anExpressionResult);  -> Session Data: "msg": anExpressionResult
 void logd(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (sessionDataDebug) pu.printd("Session Data: $msg");
@@ -190,7 +202,7 @@ void logd(String msg, [Object? anExpressionResult]) {
 /// {@category Utils - Generic}
 /// A method used to log data related to the sessionMetadataDebug boolean.
 /// logm(msg); -> Session Metadata: "msg"
-/// logm(msg, anExpressionFResult);  -> Session Metadata: "msg": anExpressionFResult
+/// logm(msg, anExpressionResult);  -> Session Metadata: "msg": anExpressionResult
 void logm(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (sessionMetadataDebug) pu.printd("Session Metadata: $msg");
@@ -202,7 +214,7 @@ void logm(String msg, [Object? anExpressionResult]) {
 /// {@category Utils - Generic}
 /// A method used to log data related to the testingDebug boolean.
 /// logt(msg); -> Testing Debug: "msg"
-/// logt(msg, anExpressionFResult);  -> Testing Debug: "msg": anExpressionFResult
+/// logt(msg, anExpressionResult);  -> Testing Debug: "msg": anExpressionResult
 void logt(String msg, [Object? anExpressionResult]) {
   if (anExpressionResult == null) {
     if (testingDebug) pu.printd("Testing Debug: $msg");
