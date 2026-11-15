@@ -63,7 +63,7 @@ class CAPageState extends State<CAPage>
   // Method used to get stored run-time data
   getRuntimeData() async 
   {
-    if (runtimeDataDebug) pu.printd("Runtime Data: CAPAge: getRuntimeData()");
+    logr("CAPAge: getRuntimeData()");
 
     _firstRunModalAcknowledged = await rtdu.wasFirstRunModalAcknowledged();
     _caSessionDataSaved = await rtdu.wasSessionDataSaved(context: DashboardUtils.caContext);
