@@ -377,7 +377,8 @@ class _CAPreviewState extends State<CAPreview> {
       }
     }
 
-    if (previewBuildingDebug) pu.printd("Preview Building");
+    logp("");
+
     if (previewBuildingDebug)
       pu.printd("Preview Building: sectionsIndividual:");
     if (previewBuildingDebug) pu.printd(_sectionsIndividual);
