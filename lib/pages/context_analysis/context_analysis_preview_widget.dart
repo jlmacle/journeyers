@@ -381,7 +381,7 @@ class _CAPreviewState extends State<CAPreview> {
     logp("SectionsIndividual:");
     logp("$_sectionsIndividual");
     logp("");
-    if (previewBuildingDebug) pu.printd("Preview Building: sectionsGroup:");
+    logp("SectionsGroup:");
     if (previewBuildingDebug) pu.printd(_sectionsGroup);
     if (previewBuildingDebug)
       pu.printd("_sectionsGroup['title']: ${_sectionsGroup['title']}");
