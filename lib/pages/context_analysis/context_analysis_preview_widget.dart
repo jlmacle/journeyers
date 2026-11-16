@@ -505,11 +505,7 @@ class _CAPreviewState extends State<CAPreview> {
 
     logp("Data after removing empty lines:");
     logp("IndividualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines");
-
-    if (previewBuildingDebug)
-      pu.printd(
-        "Preview Building: groupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines",
-      );
+    logp("GroupPerspectiveWithoutEmptyLines: $groupPerspectiveWithoutEmptyLines");
 
     perspectiveData["individualPerspective"] =
         individualPerspectiveWithoutEmptyLines;
