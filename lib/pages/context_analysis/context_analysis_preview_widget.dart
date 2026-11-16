@@ -15,6 +15,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
+import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/utils/string/string_utils.dart";
 
 /// {@category Context analysis}
@@ -70,8 +71,8 @@ class _CAPreviewState extends State<CAPreview> {
   }
 
   Future<void> _fetchingData() async {
-    if (previewBuildingDebug)
-      pu.printd("Preview Building: pathToCSVData:${widget.pathToStoredData}");
+
+    logp("pathToCSVData:${widget.pathToStoredData}");
 
     if (pathsForTestFiles.contains(widget.pathToStoredData)) {
       if (mounted) {
