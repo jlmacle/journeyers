@@ -855,10 +855,6 @@ class DTOCAForm {
     final rawData = await rootBundle.loadString(assetPath);
     Map<String, dynamic> decodedData =
         jsonDecode(rawData) as Map<String, dynamic>;
-    if (preloadingDebug)
-      pu.printd(
-        "DTO Pre-loading: DTOCAForm: jsonDataMapFromAsset: $decodedData",
-      );
     return decodedData;
   }
 
