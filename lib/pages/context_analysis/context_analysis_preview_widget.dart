@@ -503,8 +503,8 @@ class _CAPreviewState extends State<CAPreview> {
         .where((data) => data.join().trim().isNotEmpty)
         .toList();
 
-    if (previewBuildingDebug)
-      pu.printd("Preview Building: Data after removing empty lines:");
+    logp("Data after removing empty lines:");
+
     if (previewBuildingDebug)
       pu.printd(
         "Preview Building: individualPerspectiveWithoutEmptyLines: $individualPerspectiveWithoutEmptyLines",
