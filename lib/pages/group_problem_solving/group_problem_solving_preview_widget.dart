@@ -94,10 +94,9 @@ class _GPSPreviewState extends State<GPSPreview> {
         filePathWithExtension: tmpFilePathWithExtension,
         dataBytes: dataBytes,
       );
-      if (previewBuildingDebug)
-        pu.printd(
-          "Preview Building: GPSPreview: _fetchingData: saved tmp file path for file sharing: $tmpFilePath",
-        );
+
+      logp("GPSPreview: _fetchingData: saved tmp file path for file sharing: $tmpFilePath");
+
       // Updating the value for the session list item
       widget.gpsPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);
 
