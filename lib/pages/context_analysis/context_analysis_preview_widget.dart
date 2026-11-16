@@ -383,8 +383,7 @@ class _CAPreviewState extends State<CAPreview> {
     logp("");
     logp("SectionsGroup:");
     logp("$_sectionsGroup");
-    if (previewBuildingDebug)
-      pu.printd("_sectionsGroup['title']: ${_sectionsGroup['title']}");
+    logp("_sectionsGroup['title']: ${_sectionsGroup['title']}");
   }
 
   /// Method used to retrieve data from the CSV file and to return a list of csvDataIndividualPerspective and csvDataGroupPerspective structures
