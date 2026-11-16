@@ -458,10 +458,9 @@ class _CAPreviewState extends State<CAPreview> {
       filePathWithExtension: tmpFilePathWithExtension,
       dataBytes: dataBytes,
     );
-    if (previewBuildingDebug)
-      pu.printd(
-        "Preview Building: CAPreview: temporary file for data sharing: tmpFilePath: $tmpFilePath",
-      );
+
+    logp("CAPreview: temporary file for data sharing: tmpFilePath: $tmpFilePath");
+
     // Updating the value for the session list item
     widget.caPreviewCallbackFunctionToUpdateTmpFilePath(tmpFilePath);
 
