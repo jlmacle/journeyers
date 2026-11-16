@@ -176,6 +176,18 @@ void logl(String msg, [Object? anExpressionResult]) {
 }
 
 /// {@category Utils - Generic}
+/// A method used to log data related to the previewBuildingDebug boolean.
+/// logp(msg); -> Preview Building: "msg"
+/// logp(msg, anExpressionResult);  -> Preview Building: "msg": anExpressionResult
+void logp(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (previewBuildingDebug) pu.printd("Preview Building:  $msg");
+  } else {
+    if (previewBuildingDebug) pu.printd("Preview Building:  $msg: $anExpressionResult");
+  }
+}
+
+/// {@category Utils - Generic}
 /// A method used to log data related to the runtimeDataDebug boolean.
 /// logr(msg); -> Runtime Data: "msg"
 /// logr(msg, anExpressionResult);  -> Runtime Data: "msg": anExpressionResult
