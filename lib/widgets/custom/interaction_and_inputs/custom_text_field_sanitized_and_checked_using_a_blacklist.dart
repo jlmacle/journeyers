@@ -270,10 +270,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
       // Adding the sanitizing function to the list for later sanitizing
       if (shouldStringBeBlocked) {
         blacklistingFunctionsReturnedTrueList.add(blacklistingFunction);
-        if (textFieldDebug)
-          pu.printd(
-            "Text Field: Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}",
-          );
+        
+        logtf("Added to blacklistingFunctionsReturnedTrueList: ${blacklistingFunction.toString()}");
       }
       return shouldStringBeBlocked;
     })) {
