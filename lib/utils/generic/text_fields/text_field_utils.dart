@@ -126,8 +126,9 @@ class TextFieldUtils {
     logtf("CurrentListOfStoredFileNames for extension $fileExtension: $currentListOfStoredFileNames");
 
     var valueWithExtension = "$value$fileExtension";
-    if (textFieldDebug)
-      pu.printd("Text Field: valueWithExtension: $valueWithExtension");
+
+    logtf("ValueWithExtension: $valueWithExtension");
+
     return currentListOfStoredFileNames.contains(valueWithExtension);
   }
 
