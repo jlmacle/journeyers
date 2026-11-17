@@ -362,10 +362,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
     // Additional onSubmitted instructions (before potentially saving data and exiting the process page)
     widget.additionalOnSubmittedInstructions(newValue);
 
-    if (textFieldDebug)
-      pu.printd(
-        "TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ",
-      );
+    logtf("TextFieldSanitizedAndCheckedUsingABlackList: _onTextFieldValueSubmitted: onSubmitted: submitIsBlocked: $_submitIsBlocked and newValue: $newValue ");
 
     // Data submission if not blocked
     if (!_submitIsBlocked) {
