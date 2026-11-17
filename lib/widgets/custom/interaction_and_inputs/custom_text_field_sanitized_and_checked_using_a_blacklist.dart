@@ -215,8 +215,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
         );
         cleanedValue = bundleRecord.sanitizingFunction(cleanedValue);
 
-        if (textFieldDebug)
-          pu.printd("Text Field: cleanedValue: $cleanedValue");
+        logtf("CleanedValue: $cleanedValue");
 
         setState(() {
           // Updating the text editing controller's text with the sanitized input
