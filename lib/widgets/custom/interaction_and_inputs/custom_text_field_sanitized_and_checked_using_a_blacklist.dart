@@ -341,8 +341,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
     // By default, submit is not blocked
     _submitIsBlocked = false;
 
-    if (textFieldDebug)
-      pu.printd("Text Field: onChanged: submitIsBlocked: $_submitIsBlocked");
+    logtf("OnChanged: submitIsBlocked: $_submitIsBlocked");
 
     // Sanitizing the text, and resetting the error message if relevant
     var cleanedValue = await _userInputSanitizing(newValue);
