@@ -246,3 +246,15 @@ void logtf(String msg, [Object? anExpressionResult]) {
     if (textFieldDebug) pu.printd("Text Field: $msg: $anExpressionResult");
   }
 }
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the widgetSequenceDebug boolean.
+/// logw(msg); -> "msg"
+/// logw(msg, anExpressionResult);  -> "msg": anExpressionResult
+void logw(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (widgetSequenceDebug) pu.printd("$msg");
+  } else {
+    if (widgetSequenceDebug) pu.printd("$msg: $anExpressionResult");
+  }
+}
