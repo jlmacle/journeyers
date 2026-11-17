@@ -234,3 +234,15 @@ void logt(String msg, [Object? anExpressionResult]) {
     if (testingDebug) pu.printd("Testing Debug: $msg: $anExpressionResult");
   }
 }
+
+/// {@category Utils - Generic}
+/// A method used to log data related to the textFieldDebug boolean.
+/// logtf(msg); -> Text Field: "msg"
+/// logtf(msg, anExpressionResult);  -> Text Field: "msg": anExpressionResult
+void logtf(String msg, [Object? anExpressionResult]) {
+  if (anExpressionResult == null) {
+    if (textFieldDebug) pu.printd("Text Field: $msg");
+  } else {
+    if (textFieldDebug) pu.printd("Text Field: $msg: $anExpressionResult");
+  }
+}
