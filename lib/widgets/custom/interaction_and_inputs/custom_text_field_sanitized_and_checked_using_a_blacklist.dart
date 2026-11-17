@@ -315,8 +315,9 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
 
       // Removing the error message, after delay if string was sanitized
       if (_wasStringSanitized) {
-        if (textFieldDebug)
-          pu.printd("wasStringSanitized: $_wasStringSanitized: Timer started");
+
+        logtf("WasStringSanitized: $_wasStringSanitized: Timer started");
+
         _stringSanitizedErrorTimer = Timer(const Duration(seconds: 5), () {
           setState(() {
             _errorMessage = "";
