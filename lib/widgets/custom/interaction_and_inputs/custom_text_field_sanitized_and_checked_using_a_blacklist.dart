@@ -204,8 +204,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
 
         // Blocking the submit
         _submitIsBlocked = true;
-        if (textFieldDebug)
-          pu.printd("Text Field: submitIsBlocked: $_submitIsBlocked");
+
+        logtf("SubmitIsBlocked: $_submitIsBlocked");
 
         // Sanitizing the input
         // DESIGN NOTES: after research,
