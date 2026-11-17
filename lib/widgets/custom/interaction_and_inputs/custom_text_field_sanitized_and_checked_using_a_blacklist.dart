@@ -199,10 +199,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
         _wasStringSanitized = true;
 
         bundleWithSanitizingFunctionThatReturnedTrue = stringSanitizerBundle;
-        if (textFieldDebug)
-          pu.printd(
-            "Text Field: bundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}",
-          );
+        
+        logtf("BundleWithSanitizingFunctionThatReturnedTrue: ${bundleWithSanitizingFunctionThatReturnedTrue.toString()}");
 
         // Blocking the submit
         _submitIsBlocked = true;
