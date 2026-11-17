@@ -275,10 +275,8 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
       }
       return shouldStringBeBlocked;
     })) {
-      if (textFieldDebug)
-        pu.printd(
-          "Text Field: blacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}",
-        );
+
+      logtf("BlacklistingFunctionsReturnedTrueList: ${blacklistingFunctionsReturnedTrueList.toString()}");
 
       // Blocking the submit
       _submitIsBlocked = true;
