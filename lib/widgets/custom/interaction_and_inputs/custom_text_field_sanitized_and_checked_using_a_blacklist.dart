@@ -311,8 +311,7 @@ class _TextFieldSanitizedAndCheckedUsingABlackListState
     }
     // No, because no blacklisting function returned true
     else {
-      if (textFieldDebug)
-        pu.printd("Text Field: No blacklisting needed: value: $text");
+      logtf("No blacklisting needed: value: $text");
 
       // Removing the error message, after delay if string was sanitized
       if (_wasStringSanitized) {
