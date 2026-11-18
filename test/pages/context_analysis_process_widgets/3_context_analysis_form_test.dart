@@ -103,42 +103,15 @@ void main() {
           onScreenValue: lfq.level2TitleIndividual,          
         ); 
 
-        
-        // Verifying that the second expansion tile title is correct
-        var secondExpansionTileQuestionFinder = find
-            .descendant(
-              // second expansion tile
-              of: find.byType(ExpansionTile).last,
-              matching: find.byType(Text),
-              // first Text widget out of 2
-            )
-            .first;
-        Text secondExpansionTileTextWidget = tester.widget<Text>(
-          secondExpansionTileQuestionFinder.first,
+        // Verifying the correct string present
+        verifyTextOnScreen
+        (
+          tester: tester, 
+          varName: "level2TitleGroup",
+          expectedTexts: {"en":"As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?", "fr":"En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"}, 
+          onScreenValue: lfq.level2TitleGroup,          
         );
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-        var level2TitleGroup = "";
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              level2TitleGroup =
-                  "As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?";
-            }
-          case ("fr"):
-            {
-              level2TitleGroup =
-                  "En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?";
-            }
-        }
-
-        logt("level2TitleGroup", level2TitleGroup);
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(level2TitleGroup, lfq.level2TitleGroup);
-
-        // Verifying the second title correct
-        expect(secondExpansionTileTextWidget.data, lfq.level2TitleGroup);
+        
       });
 
       testWidgets("Individual and group tiles carry the correct sub-text", (
