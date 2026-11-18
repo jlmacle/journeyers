@@ -9,7 +9,6 @@ import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
-import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
   Future<void> pumpTestableWidget(WidgetTester tester) async {
@@ -43,28 +42,15 @@ void main() {
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedDashboardStrings lds = .new(context);
 
-      // Hint text hard-coded strings
-      var hintText = "";
-      var localeLanguageCode = getLocaleLanguageCode(tester);
-
-      switch (localeLanguageCode.toLowerCase()) {
-        case ("en"):
-          {
-            hintText = "Please enter one keyword at a time\n(+ Enter key).";
-          }
-        case ("fr"):
-          {
-            hintText =
-                "Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée).";
-          }
-      }
-      logt("hintText", hintText);
-
-      // Verifying consistency between hard-coded string and localized string
-      expect(hintText, lds.keywordsEntryTextFieldHint);
-
-      // Verifying the text field hint present
-      expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);
+      // Verifying the correct string present
+      verifyTextOnScreen
+        (
+          tester: tester, 
+          varName: "hintText",
+          expectedTexts: {"en":"Please enter one keyword at a time\n(+ Enter key).", "fr":"Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."}, 
+          onScreenValue: lds.keywordsEntryTextFieldHint,          
+        );  
+      
     });
 
     testWidgets(
