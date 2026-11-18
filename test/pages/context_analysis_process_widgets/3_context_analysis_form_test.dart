@@ -101,7 +101,21 @@ void main() {
           varName: "level2TitleIndividual",
           expectedTexts: {"en":"As an individual:\nWhat problem\nam I trying to solve?", "fr":"En tant qu'individu:\nQuel problème\ndois-je résoudre ?"}, 
           onScreenValue: lfq.level2TitleIndividual,          
-        ); 
+        );
+
+        // Verifying that the first expansion tile title is correct
+        var firstExpansionTileQuestionFinder = find
+            .descendant(
+              // first expansion tile
+              of: find.byType(ExpansionTile).first,
+              matching: find.byType(Text),
+              // first Text widget out of 2
+            )
+            .first;
+        Text firstExpansionTileTextWidget = tester.widget<Text>(
+          firstExpansionTileQuestionFinder.first,
+        );
+        expect(firstExpansionTileTextWidget.data, lfq.level2TitleIndividual);
 
         // Verifying the correct string present
         verifyLocalizedStringAsExpected
@@ -111,6 +125,20 @@ void main() {
           expectedTexts: {"en":"As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?", "fr":"En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"}, 
           onScreenValue: lfq.level2TitleGroup,          
         );
+
+        // Verifying that the second expansion tile title is correct
+        var secondExpansionTileQuestionFinder = find
+            .descendant(
+              // second expansion tile
+              of: find.byType(ExpansionTile).last,
+              matching: find.byType(Text),
+              // first Text widget out of 2
+            )
+            .first;
+        Text secondExpansionTileTextWidget = tester.widget<Text>(
+          secondExpansionTileQuestionFinder.first,
+        );
+        expect(secondExpansionTileTextWidget.data, lfq.level2TitleGroup);
         
       });
 
