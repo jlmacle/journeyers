@@ -53,28 +53,16 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Default title hard-coded strings
-        var defaultTitle = "";
+        // Verifying the correct string present
+        verifyTextOnScreen
+        (
+          tester: tester, 
+          varName: "defaultTitle",
+          expectedTexts: {"en":"Problem To Solve", "fr":"Problème à résoudre"}, 
+          onScreenValue: lgps.gpsDefaultProcessSessionTitle,          
+        );
 
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              defaultTitle = "Problem To Solve";
-            }
-          case ("fr"):
-            {
-              defaultTitle = "Problème à résoudre";
-            }
-        }
-        logt("defaultTitle", defaultTitle);
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(defaultTitle, lgps.gpsDefaultProcessSessionTitle);
-
-        // Verifying the default title present
-        expect(find.text(lgps.gpsDefaultProcessSessionTitle), findsOneWidget);
+       
       });
 
       testWidgets("Correct text field hint", (WidgetTester tester) async {
