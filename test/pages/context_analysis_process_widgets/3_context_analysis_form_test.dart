@@ -94,44 +94,16 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedCAFormQuestions lfq = .new(context);
 
-        var localeLanguageCode = getLocaleLanguageCode(tester);
+        // Verifying the correct string present
+        verifyTextOnScreen
+        (
+          tester: tester, 
+          varName: "level2TitleIndividual",
+          expectedTexts: {"en":"As an individual:\nWhat problem\nam I trying to solve?", "fr":"En tant qu'individu:\nQuel problème\ndois-je résoudre ?"}, 
+          onScreenValue: lfq.level2TitleIndividual,          
+        ); 
 
-        var level2TitleIndividual = "";
-        var level2TitleGroup = "";
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              level2TitleIndividual =
-                  "As an individual:\nWhat problem\nam I trying to solve?";
-            }
-          case ("fr"):
-            {
-              level2TitleIndividual =
-                  "En tant qu'individu:\nQuel problème\ndois-je résoudre ?";
-            }
-        }
-        logt("level2TitleIndividual", level2TitleIndividual);
-
-        // Verifying that the first expansion tile title is correct
-        var firstExpansionTileQuestionFinder = find
-            .descendant(
-              // first expansion tile
-              of: find.byType(ExpansionTile).first,
-              matching: find.byType(Text),
-              // first Text widget out of 2
-            )
-            .first;
-        Text firstExpansionTileTextWidget = tester.widget<Text>(
-          firstExpansionTileQuestionFinder.first,
-        );
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(level2TitleIndividual, lfq.level2TitleIndividual);
-
-        // Verifying the first title correct
-        expect(firstExpansionTileTextWidget.data, lfq.level2TitleIndividual);
-
+        
         // Verifying that the second expansion tile title is correct
         var secondExpansionTileQuestionFinder = find
             .descendant(
@@ -145,6 +117,8 @@ void main() {
           secondExpansionTileQuestionFinder.first,
         );
 
+        var localeLanguageCode = getLocaleLanguageCode(tester);
+        var level2TitleGroup = "";
         switch (localeLanguageCode.toLowerCase()) {
           case ("en"):
             {
