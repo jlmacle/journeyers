@@ -11,7 +11,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 import "../../../integration_test/externalized_code/externalized_testing_code.dart";
-import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
   Future<void> pumpGPSChecklist(WidgetTester tester) async {
@@ -107,26 +106,14 @@ void main() {
         await tester.tap(checkListTitleFinder);
         await tester.pumpAndSettle();
 
-        // checkListAppbarTitle hard-coded strings
-        var checkListAppbarTitle = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              checkListAppbarTitle =
-                  "Please consider postponing\nif incomplete";
-            }
-          case ("fr"):
-            {
-              checkListAppbarTitle =
-                  "Veuillez considérer reporter\nsi incomplet";
-            }
-        }
-        logt("checkListAppbarTitle", checkListAppbarTitle);
-        // Verifying consistency between hard-coded string and localized string
-        expect(checkListAppbarTitle, lgps.checkListAppBarTitle);
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          varName: "checkListAppbarTitle",
+          expectedTexts: {"en":"Please consider postponing\nif incomplete", "fr":"Veuillez considérer reporter\nsi incomplet"}, 
+          onScreenValue: lgps.checkListAppBarTitle,          
+        );
 
         // Verifying the checkListAppbarTitle present
         expect(find.text(lgps.checkListAppBarTitle), findsOneWidget);
