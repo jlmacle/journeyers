@@ -43,13 +43,16 @@ void main() {
       LocalizedCAOtherStrings los= .new(context);
 
       // Verifying the correct string present
-      verifyTextOnScreen
+      verifyStringConsistency
         (
           tester: tester, 
           varName: "hintText",
           expectedTexts: {"en":"Please enter a title for this analysis.", "fr":"Veuillez renseigner le titre\nde cette analyse."}, 
           onScreenValue: los.caTitleTextFieldHint,          
-        );        
+        );
+
+      // Verifying the text field hint present
+      expect(find.text(los.caTitleTextFieldHint), findsOneWidget);    
       
     });
 

@@ -54,7 +54,7 @@ void main() {
         LocalizedGPSStrings lgps = .new(context);
 
         // Verifying the correct string present
-        verifyTextOnScreen
+        verifyStringConsistency
         (
           tester: tester, 
           varName: "defaultTitle",
@@ -73,7 +73,7 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        verifyTextOnScreen
+        verifyStringConsistency
         (
           tester: tester, 
           varName: "defaultTextFieldHint",
