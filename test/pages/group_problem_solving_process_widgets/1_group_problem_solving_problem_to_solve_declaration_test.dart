@@ -73,40 +73,13 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Default title hard-coded strings
-        var defaultTitle = "";
-        // Default text field hint hard-coded strings
-        var defaultTextFieldHint = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              defaultTitle = "Problem To Solve";
-              defaultTextFieldHint = "Please enter a title or select below.";
-            }
-          case ("fr"):
-            {
-              defaultTitle = "Problème à résoudre";
-              defaultTextFieldHint =
-                  "Veuillez entrer un titre ou en choisir un ci-dessous, si disponible.";
-            }
-        }
-        logt("defaultTitle", defaultTitle);
-        logt("defaultTextFieldHint", defaultTextFieldHint);
-
-        // Verifying consistency between hard-coded strings and localized strings
-        expect(defaultTitle, lgps.gpsDefaultProcessSessionTitle);
-        expect(defaultTextFieldHint, lgps.gpsProcessTitleTextFieldHint);
-
-        // Tapping on the default title
-        var titleFinder = find.text(defaultTitle);
-        await tester.tap(titleFinder);
-        await tester.pumpAndSettle();
-
-        // Verifying the text field hint present
-        expect(find.text(lgps.gpsProcessTitleTextFieldHint), findsOneWidget);
+        verifyTextOnScreen
+        (
+          tester: tester, 
+          varName: "defaultTextFieldHint",
+          expectedTexts: {"en":"Please enter a title or select below.", "fr":"Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."}, 
+          onScreenValue: lgps.gpsProcessTitleTextFieldHint,          
+        );        
       });
     });
 
