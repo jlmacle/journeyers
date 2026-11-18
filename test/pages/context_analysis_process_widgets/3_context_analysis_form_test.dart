@@ -94,8 +94,8 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedCAFormQuestions lfq = .new(context);
 
-        // Verifying the correct string present
-        verifyStringConsistency
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
         (
           tester: tester, 
           varName: "level2TitleIndividual",
@@ -104,7 +104,7 @@ void main() {
         ); 
 
         // Verifying the correct string present
-        verifyStringConsistency
+        verifyLocalizedStringAsExpected
         (
           tester: tester, 
           varName: "level2TitleGroup",
