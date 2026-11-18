@@ -95,7 +95,7 @@ void main() {
         LocalizedCAFormQuestions lfq = .new(context);
 
         // Verifying the correct string present
-        verifyTextOnScreen
+        verifyStringConsistency
         (
           tester: tester, 
           varName: "level2TitleIndividual",
@@ -104,7 +104,7 @@ void main() {
         ); 
 
         // Verifying the correct string present
-        verifyTextOnScreen
+        verifyStringConsistency
         (
           tester: tester, 
           varName: "level2TitleGroup",

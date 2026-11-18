@@ -48,24 +48,14 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Default title hard-coded strings
-        var defaultTitle = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              defaultTitle = "Checklist";
-            }
-          case ("fr"):
-            {
-              defaultTitle = "Check-list";
-            }
-        }
-        logt("defaultTitle", defaultTitle);
-        // Verifying consistency between hard-coded string and localized string
-        expect(defaultTitle, lgps.checkListTitle);
+        // Verifying the correct string present
+        verifyStringConsistency
+        (
+          tester: tester, 
+          varName: "defaultTitle",
+          expectedTexts: {"en":"Checklist", "fr":"Check-list"}, 
+          onScreenValue: lgps.checkListTitle,          
+        );        
 
         // Verifying the title present
         expect(find.text(lgps.checkListTitle), findsOne);

@@ -43,7 +43,7 @@ void main() {
       LocalizedDashboardStrings lds = .new(context);
 
       // Verifying the correct string present
-      verifyTextOnScreen
+      verifyStringConsistency
         (
           tester: tester, 
           varName: "hintText",
