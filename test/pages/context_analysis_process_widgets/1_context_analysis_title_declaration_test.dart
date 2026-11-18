@@ -42,29 +42,15 @@ void main() {
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedCAOtherStrings los= .new(context);
 
-      // Hint text hard-coded strings
-      var hintText = "";
-
-      var localeLanguageCode = getLocaleLanguageCode(tester);
-
-      switch (localeLanguageCode.toLowerCase()) {
-        case ("en"):
-          {
-            hintText = "Please enter a title for this analysis.";
-          }
-        case ("fr"):
-          {
-            hintText = "Veuillez renseigner le titre\nde cette analyse.";
-          }
-      }
-
-      logt("hintText", hintText);
-
-      // Verifying consistency between hard-coded string and localized string
-      expect(hintText, los.caTitleTextFieldHint);
-
-      // Verifying the text field hint present
-      expect(find.text(los.caTitleTextFieldHint), findsOneWidget);
+      // Verifying the correct string present
+      verifyTextOnScreen
+        (
+          tester: tester, 
+          varName: "hintText",
+          expectedTexts: {"en":"Please enter a title for this analysis.", "fr":"Veuillez renseigner le titre\nde cette analyse."}, 
+          onScreenValue: los.caTitleTextFieldHint,          
+        );        
+      
     });
 
     testWidgets("Starts not autofocused (to avoid the keyboard on mobile)", (
