@@ -39,12 +39,12 @@ String getLocaleLanguageCode2(WidgetTester tester) {
 
 /// {@category Utils - Generic}
 /// A method used to verify that text on-screen is consistent with what was expected.
-void verifyTextOnScreen(
-  WidgetTester tester,
-  String varName,
-  Map<String, String> expectedTexts,
-  String onScreenValue,
-) {
+void verifyTextOnScreen({
+  required WidgetTester tester,
+  required String varName,
+  required Map<String, String> expectedTexts,
+  required String onScreenValue,
+}) {
   var localeLanguageCode = getLocaleLanguageCode2(tester);
 
   var expectedText = "";
