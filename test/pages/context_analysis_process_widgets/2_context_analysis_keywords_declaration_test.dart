@@ -42,14 +42,17 @@ void main() {
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedDashboardStrings lds = .new(context);
 
-      // Verifying the correct string present
-      verifyStringConsistency
-        (
-          tester: tester, 
-          varName: "hintText",
-          expectedTexts: {"en":"Please enter one keyword at a time\n(+ Enter key).", "fr":"Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."}, 
-          onScreenValue: lds.keywordsEntryTextFieldHint,          
-        );  
+      // Verifying the correct localized string present
+      verifyLocalizedStringAsExpected
+      (
+        tester: tester, 
+        varName: "hintText",
+        expectedTexts: {"en":"Please enter one keyword at a time\n(+ Enter key).", "fr":"Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."}, 
+        onScreenValue: lds.keywordsEntryTextFieldHint,          
+      );  
+
+      // Verifying the text field hint present
+      expect(find.text(lds.keywordsEntryTextFieldHint), findsOneWidget);
       
     });
 

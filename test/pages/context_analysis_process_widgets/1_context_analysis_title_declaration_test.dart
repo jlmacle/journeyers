@@ -42,8 +42,8 @@ void main() {
       var context = tester.element(find.byType(Scaffold).first);
       LocalizedCAOtherStrings los= .new(context);
 
-      // Verifying the correct string present
-      verifyStringConsistency
+      // Verifying the correct localized string present
+      verifyLocalizedStringAsExpected
         (
           tester: tester, 
           varName: "hintText",
