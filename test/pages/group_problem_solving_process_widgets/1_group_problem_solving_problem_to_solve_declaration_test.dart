@@ -62,6 +62,8 @@ void main() {
           onScreenValue: lgps.gpsDefaultProcessSessionTitle,          
         );
 
+        // Verifying the default title present
+        expect(find.text(lgps.gpsDefaultProcessSessionTitle), findsOneWidget);
        
       });
 
