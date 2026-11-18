@@ -82,7 +82,15 @@ void main() {
           varName: "defaultTextFieldHint",
           expectedTexts: {"en":"Please enter a title or select below.", "fr":"Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."}, 
           onScreenValue: lgps.gpsProcessTitleTextFieldHint,          
-        );        
+        );   
+
+        // Tapping on the default title
+        var titleFinder = find.text(lgps.gpsDefaultProcessSessionTitle);
+        await tester.tap(titleFinder);
+        await tester.pumpAndSettle();
+
+        // Verifying the text field hint present
+        expect(find.text(lgps.gpsProcessTitleTextFieldHint), findsOneWidget);     
       });
     });
 
