@@ -2659,13 +2659,13 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // Verifying the correct localized string present
-                verifyLocalizedStringAsExpected
-                (
-                  tester: tester, 
-                  label: "snackbarMessage",
-                  expectedTexts: {"en":"Data deleted", "fr":"Données supprimées"}, 
-                  onScreenValue: lds.snackbarMessageDataDeleted,          
-                );
+              verifyLocalizedStringAsExpected
+              (
+                tester: tester, 
+                label: "snackbarMessage",
+                expectedTexts: {"en":"Data deleted", "fr":"Données supprimées"}, 
+                onScreenValue: lds.snackbarMessageDataDeleted,          
+              );
 
               // Verifying the snackbarMessage present
               expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
