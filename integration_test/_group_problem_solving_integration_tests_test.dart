@@ -285,26 +285,14 @@ Future<void> main() async {
           );
 
           // ── 2. VERIFYING THE CORRECT SNACKBAR MESSAGE PRESENT ───────────────────────────────────────────
-          // snackbarMessage hard-coded strings
-          var snackbarMessage = "";
-
-          var localeLanguageCode = getLocaleLanguageCode(tester);
-
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                snackbarMessage = "Session data saved";
-              }
-            case ("fr"):
-              {
-                snackbarMessage = "Session sauvegardée";
-              }
-          }
-
-          logt("snackbarMessage", snackbarMessage);
-          // Verifying consistency between hard-coded string and localized string
-          // GPSProcess: lds.snackbarMessageSessionSavedSuccessfully
-          expect(snackbarMessage, lds.snackbarMessageSessionSavedSuccessfully);
+          // Verifying the correct localized string present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "snackbarMessage",
+            expectedTexts: {"en":"Session data saved", "fr":"Session sauvegardée"}, 
+            onScreenValue: lds.snackbarMessageSessionSavedSuccessfully,          
+          );        
 
           // Verifying the snackbarMessage present
           expect(
