@@ -1342,24 +1342,15 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
-            // Verifying the correct snackbar message present ───────────────────────────────────────────
-            // snackbarMessage hard-coded strings
-            var snackbarMessage = "";
-            
-            var localeLanguageCode = getLocaleLanguageCode(tester);
+            // Verifying the correct localized string present
+            verifyLocalizedStringAsExpected
+            (
+              tester: tester, 
+              label: "snackbarMessage",
+              expectedTexts: {"en":"Keywords updated", "fr":"Mots-clés mis à jour"}, 
+              onScreenValue: lds.snackbarMessageKeywordsUpdated,          
+            );
 
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): { snackbarMessage = "Keywords updated"; }
-              case("fr"): { snackbarMessage = "Mots-clés mis à jour"; }        
-            }
-            
-            logt("snackbarMessage: $snackbarMessage");
-            
-            // Verifying consistency between hard-coded string and localized string
-            // DashboardPage: lds.snackbarMessageKeywordsUpdated
-            expect(snackbarMessage, lds.snackbarMessageKeywordsUpdated);  
-            
             // Verifying the snackbarMessage present
             expect(find.text(lds.snackbarMessageKeywordsUpdated), findsOne);
 
