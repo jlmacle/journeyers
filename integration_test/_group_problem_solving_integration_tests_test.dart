@@ -3624,27 +3624,14 @@ Future<void> main() async {
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
 
-              // Verifying the correct snackbar message present ───────────────────────────────────────────
-              // snackbarMessage hard-coded strings
-              var snackbarMessage = "";
-
-              var localeLanguageCode = getLocaleLanguageCode(tester);
-
-              switch (localeLanguageCode.toLowerCase()) {
-                case ("en"):
-                  {
-                    snackbarMessage = "Participants updated";
-                  }
-                case ("fr"):
-                  {
-                    snackbarMessage = "Noms mis à jour";
-                  }
-              }
-
-              logt("snackbarMessage", snackbarMessage);
-              // Verifying consistency between hard-coded string and localized string
-              // ParticipantsListsDashboard: lps.participantsUpdatedSnackBarMessage
-              expect(snackbarMessage, lps.participantsUpdatedSnackBarMessage);
+              // Verifying the correct localized string present
+              verifyLocalizedStringAsExpected
+              (
+                tester: tester, 
+                label: "snackbarMessage",
+                expectedTexts: {"en":"Participants updated", "fr":"Noms mis à jour"}, 
+                onScreenValue: lps.participantsUpdatedSnackBarMessage,          
+              );
 
               // Verifying the snackbarMessage present
               expect(
