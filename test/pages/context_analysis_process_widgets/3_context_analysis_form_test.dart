@@ -98,7 +98,7 @@ void main() {
         verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "level2TitleIndividual",
+          label: "level2TitleIndividual",
           expectedTexts: {"en":"As an individual:\nWhat problem\nam I trying to solve?", "fr":"En tant qu'individu:\nQuel problème\ndois-je résoudre ?"}, 
           onScreenValue: lfq.level2TitleIndividual,          
         );
@@ -121,7 +121,7 @@ void main() {
         verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "level2TitleGroup",
+          label: "level2TitleGroup",
           expectedTexts: {"en":"As a member\nof groups/teams:\nWhat problem(s)\nare we trying to solve?", "fr":"En tant que membre\nde groupes/équipes:\nQuel(s) problème(s)\ndevons-nous résoudre ?"}, 
           onScreenValue: lfq.level2TitleGroup,          
         );

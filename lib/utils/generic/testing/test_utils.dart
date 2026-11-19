@@ -41,7 +41,7 @@ String getLocaleLanguageCode2(WidgetTester tester) {
 /// A method used to verify that text on-screen is consistent with what was expected.
 void verifyLocalizedStringAsExpected({
   required WidgetTester tester,
-  required String varName,
+  required String label,
   required Map<String, String> expectedTexts,
   required String onScreenValue,
 }) {
@@ -60,7 +60,7 @@ void verifyLocalizedStringAsExpected({
       }
   }
 
-  logt(varName, expectedText);
+  logt(label, expectedText);
 
   // Verifying consistency between hard-coded string and localized string
   expect(onScreenValue, expectedText);

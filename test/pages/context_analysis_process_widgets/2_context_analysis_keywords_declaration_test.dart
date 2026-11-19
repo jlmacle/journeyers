@@ -46,7 +46,7 @@ void main() {
       verifyLocalizedStringAsExpected
       (
         tester: tester, 
-        varName: "hintText",
+        label: "hintText",
         expectedTexts: {"en":"Please enter one keyword at a time\n(+ Enter key).", "fr":"Veuillez renseigner un mot-clé à la fois\n(+ Touche Entrée)."}, 
         onScreenValue: lds.keywordsEntryTextFieldHint,          
       );  
