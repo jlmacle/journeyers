@@ -3256,28 +3256,15 @@ Future<void> main() async {
               await tester.tap(deleteIconFinder);
               await tester.pumpAndSettle();
 
-              // Verifying the correct snackbar message present ───────────────────────────────────────────
-              // snackbarMessage hard-coded strings
-              var snackbarMessage = "";
-
-              var localeLanguageCode = getLocaleLanguageCode(tester);
-
-              switch (localeLanguageCode.toLowerCase()) {
-                case ("en"):
-                  {
-                    snackbarMessage = "List deleted";
-                  }
-                case ("fr"):
-                  {
-                    snackbarMessage = "Liste supprimée";
-                  }
-              }
-
-              logt("snackbarMessage", snackbarMessage);
-              // Verifying consistency between hard-coded string and localized string
-              // ParticipantsListsDashboard: lps.listDeletedSnackbarMessage
-              expect(snackbarMessage, lps.listDeletedSnackbarMessage);
-
+              // Verifying the correct localized string present
+              verifyLocalizedStringAsExpected
+              (
+                tester: tester, 
+                label: "snackbarMessage",
+                expectedTexts: {"en":"List deleted", "fr":"Liste supprimée"}, 
+                onScreenValue: lps.listDeletedSnackbarMessage,          
+              );
+              
               // Verifying the snackbarMessage present
               expect(find.text(lps.listDeletedSnackbarMessage), findsOne);
 
