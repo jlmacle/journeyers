@@ -2418,39 +2418,7 @@ Future<void> main() async {
                           matching: find.byType(Scrollable)
                         ).first;
             
-            // ── Individual perspective ────────────
-              // Balance issue items
-
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            var individualPerspectiveBalanceIssue = "";
-            var individualPerspectiveWorkplaceIssue = "";
-            var individualPerspectiveLegacyIssue = "";
-            var individualPerspectiveAnotherIssue = "";
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): 
-              { 
-                individualPerspectiveBalanceIssue = "A Balance Issue?";
-                individualPerspectiveWorkplaceIssue = "A Workplace Issue?";
-                individualPerspectiveLegacyIssue = "A Legacy Issue?";
-                individualPerspectiveAnotherIssue = "Is the issue\nof another type?";
-              }
-              case("fr"): 
-              { 
-                individualPerspectiveBalanceIssue = "Un problème d'équilibre ?";
-                individualPerspectiveWorkplaceIssue = "Un problème au travail ?";
-                individualPerspectiveLegacyIssue = "Un problème\navec mon histoire de vie ?";
-                individualPerspectiveAnotherIssue = "Est-ce un autre type\nde problème ?";
-              }              
-            }
-
-            logt("Data: $individualPerspectiveBalanceIssue");
-            logt("Data: $individualPerspectiveWorkplaceIssue");
-            logt("Data: $individualPerspectiveLegacyIssue");
-            logt("Data: $individualPerspectiveAnotherIssue");
-
-          
+            // ── Individual perspective ────────────          
             await caCheckboxesVerifyEmptyContent
             (
               tester: tester,
