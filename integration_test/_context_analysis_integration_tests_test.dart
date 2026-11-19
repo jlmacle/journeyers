@@ -665,23 +665,14 @@ Future<void> main() async {
         await tester.tap(bulkDeletionFinder);
         await tester.pumpAndSettle();
 
-        // Verifying the correct snackbar message present ───────────────────────────────────────────
-        // snackbarMessage hard-coded strings
-        var snackbarMessage = "";
-        
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch(localeLanguageCode.toLowerCase())
-        {
-          case("en"): { snackbarMessage = "Data deleted"; }
-          case("fr"): { snackbarMessage = "Données supprimées"; }        
-        }
-        
-        logt("snackbarMessage: $snackbarMessage");
-        
-        // Verifying consistency between hard-coded string and localized string
-        // DashboardDeletionByBulk: lds.snackbarMessageDataDeleted
-        expect(snackbarMessage, lds.snackbarMessageDataDeleted);  
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "snackbarMessage",
+          expectedTexts: {"en":"Data deleted", "fr":"Données supprimées"}, 
+          onScreenValue: lds.snackbarMessageDataDeleted,          
+        );
         
         // Verifying the snackbarMessage present
         expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
