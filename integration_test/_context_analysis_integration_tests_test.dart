@@ -673,7 +673,6 @@ Future<void> main() async {
           expectedTexts: {"en":"Data deleted", "fr":"Données supprimées"}, 
           onScreenValue: lds.snackbarMessageDataDeleted,          
         );
-        
         // Verifying the snackbarMessage present
         expect(find.text(lds.snackbarMessageDataDeleted), findsOne);
 
@@ -1197,23 +1196,14 @@ Future<void> main() async {
             await tester.testTextInput.receiveAction(TextInputAction.done);
             await tester.pumpAndSettle();
 
-            // Verifying the correct snackbar message present ───────────────────────────────────────────
-            // snackbarMessage hard-coded strings
-            var snackbarMessage = "";
-            
-            var localeLanguageCode = getLocaleLanguageCode(tester);
-
-            switch(localeLanguageCode.toLowerCase())
-            {
-              case("en"): { snackbarMessage = "Title updated"; }
-              case("fr"): { snackbarMessage = "Titre mis à jour"; }        
-            }
-            
-            logt("snackbarMessage: $snackbarMessage");
-            
-            // Verifying consistency between hard-coded string and localized string
-            // DashboardPage: lds.snackbarMessageTitleUpdated
-            expect(snackbarMessage, lds.snackbarMessageTitleUpdated);  
+            // Verifying the correct localized string present
+            verifyLocalizedStringAsExpected
+            (
+              tester: tester, 
+              label: "snackbarMessage",
+              expectedTexts: {"en":"Title updated", "fr":"Titre mis à jour"}, 
+              onScreenValue: lds.snackbarMessageTitleUpdated,          
+            );
             
             // Verifying the snackbarMessage present
             expect(find.text(lds.snackbarMessageTitleUpdated), findsOne);
