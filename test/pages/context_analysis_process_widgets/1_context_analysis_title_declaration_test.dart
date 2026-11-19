@@ -46,7 +46,7 @@ void main() {
       verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "hintText",
+          label: "hintText",
           expectedTexts: {"en":"Please enter a title for this analysis.", "fr":"Veuillez renseigner le titre\nde cette analyse."}, 
           onScreenValue: los.caTitleTextFieldHint,          
         );

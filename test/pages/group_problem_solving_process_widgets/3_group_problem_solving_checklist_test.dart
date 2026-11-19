@@ -51,7 +51,7 @@ void main() {
         verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "defaultTitle",
+          label: "defaultTitle",
           expectedTexts: {"en":"Checklist", "fr":"Check-list"}, 
           onScreenValue: lgps.checkListTitle,          
         );        
@@ -110,7 +110,7 @@ void main() {
         verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "checkListAppbarTitle",
+          label: "checkListAppbarTitle",
           expectedTexts: {"en":"Please consider postponing\nif incomplete", "fr":"Veuillez considérer reporter\nsi incomplet"}, 
           onScreenValue: lgps.checkListAppBarTitle,          
         );

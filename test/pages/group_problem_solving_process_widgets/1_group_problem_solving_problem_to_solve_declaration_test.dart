@@ -57,7 +57,7 @@ void main() {
         verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "defaultTitle",
+          label: "defaultTitle",
           expectedTexts: {"en":"Problem To Solve", "fr":"Problème à résoudre"}, 
           onScreenValue: lgps.gpsDefaultProcessSessionTitle,          
         );
@@ -79,7 +79,7 @@ void main() {
         verifyLocalizedStringAsExpected
         (
           tester: tester, 
-          varName: "defaultTextFieldHint",
+          label: "defaultTextFieldHint",
           expectedTexts: {"en":"Please enter a title or select below.", "fr":"Veuillez entrer un titre ou en choisir un ci-dessous, si disponible."}, 
           onScreenValue: lgps.gpsProcessTitleTextFieldHint,          
         );   
