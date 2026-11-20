@@ -2,38 +2,38 @@ const accessibilityDebug = false;
 const csvBuildingDebug = false;
 const editDebug = false;
 const listDebug = false;
-const runtimeDataDebug = false;
-const preloadingDebug = false;
 const previewBuildingDebug = false;
+const runtimeDataDebug = false;
 const sessionDataDebug = false;
 const sessionMetadataDebug = false;
 const testingDebug = false;
-const testingLocaleOption = "fr";
-// const testingLocaleOption = "en";
 const textFieldDebug = false;
 const widgetSequenceDebug = false;
+
+// For widget testing
+const testingLocaleOption = "fr";
+// const testingLocaleOption = "en";
 
 // To intercept the way the date is saved
 int dateForTestingIndex = 0;
 
 const datesForTestingList = [
-                        "January 30, 2026 10:25 AM",
-                        "January 01, 2026 10:25 AM",
-                        "January 15, 2026 10:25 AM",
-                        "February 01, 2026 10:25 AM",
-                        "February 15, 2026 10:25 AM",
-                        "February 30, 2026 10:25 AM",
-                        ];
+  "January 30, 2026 10:25 AM",
+  "January 01, 2026 10:25 AM",
+  "January 15, 2026 10:25 AM",
+  "February 01, 2026 10:25 AM",
+  "February 15, 2026 10:25 AM",
+  "February 30, 2026 10:25 AM",
+];
 
-const constJanuaryDatesListSorted = [                        
-                        "January 01, 2026 10:25 AM",
-                        "January 15, 2026 10:25 AM",
-                        "January 30, 2026 10:25 AM",
-                        ];
+const constJanuaryDatesListSorted = [
+  "January 01, 2026 10:25 AM",
+  "January 15, 2026 10:25 AM",
+  "January 30, 2026 10:25 AM",
+];
 
 // Mapping all French dates to US English dates
-const datesFrEnMap = 
-{
+const datesFrEnMap = {
   "30 janvier 2026 10:25": "January 30, 2026 10:25 AM",
   "01 janvier 2026 10:25": "January 01, 2026 10:25 AM",
   "15 janvier 2026 10:25": "January 15, 2026 10:25 AM",
@@ -41,4 +41,3 @@ const datesFrEnMap =
   "15 février 2026 10:25": "February 15, 2026 10:25 AM",
   "30 février 2026 10:25": "February 30, 2026 10:25 AM",
 };
-
