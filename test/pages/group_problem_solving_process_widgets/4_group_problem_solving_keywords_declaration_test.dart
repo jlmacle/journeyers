@@ -66,30 +66,19 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Appbar title hard-coded strings
-        var keywordsAppBarTitle = "";
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "keywordsAppBarTitle",
+          expectedTexts: {"en":"Keywords for the\nproblem-solving session", "fr":"Mots-clés pour la\nsession de résolution du problème"}, 
+          onScreenValue: lgps.gpsKeywordsOverlayAppbarTitle,          
+        );
 
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              keywordsAppBarTitle = "Keywords for the\nproblem-solving session";
-            }
-          case ("fr"):
-            {
-              keywordsAppBarTitle =
-                  "Mots-clés pour la\nsession de résolution du problème";
-            }
-        }
-        logt("defaultTitle", keywordsAppBarTitle);
         // Tapping to open the overlay
         var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
         await tester.tap(keywordsTitleFinder);
         await tester.pumpAndSettle();
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(keywordsAppBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);
 
         // Verifying the appbar title present
         expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOne);
