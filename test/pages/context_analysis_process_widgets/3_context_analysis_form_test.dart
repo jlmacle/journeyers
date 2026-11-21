@@ -508,25 +508,14 @@ void main() {
             matching: find.byType(Text),
           );
 
-          var localeLanguageCode = getLocaleLanguageCode(tester);
 
-          var caFormPleaseDevelopTextFieldHint = "";
-
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                caFormPleaseDevelopTextFieldHint = "Please develop.";
-              }
-            case ("fr"):
-              {
-                caFormPleaseDevelopTextFieldHint = "Veuillez développer.";
-              }
-          }
-
-          // Verifying consistency between hard-coded string and localized string
-          expect(
-            caFormPleaseDevelopTextFieldHint,
-            los.caFormPleaseDevelopTextFieldHint,
+          // Verifying the correct localized string present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "caFormPleaseDevelopTextFieldHint",
+            expectedTexts: {"en":"Please develop.", "fr":"Veuillez développer."}, 
+            onScreenValue: los.caFormPleaseDevelopTextFieldHint,          
           );
 
           // Verifying text hint text present
