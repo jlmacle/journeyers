@@ -152,26 +152,14 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedCAOtherStrings los= .new(context);
 
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        var invitationToUnfoldExpansionTile = "";
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              invitationToUnfoldExpansionTile = "Please click to toggle";
-            }
-          case ("fr"):
-            {
-              invitationToUnfoldExpansionTile =
-                  "Veuillez cliquer pour commencer";
-            }
-        }
-
-        logt(
-          "invitationToUnfoldExpansionTile",
-          invitationToUnfoldExpansionTile,
-        );
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "invitationToUnfoldExpansionTile",
+          expectedTexts: {"en":"Please click to toggle", "fr":"Veuillez cliquer pour commencer"}, 
+          onScreenValue: los.invitationToUnfoldExpansionTile,          
+        );   
 
         // Verifying that the first expansion tile subtext is correct
         var firstUnfoldedExpansionTileSubTextFinder = find
@@ -186,11 +174,7 @@ void main() {
           firstUnfoldedExpansionTileSubTextFinder,
         );
 
-        // Verifying consistency between hard-coded string and localized string
-        expect(
-          invitationToUnfoldExpansionTile,
-          los.invitationToUnfoldExpansionTile,
-        );
+
 
         // Verifying the first subtext correct
         expect(
