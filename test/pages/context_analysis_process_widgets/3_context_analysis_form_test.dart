@@ -227,65 +227,36 @@ void main() {
             ),
           );
 
-          var localeLanguageCode = getLocaleLanguageCode(tester);
-
-          var individualPerspectiveBalanceIssue = "";
-          var individualPerspectiveWorkplaceIssue = "";
-          var individualPerspectiveLegacyIssue = "";
-          var individualPerspectiveAnotherIssue = "";
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                individualPerspectiveBalanceIssue = "A Balance Issue?";
-                individualPerspectiveWorkplaceIssue = "A Workplace Issue?";
-                individualPerspectiveLegacyIssue = "A Legacy Issue?";
-                individualPerspectiveAnotherIssue =
-                    "Is the issue\nof another type?";
-              }
-            case ("fr"):
-              {
-                individualPerspectiveBalanceIssue = "Un problème d'équilibre ?";
-                individualPerspectiveWorkplaceIssue =
-                    "Un problème au travail ?";
-                individualPerspectiveLegacyIssue =
-                    "Un problème\navec mon histoire de vie ?";
-                individualPerspectiveAnotherIssue =
-                    "Est-ce un autre type\nde problème ?";
-              }
-          }
-
-          logt(
-            "individualPerspectiveBalanceIssue",
-            individualPerspectiveBalanceIssue,
+          // Verifying the correct localized strings present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "individualPerspectiveBalanceIssue",
+            expectedTexts: {"en":"A Balance Issue?", "fr":"Un problème d'équilibre ?"}, 
+            onScreenValue: lfq.level3TitleBalanceIssue,          
           );
-          logt(
-            "individualPerspectiveWorkplaceIssue",
-            individualPerspectiveWorkplaceIssue,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "individualPerspectiveWorkplaceIssue",
+            expectedTexts: {"en":"A Workplace Issue?", "fr":"Un problème au travail ?"}, 
+            onScreenValue: lfq.level3TitleWorkplaceIssue,          
           );
-          logt(
-            "individualPerspectiveLegacyIssue",
-            individualPerspectiveLegacyIssue,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "individualPerspectiveLegacyIssue",
+            expectedTexts: {"en":"A Legacy Issue?", "fr":"Un problème\navec mon histoire de vie ?"}, 
+            onScreenValue: lfq.level3TitleLegacyIssue,          
           );
-          logt(
-            "individualPerspectiveAnotherIssue",
-            individualPerspectiveAnotherIssue,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "individualPerspectiveAnotherIssue",
+            expectedTexts: {"en":"Is the issue\nof another type?", "fr":"Est-ce un autre type\nde problème ?"}, 
+            onScreenValue: lfq.level3TitleAnotherIssue,          
           );
-
-          // Verifying consistency between hard-coded strings and localized strings
-          expect(
-            individualPerspectiveBalanceIssue,
-            lfq.level3TitleBalanceIssue,
-          );
-          expect(
-            individualPerspectiveWorkplaceIssue,
-            lfq.level3TitleWorkplaceIssue,
-          );
-          expect(individualPerspectiveLegacyIssue, lfq.level3TitleLegacyIssue);
-          expect(
-            individualPerspectiveAnotherIssue,
-            lfq.level3TitleAnotherIssue,
-          );
-
+ 
           // Verifying the level 3 titles present (skipping los.invitationToUnfoldExpansionTile)
           expect(
             tester.widget<Text>(customHeadingTextsFinders.at(2)).data,
