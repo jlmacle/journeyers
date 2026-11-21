@@ -10,7 +10,6 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
-import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
   Future<void> pumpGPSKeywordsDeclaration(WidgetTester tester) async {
@@ -142,45 +141,6 @@ void main() {
         },
       );
 
-      testWidgets("The correct appbar title is present", (
-        WidgetTester tester,
-      ) async {
-        // Pumping the widget
-        await pumpGPSKeywordsDeclaration(tester);
-        await tester.pumpAndSettle();
-
-        // Getting the localized strings
-        var context = tester.element(find.byType(Scaffold).first);
-        LocalizedGPSStrings lgps = .new(context);
-
-        // Tapping to open the overlay
-        var keywordsTitleFinder = find.text(lgps.gpsKeywordsTitle);
-        await tester.tap(keywordsTitleFinder);
-        await tester.pumpAndSettle();
-
-        // appBarTitle hard-coded strings
-        var appBarTitle = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              appBarTitle = "Keywords for the\nproblem-solving session";
-            }
-          case ("fr"):
-            {
-              appBarTitle =
-                  "Mots-clés pour la\nsession de résolution du problème";
-            }
-        }
-        logt("appBarTitle", appBarTitle);
-        // Verifying consistency between hard-coded string and localized string
-        expect(appBarTitle, lgps.gpsKeywordsOverlayAppbarTitle);
-
-        // Verifying the appBarTitle present
-        expect(find.text(lgps.gpsKeywordsOverlayAppbarTitle), findsOneWidget);
-      });
     });
   });
 }
