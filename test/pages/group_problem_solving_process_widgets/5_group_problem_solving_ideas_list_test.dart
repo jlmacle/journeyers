@@ -37,26 +37,14 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // ideasListTitle hard-coded strings
-        var ideasListTitle = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              ideasListTitle = "List of ideas";
-            }
-          case ("fr"):
-            {
-              ideasListTitle = "Liste des idées";
-            }
-        }
-
-        logt("ideasListTitle", ideasListTitle);
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(ideasListTitle, lgps.ideasListTitle);
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "ideasListTitle",
+          expectedTexts: {"en":"List of ideas", "fr":"Liste des idées"}, 
+          onScreenValue: lgps.ideasListTitle,          
+        );
 
         // Verifying the ideasListTitle present
         expect(find.text(lgps.ideasListTitle), findsOne);
