@@ -350,58 +350,36 @@ void main() {
           // Getting the localized strings
           LocalizedCAFormQuestions lfq = .new(context);
 
-          var localeLanguageCode = getLocaleLanguageCode(tester);
+          // Verifying the correct localized strings present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleBalanceIssueItem1",
+            expectedTexts: {"en":"To balance studies and household life?", "fr":"Équilibre entre les études et la vie de famille ?"}, 
+            onScreenValue: lfq.level3TitleBalanceIssueItem1,          
+          );
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleBalanceIssueItem2",
+            expectedTexts: {"en":"To balance accessing income and household life?", "fr":"Équilibre entre l'accès à l'emploi et la vie de famille ?"}, 
+            onScreenValue: lfq.level3TitleBalanceIssueItem2,          
+          );
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleBalanceIssueItem3",
+            expectedTexts: {"en":"To balance earning an income and household life?", "fr":"Équilibre entre maintenir un revenu et la vie de famille ?"}, 
+            onScreenValue: lfq.level3TitleBalanceIssueItem3,          
+          );
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleBalanceIssueItem4",
+            expectedTexts: {"en":"To balance helping others and household life?", "fr":"Équilibre entre aider les autres et la vie de famille ?"}, 
+            onScreenValue: lfq.level3TitleBalanceIssueItem4,          
+          );
 
-          var level3TitleBalanceIssueItem1 = "";
-          var level3TitleBalanceIssueItem2 = "";
-          var level3TitleBalanceIssueItem3 = "";
-          var level3TitleBalanceIssueItem4 = "";
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                level3TitleBalanceIssueItem1 =
-                    "To balance studies and household life?";
-                level3TitleBalanceIssueItem2 =
-                    "To balance accessing income and household life?";
-                level3TitleBalanceIssueItem3 =
-                    "To balance earning an income and household life?";
-                level3TitleBalanceIssueItem4 =
-                    "To balance helping others and household life?";
-              }
-            case ("fr"):
-              {
-                level3TitleBalanceIssueItem1 =
-                    "Équilibre entre les études et la vie de famille ?";
-                level3TitleBalanceIssueItem2 =
-                    "Équilibre entre l'accès à l'emploi et la vie de famille ?";
-                level3TitleBalanceIssueItem3 =
-                    "Équilibre entre maintenir un revenu et la vie de famille ?";
-                level3TitleBalanceIssueItem4 =
-                    "Équilibre entre aider les autres et la vie de famille ?";
-              }
-          }
-
-          logt("level3TitleBalanceIssueItem1", level3TitleBalanceIssueItem1);
-          logt("level3TitleBalanceIssueItem2", level3TitleBalanceIssueItem2);
-          logt("level3TitleBalanceIssueItem3", level3TitleBalanceIssueItem3);
-          logt("level3TitleBalanceIssueItem4", level3TitleBalanceIssueItem4);
-          // Verifying consistency between hard-coded strings and localized strings
-          expect(
-            level3TitleBalanceIssueItem1,
-            lfq.level3TitleBalanceIssueItem1,
-          );
-          expect(
-            level3TitleBalanceIssueItem2,
-            lfq.level3TitleBalanceIssueItem2,
-          );
-          expect(
-            level3TitleBalanceIssueItem3,
-            lfq.level3TitleBalanceIssueItem3,
-          );
-          expect(
-            level3TitleBalanceIssueItem4,
-            lfq.level3TitleBalanceIssueItem4,
-          );
 
           // Verifying the level 3 items present
           expect(
