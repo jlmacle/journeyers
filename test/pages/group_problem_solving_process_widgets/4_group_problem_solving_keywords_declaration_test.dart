@@ -42,27 +42,17 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // Title hard-coded strings
-        var keywordsTitle = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              keywordsTitle = "Keywords";
-            }
-          case ("fr"):
-            {
-              keywordsTitle = "Mots-clés";
-            }
-        }
-        logt("keywordsTitle", keywordsTitle);
-        // Verifying consistency between hard-coded string and localized string
-        expect(keywordsTitle, lgps.gpsKeywordsTitle);
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "keywordsTitle",
+          expectedTexts: {"en":"Keywords", "fr":"Mots-clés"}, 
+          onScreenValue: lgps.gpsKeywordsTitle,          
+        );
 
         // Verifying the title present
-        expect(find.text(keywordsTitle), findsOne);
+        expect(find.text(lgps.gpsKeywordsTitle), findsOne);
       });
 
       testWidgets("The correct appbar title is present", (
