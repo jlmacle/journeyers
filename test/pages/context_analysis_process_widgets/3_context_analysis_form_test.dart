@@ -422,44 +422,20 @@ void main() {
           // Getting the localized strings
           LocalizedCAFormQuestions lfq = .new(context);
 
-          var localeLanguageCode = getLocaleLanguageCode(tester);
-
-          var level3TitleWorkplaceIssueItem1 = "";
-          var level3TitleWorkplaceIssueItem2 = "";
-
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                level3TitleWorkplaceIssueItem1 =
-                    "To solve a need to be more appreciated at work?";
-                level3TitleWorkplaceIssueItem2 =
-                    "To solve a need to remain appreciated at work?";
-              }
-            case ("fr"):
-              {
-                level3TitleWorkplaceIssueItem1 =
-                    "Le besoin d'être plus apprécié(e) au travail ?";
-                level3TitleWorkplaceIssueItem2 =
-                    "Le besoin de rester apprécié(e) au travail ?";
-              }
-          }
-
-          logt(
-            "level3TitleWorkplaceIssueItem1",
-            level3TitleWorkplaceIssueItem1,
+          // Verifying the correct localized strings present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleWorkplaceIssueItem1",
+            expectedTexts: {"en":"To solve a need to be more appreciated at work?", "fr":"Le besoin d'être plus apprécié(e) au travail ?"}, 
+            onScreenValue: lfq.level3TitleWorkplaceIssueItem1,          
           );
-          logt(
-            "level3TitleWorkplaceIssueItem2",
-            level3TitleWorkplaceIssueItem2,
-          );
-          // Verifying consistency between hard-coded strings and localized strings
-          expect(
-            level3TitleWorkplaceIssueItem1,
-            lfq.level3TitleWorkplaceIssueItem1,
-          );
-          expect(
-            level3TitleWorkplaceIssueItem2,
-            lfq.level3TitleWorkplaceIssueItem2,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleWorkplaceIssueItem2",
+            expectedTexts: {"en":"To solve a need to remain appreciated at work?", "fr":"Le besoin de rester apprécié(e) au travail ?"}, 
+            onScreenValue: lfq.level3TitleWorkplaceIssueItem2,          
           );
 
           // Verifying the level 3 items present
