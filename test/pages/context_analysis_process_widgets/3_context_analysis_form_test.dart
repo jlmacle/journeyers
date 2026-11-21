@@ -471,26 +471,14 @@ void main() {
           // Getting the localized strings
           LocalizedCAFormQuestions lfq = .new(context);
 
-          var localeLanguageCode = getLocaleLanguageCode(tester);
-
-          var level3TitleLegacyIssueItem1 = "";
-
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                level3TitleLegacyIssueItem1 =
-                    "To have a better legacy to leave to my children/others?";
-              }
-            case ("fr"):
-              {
-                level3TitleLegacyIssueItem1 =
-                    "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?";
-              }
-          }
-
-          logt("level3TitleLegacyIssueItem1", level3TitleLegacyIssueItem1);
-          // Verifying consistency between hard-coded strings and localized strings
-          expect(level3TitleLegacyIssueItem1, lfq.level3TitleLegacyIssueItem1);
+          // Verifying the correct localized string present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "level3TitleLegacyIssueItem1",
+            expectedTexts: {"en":"To have a better legacy to leave to my children/others?", "fr":"Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?"}, 
+            onScreenValue: lfq.level3TitleLegacyIssueItem1,          
+          );
 
           // Verifying the level 3 item present
           expect(
