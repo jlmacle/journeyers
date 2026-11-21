@@ -669,65 +669,41 @@ void main() {
             ),
           );
 
-          var localeLanguageCode = getLocaleLanguageCode(tester);
-
-          var groupPerspectiveProblems = "";
-          var groupPerspectiveSameProblems = "";
-          var groupPerspectiveHarmonyHome = "";
-          var groupPerspectiveAppreciabilityWork = "";
-          var groupPerspectiveEarningAbility = "";
-
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                groupPerspectiveProblems =
-                    "What problem(s)\nare my groups/teams\ntrying to solve?";
-                groupPerspectiveSameProblems =
-                    "Am I trying to solve the same problem(s) as my groups/teams?";
-                groupPerspectiveHarmonyHome =
-                    "Is entering the group problem-solving process consistent with harmony at home?";
-                groupPerspectiveAppreciabilityWork =
-                    "Is entering the group problem-solving process consistent with appreciability at work?";
-                groupPerspectiveEarningAbility =
-                    "Is entering the group problem-solving process consistent with my income earning ability?";
-              }
-            case ("fr"):
-              {
-                groupPerspectiveProblems =
-                    "Quel(s) problème(s)\nnos groupes/équipes\nessayent de résoudre ?";
-                groupPerspectiveSameProblems =
-                    "Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?";
-                groupPerspectiveHarmonyHome =
-                    "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?";
-                groupPerspectiveAppreciabilityWork =
-                    "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?";
-                groupPerspectiveEarningAbility =
-                    "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?";
-              }
-          }
-
-          logt("groupPerspectiveProblems", groupPerspectiveProblems);
-          logt("groupPerspectiveSameProblems", groupPerspectiveSameProblems);
-          logt("groupPerspectiveHarmonyHome", groupPerspectiveHarmonyHome);
-          logt(
-            "groupPerspectiveAppreciabilityWork",
-            groupPerspectiveAppreciabilityWork,
+          // Verifying the correct localized strings present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "groupPerspectiveProblematics",
+            expectedTexts: {"en":"What problem(s)\nare my groups/teams\ntrying to solve?", "fr":"Quel(s) problème(s)\nnos groupes/équipes\nessayent de résoudre ?"}, 
+            onScreenValue: lfq.level3TitleGroupsProblematics,          
           );
-          logt(
-            "groupPerspectiveEarningAbility",
-            groupPerspectiveEarningAbility,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "groupPerspectiveSameProblems",
+            expectedTexts: {"en":"Am I trying to solve the same problem(s) as my groups/teams?", "fr":"Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?"}, 
+            onScreenValue: lfq.level3TitleSameProblem,          
           );
-          // Verifying consistency between hard-coded strings and localized strings
-          expect(groupPerspectiveProblems, lfq.level3TitleGroupsProblematics);
-          expect(groupPerspectiveSameProblems, lfq.level3TitleSameProblem);
-          expect(groupPerspectiveHarmonyHome, lfq.level3TitleHarmonyAtHome);
-          expect(
-            groupPerspectiveAppreciabilityWork,
-            lfq.level3TitleAppreciabilityAtWork,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "groupPerspectiveHarmonyHome",
+            expectedTexts: {"en":"Is entering the group problem-solving process consistent with harmony at home?", "fr":"Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?"}, 
+            onScreenValue: lfq.level3TitleHarmonyAtHome,          
           );
-          expect(
-            groupPerspectiveEarningAbility,
-            lfq.level3TitleIncomeEarningAbility,
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "groupPerspectiveAppreciabilityWork",
+            expectedTexts: {"en":"Is entering the group problem-solving process consistent with appreciability at work?", "fr":"Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?"}, 
+            onScreenValue: lfq.level3TitleAppreciabilityAtWork,          
+          );
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "groupPerspectiveEarningAbility",
+            expectedTexts: {"en":"Is entering the group problem-solving process consistent with my income earning ability?", "fr":"Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?"}, 
+            onScreenValue: lfq.level3TitleIncomeEarningAbility,          
           );
 
           // Verifying the level 3 titles present (skipping los.invitationToUnfoldExpansionTile)
