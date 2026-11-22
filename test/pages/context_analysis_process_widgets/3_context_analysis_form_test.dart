@@ -18,7 +18,6 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/custom/text/custom_heading.dart";
 
 import "../../../integration_test/externalized_code/externalized_testing_code.dart";
-import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
   // ─── HELPER FUNCTIONS ───────────────────────────────────────
