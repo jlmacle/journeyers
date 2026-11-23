@@ -13,7 +13,7 @@ import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 // ---------------------------------------------------------------------------
-// HELPER FUNTION ------------------------------------------------------------------
+// HELPER FUNCTION ------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 
 /// Reads and JSON-decodes the content of the file.
