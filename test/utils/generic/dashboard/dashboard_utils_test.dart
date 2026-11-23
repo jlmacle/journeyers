@@ -19,7 +19,7 @@ List<dynamic> _readRecords(File file) =>
     jsonDecode(file.readAsStringSync()) as List<dynamic>;
 
 // ---------------------------------------------------------------------------
-// Test suite
+// TEST SUITE
 // ---------------------------------------------------------------------------
 void main() {
   // Necessary for isInTestEnvironment used in DashboardUtils (saveDashboardMetadata)
