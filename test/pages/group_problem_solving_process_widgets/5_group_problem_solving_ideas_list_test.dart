@@ -145,27 +145,15 @@ void main() {
         await tester.tap(find.text(lgps.ideasListTitle));
         await tester.pumpAndSettle();
 
-        // newIdeaTextFieldHint hard-coded strings
-        var newIdeaTextFieldHint = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              newIdeaTextFieldHint = "Please enter an idea.";
-            }
-          case ("fr"):
-            {
-              newIdeaTextFieldHint = "Veuillez entrer une idée.";
-            }
-        }
-
-        logt("newIdeaTextFieldHint", newIdeaTextFieldHint);
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(newIdeaTextFieldHint, lgps.newIdeaTextFieldHint);
-
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "newIdeaTextFieldHint",
+          expectedTexts: {"en":"Please enter an idea.", "fr":"Veuillez entrer une idée."}, 
+          onScreenValue: lgps.newIdeaTextFieldHint,          
+        );
+        
         // Verifying the newIdeaTextFieldHint present
         expect(find.text(lgps.newIdeaTextFieldHint), findsOne);
       });
