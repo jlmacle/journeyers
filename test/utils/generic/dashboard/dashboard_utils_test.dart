@@ -18,7 +18,6 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 List<dynamic> _readRecords(File file) =>
     jsonDecode(file.readAsStringSync()) as List<dynamic>;
 
-// ---------------------------------------------------------------------------
 // TEST SUITE
 
 void main() {
