@@ -9,7 +9,6 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/5_group_problem_solving_ideas_list.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
-import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
   Future<void> pumpGPSIdeasList(WidgetTester tester) async {
