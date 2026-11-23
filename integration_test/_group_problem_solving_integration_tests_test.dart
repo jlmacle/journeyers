@@ -21,7 +21,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/4_group_problem_solving_keywords_declaration.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
-import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/project_specific/dev/test_utils.dart";
 import "package:journeyers/widgets/custom/interaction_and_inputs/editable_deletable_text_list_item.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
@@ -30,7 +29,6 @@ import "package:journeyers/widgets/utility/lists/tmp_participants_widgets/partic
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
 import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
-import "../test/_widget_testing_utils/widget_testing_utils.dart";
 import "externalized_code/externalized_testing_code.dart";
 
 // ─── Helper function ──────────────────────────────────────────────────────────────────
@@ -2841,7 +2839,7 @@ Future<void> main() async {
           );
 
           testWidgets(
-            "(Mobile) Stakeholders identifiers' colors can be changed from green, to orange, to red, and vice-versa by swiping",
+            "(Mobile) Participants identifiers' colors can be changed from green, to orange, to red, and vice-versa by swiping",
             (WidgetTester tester) async {
               // Setting mock values for SharedPreferences
               SharedPreferences.setMockInitialValues({
@@ -3819,29 +3817,16 @@ Future<void> main() async {
               );
               await tester.testTextInput.receiveAction(TextInputAction.done);
               await tester.pumpAndSettle();
-
-              // Verifying the correct snackbar message present ───────────────────────────────────────────
-              // snackbarMessage hard-coded strings
-              var snackbarMessage = "";
-
-              var localeLanguageCode = getLocaleLanguageCode(tester);
-
-              switch (localeLanguageCode.toLowerCase()) {
-                case ("en"):
-                  {
-                    snackbarMessage = "Keywords updated";
-                  }
-                case ("fr"):
-                  {
-                    snackbarMessage = "Mots-clés mis à jour";
-                  }
-              }
-
-              logt("snackbarMessage", snackbarMessage);
-              // Verifying consistency between hard-coded string and localized string
-              // ParticipantsListsDashboard: lds.snackbarMessageKeywordsUpdated
-              expect(snackbarMessage, lds.snackbarMessageKeywordsUpdated);
-
+           
+              // Verifying the correct localized string present
+              verifyLocalizedStringAsExpected
+              (
+                tester: tester, 
+                label: "snackbarMessage",
+                expectedTexts: {"en":"Keywords updated", "fr":"Mots-clés mis à jour"}, 
+                onScreenValue: lds.snackbarMessageKeywordsUpdated,          
+              );              
+              
               // Verifying the snackbarMessage present
               expect(find.text(lds.snackbarMessageKeywordsUpdated), findsOne);
 
