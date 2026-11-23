@@ -14,7 +14,6 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 
 // ---------------------------------------------------------------------------
 // HELPER FUNCTION ------------------------------------------------------------------
-// ---------------------------------------------------------------------------
 
 /// Reads and JSON-decodes the content of the file.
 List<dynamic> _readRecords(File file) =>
