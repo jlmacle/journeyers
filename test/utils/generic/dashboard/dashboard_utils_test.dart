@@ -20,7 +20,7 @@ List<dynamic> _readRecords(File file) =>
 
 // ---------------------------------------------------------------------------
 // TEST SUITE
-// ---------------------------------------------------------------------------
+
 void main() {
   // Necessary for isInTestEnvironment used in DashboardUtils (saveDashboardMetadata)
   TestWidgetsFlutterBinding.ensureInitialized();
