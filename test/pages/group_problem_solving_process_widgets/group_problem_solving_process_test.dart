@@ -12,7 +12,6 @@ import "package:journeyers/pages/group_problem_solving/group_problem_solving_pro
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/_group_problem_solving_externalized_variables.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
-import "../../_widget_testing_utils/widget_testing_utils.dart";
 
 void main() {
   Future<void> pumpGPSProcess(WidgetTester tester) async {
