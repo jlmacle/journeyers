@@ -8,8 +8,6 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/6_group_problem_solving_new_idea.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 
-import "../../_widget_testing_utils/widget_testing_utils.dart";
-
 void main() {
   Future<void> pumpGPSNewIdea(WidgetTester tester) async {
     await tester.pumpWidget(
@@ -39,25 +37,15 @@ void main() {
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
 
-        // newIdeaTextFieldHint hard-coded strings
-        var newIdeaTextFieldHint = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              newIdeaTextFieldHint = "Please enter an idea.";
-            }
-          case ("fr"):
-            {
-              newIdeaTextFieldHint = "Veuillez entrer une idée.";
-            }
-        }
-        logt("newIdeaTextFieldHint", newIdeaTextFieldHint);
-        // Verifying consistency between hard-coded string and localized string
-        expect(newIdeaTextFieldHint, lgps.newIdeaTextFieldHint);
-
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "newIdeaTextFieldHint",
+          expectedTexts: {"en":"Please enter an idea.", "fr":"Veuillez entrer une idée."}, 
+          onScreenValue: lgps.newIdeaTextFieldHint,          
+        );
+ 
         // Verifying the newIdeaTextFieldHint present
         expect(find.text(lgps.newIdeaTextFieldHint), findsOne);
       });
