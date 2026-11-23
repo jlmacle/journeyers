@@ -243,25 +243,14 @@ void main() {
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedGPSStrings lgps = .new(context);
 
-          // placeholder hard-coded strings
-          var placeholder = "";
-
-          var localeLanguageCode = getLocaleLanguageCode(tester);
-
-          switch (localeLanguageCode.toLowerCase()) {
-            case ("en"):
-              {
-                placeholder = "No ideas added yet.";
-              }
-            case ("fr"):
-              {
-                placeholder = "Liste d'idées vide";
-              }
-          }
-
-          logt("placeholder", placeholder);
-          // Verifying consistency between hard-coded string and localized string
-          expect(placeholder, lgps.ideasListPlaceholder);
+          // Verifying the correct localized string present
+          verifyLocalizedStringAsExpected
+          (
+            tester: tester, 
+            label: "placeholder",
+            expectedTexts: {"en":"No ideas added yet.", "fr":"Liste d'idées vide"}, 
+            onScreenValue: lgps.ideasListPlaceholder,          
+          );
 
           // Verifying the placeholder present
           expect(find.text(lgps.ideasListPlaceholder), findsOneWidget);
