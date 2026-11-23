@@ -90,26 +90,14 @@ void main() {
         await tester.tap(find.text(lgps.ideasListTitle));
         await tester.pumpAndSettle();
 
-        // ideasListAppBarTitle hard-coded strings
-        var ideasListAppBarTitle = "";
-
-        var localeLanguageCode = getLocaleLanguageCode(tester);
-
-        switch (localeLanguageCode.toLowerCase()) {
-          case ("en"):
-            {
-              ideasListAppBarTitle = "List of ideas";
-            }
-          case ("fr"):
-            {
-              ideasListAppBarTitle = "Liste des idées";
-            }
-        }
-
-        logt("ideasListAppBarTitle", ideasListAppBarTitle);
-
-        // Verifying consistency between hard-coded string and localized string
-        expect(ideasListAppBarTitle, lgps.ideasListAppBarTitle);
+        // Verifying the correct localized string present
+        verifyLocalizedStringAsExpected
+        (
+          tester: tester, 
+          label: "ideasListAppBarTitle",
+          expectedTexts: {"en":"List of ideas", "fr":"Liste des idées"}, 
+          onScreenValue: lgps.ideasListAppBarTitle,          
+        );
 
         // Verifying the ideasListAppBarTitle present
         expect(find.text(lgps.ideasListAppBarTitle), findsNWidgets(2));
