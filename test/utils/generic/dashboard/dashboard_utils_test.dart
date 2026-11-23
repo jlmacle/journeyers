@@ -18,7 +18,7 @@ import "package:journeyers/utils/generic/testing/test_utils.dart";
 List<dynamic> _readRecords(File file) =>
     jsonDecode(file.readAsStringSync()) as List<dynamic>;
 
-// TEST SUITE
+// TEST SUITE ------------------------------------------------------------------
 
 void main() {
   // Necessary for isInTestEnvironment used in DashboardUtils (saveDashboardMetadata)
