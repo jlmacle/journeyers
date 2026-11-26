@@ -418,7 +418,7 @@ class _SessionsListItemState extends State<SessionsListItem> {
                                   // additional notes
                                   Padding(
                                     padding: const EdgeInsets.only(left:12.0, right:12.0, top: 16.0),
-                                    child: Text(los.caPreviewExternalLink, style:TextStyle(fontSize: 16, fontWeight: .bold),),
+                                    child: Text(los.caPreviewExternalLink, style:const TextStyle(fontSize: 16, fontWeight: .bold),),
                                   ),                           
                                   TextButton
                                   (
