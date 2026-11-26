@@ -916,7 +916,7 @@ Future<void> caTestPreview({
   );
 
   // 3.1 case 1: no expansion tiles in the individual perpective: default message to check
-  // ---------------------------------------------------------------------------
+  
   if (totalExpansionTilesIndividualPerpectiveFinder == 0) {
     var caPreviewNoDataInIndividualPerspectiveFinder = find.byKey(
       const Key("ca-preview-no-data-in-individual-perspective"),
