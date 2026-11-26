@@ -1264,7 +1264,6 @@ Future<void> caTestPreview({
     }
 
     // 4. VERIFYING THE VALUES FOR THE GROUP PERSPECTIVE
-    // ---------------------------------------------------------------------------
 
     // String groupProblemsToSolveStrValue = "b1";
     // List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.no,los.yes}];
