@@ -96,7 +96,7 @@ class GPSProcessState extends State<GPSProcess> {
   List<Map<String, dynamic>> _previousCAMetadata = [];
   var _isTitleTextFieldUnfocused = true;
 
-  // ─── STAKEHOLDER IDENTIFIERS related data ───────────────────────────────────────
+  // ─── PARTICIPANTS IDENTIFIERS related data ───────────────────────────────────────
   final GlobalKey<GPSGroupMoodsState> _groupMoods1Key = GlobalKey(
     debugLabel: "group-moods-1",
   );
@@ -104,25 +104,25 @@ class GPSProcessState extends State<GPSProcess> {
     debugLabel: "group-moods-2",
   );
 
-  // Mode for modifying a stakeholder identifier
+  // Mode for modifying a participant identifier
   bool _isModificationMode = false;
 
-  // Mode for editing a stakeholder identifier
+  // Mode for editing a participant identifier
   bool _isEditMode = false;
 
-  // Mode for deleting a stakeholder identifier
+  // Mode for deleting a participant identifier
   bool _isDeleteMode = false;
 
-  // The list of stakeholders identifiers for the first column
+  // The list of participants identifiers for the first column
   final List<String> _identifiersCol1 = [];
 
-  // The list of stakeholders identifiers for the second column
+  // The list of participants identifiers for the second column
   final List<String> _identifiersCol2 = [];
 
-  // The list of stakeholders identifiers' colors for the first column
+  // The list of participants identifiers' colors for the first column
   final List<Color> _identifiersColors1 = [];
 
-  // The list of stakeholders identifiers' colors for the second column
+  // The list of participants identifiers' colors for the second column
   final List<Color> _identifiersColors2 = [];
 
   // ─── KEYWORDS related data ───────────────────────────────────────

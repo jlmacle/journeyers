@@ -510,6 +510,7 @@ class DashboardPageState extends State<DashboardPage> {
                               fileNameWithoutExtensionWhenEdition,
                               required String titleWhenEdition,
                               required Set<String> keywordsWhenEdition,
+                              String? linkToExternalNotesWhenEdition,
                               required String filePathWhenEdition,
                             }) {
                               if (widget.dashboardContext ==
@@ -523,6 +524,7 @@ class DashboardPageState extends State<DashboardPage> {
                                       titleWhenEdition: titleWhenEdition,
                                       keywordsWhenEdition: keywordsWhenEdition,
                                       dtoWhenEdition: dtoWhenEdition,
+                                      linkToExternalNotesWhenEdition: linkToExternalNotesWhenEdition,
                                       fileNameWithoutExtensionWhenEdition:
                                           fileNameWithoutExtensionWhenEdition,
                                       filePathWhenEdition: filePathWhenEdition,

@@ -46,6 +46,8 @@ class CAPageState extends State<CAPage>
   String _titleWhenEdition = "";
   // Values for the keywords at edition time
   Set<String> _keywordsWhenEdition = {};
+  // Value for the link to the external notes at edition time
+  String? _linkToExternalNotesWhenEdition = "";
   // Value for the file path at edition time
   String _filePathWhenEdition = "";
 
@@ -155,10 +157,11 @@ class CAPageState extends State<CAPage>
   ({
     required String dashboardContext,
     required bool isSessionDataBeingEdited, 
-    required DTOCAForm? dtoCAFormWhenEdition, 
-    required String fileNameWithoutExtensionWhenEdition, 
     required String titleWhenEdition, 
     required Set<String> keywordsWhenEdition,
+    required DTOCAForm? dtoCAFormWhenEdition, 
+    String? linkToExternalNotesWhenEdition,
+    required String fileNameWithoutExtensionWhenEdition,    
     required String filePathWhenEdition
   })
   {
@@ -173,6 +176,7 @@ class CAPageState extends State<CAPage>
       _titleWhenEdition  = titleWhenEdition;
       _keywordsWhenEdition = keywordsWhenEdition;
       _dtoCAFormWhenEdition = dtoCAFormWhenEdition;
+      _linkToExternalNotesWhenEdition = linkToExternalNotesWhenEdition;
       _fileNameWithoutExtensionWhenEdition = fileNameWithoutExtensionWhenEdition;
       _filePathWhenEdition = filePathWhenEdition;
     });
@@ -241,6 +245,7 @@ class CAPageState extends State<CAPage>
                   // Reset of edition-related data
                   _titleWhenEdition = "";
                   _keywordsWhenEdition = {};
+                  _linkToExternalNotesWhenEdition = "";
                   _dtoCAFormWhenEdition = DTOCAForm();
                   _fileNameWithoutExtensionWhenEdition = "";
                   // To display the CAProcess page, without the dashboard
@@ -265,6 +270,7 @@ class CAPageState extends State<CAPage>
                     required String fileNameWithoutExtensionWhenEdition, 
                     required String titleWhenEdition, 
                     required Set<String> keywordsWhenEdition,
+                    String? linkToExternalNotesWhenEdition,
                     required String filePathWhenEdition
                   }) 
                     => _onEditSessionData
@@ -274,6 +280,7 @@ class CAPageState extends State<CAPage>
                       titleWhenEdition: titleWhenEdition, 
                       keywordsWhenEdition: keywordsWhenEdition,
                       dtoCAFormWhenEdition: dtoWhenEdition as DTOCAForm, 
+                      linkToExternalNotesWhenEdition: linkToExternalNotesWhenEdition,
                       fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,
                       filePathWhenEdition: filePathWhenEdition
                     )                
@@ -301,6 +308,7 @@ class CAPageState extends State<CAPage>
                     titleWhenEdition: _titleWhenEdition, 
                     keywordsWhenEdition:  _keywordsWhenEdition, 
                     dtoCAFormWhenEdition: _dtoCAFormWhenEdition, 
+                    linkToExternalNotesWhenEdition: _linkToExternalNotesWhenEdition,
                     fileNameWithoutExtensionWhenEdition: _fileNameWithoutExtensionWhenEdition, 
                     filePathWhenEdition: _filePathWhenEdition,
                     caPageCallbackFunctionToRefreshThePage: _onDataSaved, 

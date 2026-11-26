@@ -19,13 +19,10 @@ import "package:journeyers/l10n/localized_gps_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/l10n/localized_testing_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_page.dart";
-import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
 import "package:journeyers/widgets/utility/dashboard/dashboard_widgets/4_dashboard_sessions_list_item.dart";
 import "package:journeyers/widgets/utility/process/new_process_button.dart";
-import "package:journeyers/widgets/utility/process/session_file_name_on_mobile_platforms.dart";
 
-import "../test/_widget_testing_utils/widget_testing_utils.dart";
 import "externalized_code/externalized_testing_code.dart";
 
 
@@ -85,27 +82,25 @@ Future<void> main() async {
   const List<String> titlesListSorted = ["atitl", "aTitle", "atitle2", "Untitled", "untitre"];
 
   // Keywords
-  const kwCompanionship = "Companionship";
+  const kwHarmony = "Harmony";
   const kwWorkplace = "Workplace";
   const kwStudies = "Studies";  
   const kwCommunication = "Communication";
   const kwMaintenance = "Maintenance";
   const kwLogistics = "Logistics";
-  const List<String> kwsList2Keywords = [kwCompanionship, kwWorkplace];
+  const List<String> kwsList2Keywords = [kwHarmony, kwWorkplace];
   const List<List<String>> kwsListsKwsSorting = 
                     [
-                      [kwMaintenance], [kwCompanionship, kwLogistics], [kwWorkplace, kwCommunication],
-                      [kwCompanionship, kwStudies], [kwMaintenance], [kwMaintenance],
+                      [kwMaintenance], [kwHarmony, kwLogistics], [kwWorkplace, kwCommunication],
+                      [kwHarmony, kwStudies], [kwMaintenance], [kwMaintenance],
                     ];
 
-  // File names
-  const fileName1WithoutExtension = "file1";
-  const fileName2WithoutExtension = "file2";
-  const fileName3WithoutExtension = "file3";
-  const List<String> fileNamesWithoutExtensionList = [fileName1WithoutExtension, fileName2WithoutExtension, fileName3WithoutExtension];
+  // Links
+  var linkToExternalNotes = "https://ext-notes.com";
 
-  // Edition
-  const editionSuffix = "-edited";
+  // File names
+  const fileNameWithoutExtension = "file";
+  List<String> fileNamesWithoutExtensionList = List.generate(3, (i)=>"$fileNameWithoutExtension${i+1}");
 
   // ── TESTS PREPARATION AND CLEANUP ─────────────────────────────────────────────────────────────
   Directory? testTmpDir;
@@ -128,9 +123,9 @@ Future<void> main() async {
 
   // ── Test cases ─────────────────────────────────────────────────────────────
 
-  group("Context Analysis Integration Tests: Mobile: \n", () 
+  group("Context Analysis Integration Tests: Mobile:", () 
   {
-    group("Entered metadata is displayed on the dashboard: Mobile: \n", ()
+    group("Entered metadata is displayed on the dashboard: Mobile:", ()
     {
     testWidgets("Session metadata entered (title, keywords, date) is found: "
       "(assuming an already selected path to the user session data folder)",
@@ -172,7 +167,7 @@ Future<void> main() async {
               formToFill: false,
               title: testAnalysisTitle1,
               kwsList: kwsList2Keywords,
-              fileNameWithoutExtension: fileName1WithoutExtension
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
 
 
@@ -194,9 +189,9 @@ Future<void> main() async {
  
     });
 
-    group("Sorting and filtering Tests: Mobile: \n", ()
+    group("Sorting and filtering Tests: Mobile:", ()
     {
-      testWidgets("Sorting by title \n"
+      testWidgets("Sorting by title"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
@@ -277,7 +272,7 @@ Future<void> main() async {
         }
       );
          
-      testWidgets("Sorting by date \n"
+      testWidgets("Sorting by date"
         "(assuming an already selected path to the user session data folder)",
         (WidgetTester tester) async 
         {
@@ -375,7 +370,7 @@ Future<void> main() async {
           }
         });
 
-      testWidgets("Filtering by keywords \n"
+      testWidgets("Filtering by keywords"
           "(assuming an already selected path to the user session data folder)",
           (WidgetTester tester) async 
           {
@@ -442,7 +437,7 @@ Future<void> main() async {
               await tester.pumpAndSettle();
 
               // 2. Filtering by kwCompanionship
-              var kwCompanionshipFinder = await dashboardGetKwFilterChip(tester, kwCompanionship);
+              var kwCompanionshipFinder = await dashboardGetKwFilterChip(tester, kwHarmony);
               await tester.tap(kwCompanionshipFinder);
               await tester.pumpAndSettle();
 
@@ -450,7 +445,7 @@ Future<void> main() async {
               titlesFinder = await dashboardGetAllSessionsTitles(tester);
               totalTitles = titlesFinder.evaluate().length;
 
-              logt("totalTitles for $kwCompanionship: $totalTitles");
+              logt("totalTitles for $kwHarmony: $totalTitles");
 
               for (var index = 0; index < totalTitles; index++)
               {
@@ -483,7 +478,7 @@ Future<void> main() async {
           });     
     });
   
-    group("Deletion Tests: Mobile: \n", ()
+    group("Deletion Tests: Mobile:", ()
   {
   testWidgets("Deletion: Single deletion with icon \n"
     "(the correct snackbar message is displayed) "
@@ -525,8 +520,8 @@ Future<void> main() async {
           formToFill: false,
           tester: tester, 
           title: testAnalysisTitleRoot,
-          kwsList: [kwCompanionship],              
-          fileNameWithoutExtension: fileName1WithoutExtension
+          kwsList: [kwHarmony],              
+          fileNameWithoutExtension: fileNameWithoutExtension
         );
 
         // ── 2. SEARCHING FOR THE SESSION DATA ON THE DASHBOARD  ────────────────────────────────
@@ -541,7 +536,7 @@ Future<void> main() async {
         var filterChipFinder = find.descendant
         (
           of: find.byType(FilterChip), 
-          matching: find.text(kwCompanionship)
+          matching: find.text(kwHarmony)
         );
 
         expect(filterChipFinder, findsOne);
@@ -564,7 +559,7 @@ Future<void> main() async {
         filterChipFinder = find.descendant
         (
           of: find.byType(FilterChip), 
-          matching: find.text(kwCompanionship)
+          matching: find.text(kwHarmony)
         );
 
         expect(filterChipFinder, findsNothing);
@@ -586,7 +581,7 @@ Future<void> main() async {
     }      
   );
 
-  testWidgets("Deletion: Bulk deletion \n"
+  testWidgets("Deletion: Bulk deletion"
               "(the correct snackbar message is displayed) "
               "(assuming an already selected path to the user session data folder)",
     (WidgetTester tester) async {
@@ -700,7 +695,7 @@ Future<void> main() async {
   
   });
 
-    group("Preview Tests: Mobile: \n", () 
+    group("Preview Tests: Mobile:", () 
   {
     testWidgets("Session data entered is found on the preview: "
       "all fields empty \n"
@@ -733,7 +728,8 @@ Future<void> main() async {
             tester: tester, 
             title: testAnalysisTitleRoot,
             kwsList: kwsList2Keywords,
-            fileNameWithoutExtension: fileName1WithoutExtension
+            linkToExternalNotes: linkToExternalNotes,
+            fileNameWithoutExtension: fileNameWithoutExtension
           );
 
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
@@ -754,6 +750,7 @@ Future<void> main() async {
             context: context, 
             tester: tester, 
             title: testAnalysisTitleRoot, 
+            linkToExternalNotes: linkToExternalNotes,
             checkboxesValues: [], 
             individualStringValues: [], 
             segmentedButtonsValues: [], 
@@ -826,7 +823,7 @@ Future<void> main() async {
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
             segmentedButtonsValues: segmentedButtonsValues,
             segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-            fileNameWithoutExtension: fileName1WithoutExtension
+            fileNameWithoutExtension: fileNameWithoutExtension
           );
 
           // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
@@ -847,7 +844,8 @@ Future<void> main() async {
           (
             context: context, 
             tester: tester, 
-            title: testAnalysisTitleRoot , 
+            title: testAnalysisTitleRoot, 
+            linkToExternalNotes: linkToExternalNotes,
             checkboxesValues: checkboxesValues, 
             individualStringValues: individualStringValues, 
             segmentedButtonsValues: segmentedButtonsValues,
@@ -917,7 +915,7 @@ Future<void> main() async {
           groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
           segmentedButtonsValues: segmentedButtonsValues,
           segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-          fileNameWithoutExtension: fileName1WithoutExtension
+          fileNameWithoutExtension: fileNameWithoutExtension
         );
         
         // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
@@ -941,6 +939,7 @@ Future<void> main() async {
           context: context, 
           tester: tester, 
           title:testAnalysisTitleRoot,
+          linkToExternalNotes: linkToExternalNotes,
           checkboxesValues: checkboxesValues,
           individualStringValues: individualStringValues, 
           segmentedButtonsValues: segmentedButtonsValues, 
@@ -1010,7 +1009,7 @@ Future<void> main() async {
           groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
           segmentedButtonsValues: segmentedButtonsValues,
           segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-          fileNameWithoutExtension: fileName1WithoutExtension
+          fileNameWithoutExtension: fileNameWithoutExtension
         );
         
         // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
@@ -1034,6 +1033,7 @@ Future<void> main() async {
           context: context, 
           tester: tester, 
           title: testAnalysisTitleRoot, 
+          linkToExternalNotes: linkToExternalNotes,
           individualStringValues: individualStringValues, 
           segmentedButtonsValues: segmentedButtonsValues, 
           groupStringValues: groupStringValues, 
@@ -1103,7 +1103,7 @@ Future<void> main() async {
           groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
           segmentedButtonsValues: segmentedButtonsValues,
           segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-          fileNameWithoutExtension: fileName1WithoutExtension
+          fileNameWithoutExtension: fileNameWithoutExtension
         );
 
         // ── 2. SEARCHING FOR THE METADATA ON THE DASHBOARD  ────────────────────────────────
@@ -1127,6 +1127,7 @@ Future<void> main() async {
           context: context, 
           tester: tester, 
           title: testAnalysisTitleRoot, 
+          linkToExternalNotes: linkToExternalNotes,
           checkboxesValues: checkboxesValues,
           individualStringValues: individualStringValues, 
           segmentedButtonsValues: segmentedButtonsValues, 
@@ -1140,7 +1141,7 @@ Future<void> main() async {
 
   });
 
-    group("Edition Tests: Mobile: \n", ()
+    group("Edition Tests: Mobile:", ()
     {
       testWidgets("Edition: Title (non empty edited title)\n"
                   "(the correct snackbar message is displayed) ",
@@ -1165,6 +1166,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
+            LocalizedTestingStrings lts = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1177,7 +1179,7 @@ Future<void> main() async {
               title: title,
               kwsList: [],
               formToFill: false,
-              fileNameWithoutExtension: fileName1WithoutExtension
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
 
             await tester.pump(const Duration(seconds: 2));
@@ -1189,7 +1191,7 @@ Future<void> main() async {
             await tester.tap(titleFinder);
             await tester.pumpAndSettle();
               // Editing the title
-            var editedTitle = "${title}${editionSuffix}";
+            var editedTitle = "${title}${lts.editionSuffix}";
             
             var editTfFinder = find.byKey(const Key("titleDashboardEditField"));
             await tester.enterText(editTfFinder, editedTitle);
@@ -1215,7 +1217,7 @@ Future<void> main() async {
           }
         });
   
-      testWidgets("Edition: Title (empty edited title) \n", 
+      testWidgets("Edition: Title (empty edited title)", 
       (WidgetTester tester) async 
       {
         // Setting mock values for SharedPreferences
@@ -1246,7 +1248,7 @@ Future<void> main() async {
             title: title,
             kwsList: [],
             formToFill: false,
-            fileNameWithoutExtension: fileName1WithoutExtension
+            fileNameWithoutExtension: fileNameWithoutExtension
           );
 
           await tester.pump(const Duration(seconds: 2));
@@ -1273,6 +1275,7 @@ Future<void> main() async {
           // Getting the localized strings
           var context = tester.element(find.byType(Scaffold).first);
           LocalizedDashboardStrings lds = .new(context);
+          
 
           // Searching for the error message
           var emptyTitleEditErrorFinder = find.textContaining(lds.emptyTitleEditError);
@@ -1283,7 +1286,7 @@ Future<void> main() async {
         } 
       });            
     
-      testWidgets("Edition: Keywords \n",
+      testWidgets("Edition: Keywords",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1305,6 +1308,7 @@ Future<void> main() async {
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
+            LocalizedTestingStrings lts = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
@@ -1317,7 +1321,7 @@ Future<void> main() async {
               title: title,
               kwsList: [kwsList2Keywords[0]],
               formToFill: false,
-              fileNameWithoutExtension: fileName1WithoutExtension
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
 
             await tester.pump(const Duration(seconds: 2));
@@ -1333,7 +1337,7 @@ Future<void> main() async {
             await tester.tap(kwFinder);
             await tester.pumpAndSettle();
               // Editing the keywords
-            var kwEdited = "${kwsList2Keywords[0]}${editionSuffix}";
+            var kwEdited = "${kwsList2Keywords[0]}${lts.editionSuffix}";
             var kwAdded = "kwAdded";
             var editedKeywords = "$kwEdited,$kwAdded";
             
@@ -1373,7 +1377,7 @@ Future<void> main() async {
           }
         });
   
-      testWidgets("Context analysis data edition (from preview) \n",
+      testWidgets("Context analysis data edition (from preview)",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -1391,17 +1395,24 @@ Future<void> main() async {
             // Pumping the CAPage        
             await tester.pumpWidget(buildTestableCAPage());
             await tester.pumpAndSettle();
+
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
             LocalizedDashboardStrings lds = .new(context);
             LocalizedCAOtherStrings los= .new(context);
             LocalizedCAFormQuestions lfq = .new(context);
+            LocalizedTestingStrings lts = .new(context);
 
             // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
             // ──────────────────────────────────────────────────────────────────────
 
+            // ── 1.a Title  ──────────────────────────────────
             var title = "CA title";
             
+            // ── 1.b Keywords  ──────────────────────────────────
+            var keywords = kwsList2Keywords;
+            
+            // ── 1.c Form data  ──────────────────────────────────
             // Individual perspective testing values
             // All checkboxes checked
             List<bool> checkboxesValues = List.filled(7, true);
@@ -1418,21 +1429,25 @@ Future<void> main() async {
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
+            // ── 1.d Link to external notes  ──────────────────────────────────
+            String linkToExternalNotes = "https://ext-notes.com";
+
             await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: title,
-              kwsList: kwsList2Keywords,
+              kwsList: keywords,
               checkboxesValues: checkboxesValues,
               checkboxesTextFieldValues: checkboxesTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
               segmentedButtonsValues: segmentedButtonsValues,
               segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-              fileNameWithoutExtension: fileName1WithoutExtension
+              linkToExternalNotes: linkToExternalNotes,
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
 
-            // await tester.pump(const Duration(seconds: 2));
+            await tester.pump(const Duration(seconds: 2));
 
             // ── 2. CLICKING TO OPEN THE PREVIEW  ─────────────────────────────────
             // ─────────────────────────────────────────────────────────────────────
@@ -1446,609 +1461,55 @@ Future<void> main() async {
 
             await tester.pump(const Duration(seconds: 2));
 
-            // ── 3. CLICKING TO START THE EDIT MODE  ──────────────────────────────
-            // ─────────────────────────────────────────────────────────────────────
-            // Opening the edition overlay
-            var editIconFinder = find.byIcon(Icons.edit);
-            await tester.tap(editIconFinder);
-            await tester.pumpAndSettle();
-
-            // ── 4. EDITION: Verifying data present and editing  ─────────────────
-            // ────────────────────────────────────────────────────────────────────
-
-            // ── Verifying data present ────────────────────────────
-            // ──────────────────────────────────────────────────────
-
-            // Opening the expansion tiles
-              // Getting the build context
-            await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(context, tester);
-
-            // ── Verifying checkbox data present ────────────────────────────
-            var checkboxesFinder = find.byType(Checkbox, skipOffstage: false);
-            var totalCheckboxes = checkboxesFinder.evaluate().length;
-
-            logt("totalCheckboxes: $totalCheckboxes");
-
-            for (var cbIndex = 0; cbIndex < totalCheckboxes; cbIndex++)
-            {
-              // cbIndex = 1: keywords: skipping the text field
-              if (cbIndex != 1) 
-              {
-                var currentCheckboxFinder = checkboxesFinder.at(cbIndex);
-                await tester.scrollUntilVisible(currentCheckboxFinder, 45, scrollable: find.byType(Scrollable).last);
-                await tester.pumpAndSettle();
-                var currentCheckboxWidget = tester.widget<Checkbox>(currentCheckboxFinder);
-                expect(currentCheckboxWidget.value, checkboxesValues[cbIndex]);
-              }
-            }
-
-            // ── Verifying segmented button data present ────────────────────────────
-            var segmentedButtonsFinder = 
-              find.descendant(
-                of: find.byType(ExpansionTile).last, 
-                matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-              );
-
-            var totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-
-            logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
-
-            for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
-            {
-                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonsValues[sbIndex]);
-            }
-
-            // ── Verifying text field data present ────────────────────────────
-            var textFieldsFinder = find.byType(TextField);
-            var totalTextFields = textFieldsFinder.evaluate().length;
-
-            logt("totalTextFields: $totalTextFields (expected: 16)");
-
-            // null for keywords
-            // Should have 16 values
-            // 1 + 1 + 7 + 1
-            // + 1 + 4 + 1
-            var expectedData = [title, null, ...checkboxesTextFieldValues, indivAnotherIssueStrValue,
-                                groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues, fileName1WithoutExtension];
-
-            for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
-            {
-              // Skipping: 1 (keywords text field), 12 (file name text field)
-              if 
-              (
-                // keywords
-                tfIndex != 1 
-                && tfIndex != 12
-              ) 
-              {
-                expect(tester.widget<TextField>(textFieldsFinder.at(tfIndex)).controller!.text, expectedData[tfIndex]);
-              }
-            }
-
-
-            // ── Editing data ────────────────────────────
-            // ────────────────────────────────────────────
-
-            // ── Leaving the checkboxes as is ────────────────────────────
- 
+            // ── 3. EDITION  ─────────────────
+            // ────────────────────────────────────────────────────────────────────           
             // ── Editing data in the segmented buttons ────────────────────────────
+            List<String> newKwsList = [kwMaintenance, kwLogistics];
+            List<bool>  newCheckboxesValues = [true, true, false, true, false, true, true];
             // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
-            List<Set<String>> newsegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow , los.no, los.yes}];
-            List<String> segmentedButtonsAddedValues = [los.no, los.yes, los.yes, los.iDontKnow];
-
-            segmentedButtonsFinder = find.descendant(
-              of: find.byType(ExpansionTile).last, 
-              matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-            );
-
-            totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-
-            logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
-
-            var optionsToSelect = [los.yes,los.no,los.iDontKnow];
-            for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
-            {
-              var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
-
-              for (var option in optionsToSelect)
-              {
-                // additional option to tap
-                var currentSegmentedButtonAddedValue = segmentedButtonsAddedValues[sbIndex];
-
-                if (currentSegmentedButtonAddedValue.contains(option))
-                {
-                  var optionFinder = find.descendant
-                                      (of: currentSegmentedButtonFinder,
-                                        matching: find.text(option));
-
-                  await tester.ensureVisible(currentSegmentedButtonFinder);
-                  await tester.pumpAndSettle();
-                  await tester.tap(optionFinder);
-                  await tester.pumpAndSettle();
-                }
-              }     
-            }
-
-            // ── Editing data in the text fields ────────────────────────────
-
+            List<Set<String>> newSegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow , los.no, los.yes}];
             List<String> newcheckboxesTextFieldValues = 
-            [for (var value in checkboxesTextFieldValues) "${value}${editionSuffix}"]; 
-
-            String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
-
-            String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
-
+                          [for (var value in checkboxesTextFieldValues) "${value}${lts.editionSuffix}"]; 
+            String newIndivAnotherIssueStrValue = "a8${lts.editionSuffix}";  
+            String newGroupProblemsToSolveStrValue = "b1${lts.editionSuffix}";
             List<String> newsegmentedButtonsTextFieldValues = 
-            [ for (var value in segmentedButtonsTextFieldValues) "${value}${editionSuffix}" ]; 
+                          [ for (var value in segmentedButtonsTextFieldValues) "${value}${lts.editionSuffix}" ]; 
 
-            textFieldsFinder = find.byType(TextField, skipOffstage: false);
-            totalTextFields = textFieldsFinder.evaluate().length;
-
-            logt("totalTextFields: $totalTextFields (expected: 16)");
-
-            // null for keywords and file name
-            // Should have 16 values
-            // 1 + 1 + 7 + 1
-            // + 1 + 4 + 1
-            var dataList = [title, null, ...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue,
-                                newGroupProblemsToSolveStrValue, ...newsegmentedButtonsTextFieldValues, null];
-
-            for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
-            {
-              if 
-              (
-                // keywords text field untouched
-                tfIndex != 1 
-                // file name unedited
-                && tfIndex != 15
-              ) 
-              {
-                logt("tfIndex: $tfIndex");
-                logt("dataList[tfIndex]!: ${dataList[tfIndex]!}");
-
-                var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
-                await tester.ensureVisible(currentTextFieldFinder);
-                await tester.pumpAndSettle();
-                await tester.tap(currentTextFieldFinder);
-                await tester.pumpAndSettle();
-                await tester.enterText(currentTextFieldFinder, dataList[tfIndex]!);
-                await tester.pumpAndSettle();
-                // data entered only
-              }
-            }
-
-            // ── Submitting edited data ──────────────────
-            // ────────────────────────────────────────────
-
-            Finder fileNameWidgetFinder =  find.byType(SessionFileNameOnMobilePlatforms);
-            await tester.ensureVisible(fileNameWidgetFinder);
-            await tester.pumpAndSettle();
-            await tester.tap(fileNameWidgetFinder);
-            await tester.pumpAndSettle();
-            // data is already entered
-            await tester.testTextInput.receiveAction(TextInputAction.done);
-            await tester.pumpAndSettle();  
-
-            // await tester.pump(const Duration(seconds: 2));
-
-            // ── Verifying the edited data present ──────────────────
-            // ───────────────────────────────────────────────────────
-          
-            // ── Opening the preview ──────────────────
-            previewFinder = find.byTooltip(lds.previewTooltipLabel);
-            await tester.ensureVisible(previewFinder);
-            await tester.pumpAndSettle();
-            await tester.tap(previewFinder);
-            await tester.pumpAndSettle();
-
-            // await tester.pump(const Duration(seconds: 5));
-
-            var textToFind = "a7$editionSuffix";
-
-            logt("Scrolling toward textToFind: $textToFind for screen copy");
-            var textToFindFinder = find.textContaining(textToFind);
-            await tester.scrollUntilVisible
-            (
-              textToFindFinder, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 5));
-            logt("Scrolled to $textToFind");
-
-            textToFind = "b1$editionSuffix";
-
-            logt("Scrolling toward textToFind: $textToFind for screen copy");
-            textToFindFinder = find.textContaining(textToFind);
-            await tester.scrollUntilVisible
-            (
-              textToFindFinder, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-            await tester.pumpAndSettle();
-            expect(textToFindFinder, findsOne);
-            logt("Scrolled to $textToFind");
-
-            // await tester.pump(const Duration(seconds: 10));
-
-            logt("Scrolling toward title for preview");
-
-            // Scrolling up
-            var scrollableFinder = find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ).first;
-
-            await tester.scrollUntilVisible
-            (
-              find.text(title).first, 
-              -40, // getting up the list
-              scrollable: scrollableFinder
+            await caEditDataOnMobile(
+              editingFromPreview: true,
+              tester: tester, 
+              title: title, 
+              kwsList: keywords, 
+              newKwsList: newKwsList, 
+              checkboxesValues: checkboxesValues, 
+              newCheckboxesValues: newCheckboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues, 
+              indivAnotherIssueStrValue: indivAnotherIssueStrValue, 
+              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue, 
+              segmentedButtonsValues: segmentedButtonsValues, 
+              newSegmentedButtonsValues: newSegmentedButtonsValues, 
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues, 
+              linkToExternalNotes: linkToExternalNotes,
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
-            await tester.pumpAndSettle();
-            
-            logt("Scrolled to title");
-            // await tester.pump(const Duration(seconds: 10));
 
-            // ── Verifying the edited data present ──────────────────            
+            // ── 4. VERIFYING THE EDITED DATA PRESENT  ─────────────────────────────────  
             await caTestPreview
             (
               context: context, 
               tester: tester, 
               title: title,
-              checkboxesValues: checkboxesValues,
+              linkToExternalNotes: linkToExternalNotes,
+              checkboxesValues: newCheckboxesValues,
               individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
-              segmentedButtonsValues: newsegmentedButtonsValues,              
-            );          
+              segmentedButtonsValues: newSegmentedButtonsValues,              
+            );
           } // platform-related if
 
         });
 
-      testWidgets("Context analysis data edition (from dashboard) \n",
-        (WidgetTester tester) async {
-          // Setting mock values for SharedPreferences
-          SharedPreferences.setMockInitialValues
-          ({
-            // Setting value for the first-run modal to be absent,
-            "wasFirstRunModalAcknowledged": true,
-            // and to have the context analysis page, with the dashboard.
-            "wasCASessionDataSaved": true,
-            // Temporary test dir as application folder path
-            "applicationFolderPath": testTmpDir!.path
-          });
-
-          if (Platform.isAndroid || Platform.isIOS)
-          {
-            // Pumping the CAPage        
-            await tester.pumpWidget(buildTestableCAPage());
-            await tester.pumpAndSettle();
-            // Getting the localized strings
-            var context = tester.element(find.byType(Scaffold).first);
-            LocalizedDashboardStrings lds = .new(context);
-            LocalizedCAOtherStrings los= .new(context);
-
-            // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
-            // ──────────────────────────────────────────────────────────────────────
-
-            var title = "CA title";
-            
-            // Individual perspective testing values
-            // All checkboxes checked
-            List<bool> checkboxesValues = List.filled(7, true);
-            // Values from a1 to a7 for the checkboxes text fields
-            List<String> checkboxesTextFieldValues = List.generate(7, (i) => "a${i+1}");  
-            // a8 for the text field only (indiv. persp.)        
-            String indivAnotherIssueStrValue = "a8";        
-
-            // Group/teams perspective testing values
-            // b1 for the text field only (group persp.)
-            String groupProblemsToSolveStrValue = "b1";
-            // 4 values are necessary for the segmented buttons
-            List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.yes,los.no}];
-            // Values from b2 to b5 for the segmented button text fields
-            List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
-
-            await caEnterNewProcessDataOnMobile
-            (
-              tester: tester, 
-              title: title,
-              kwsList: kwsList2Keywords,
-              checkboxesValues: checkboxesValues,
-              checkboxesTextFieldValues: checkboxesTextFieldValues,
-              indivAnotherIssueStrValue: indivAnotherIssueStrValue,
-              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
-              segmentedButtonsValues: segmentedButtonsValues,
-              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-              fileNameWithoutExtension: fileName1WithoutExtension
-            );
-
-            // await tester.pump(const Duration(seconds: 2));
-
-            // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
-            // ──────────────────────────────────────────────────────────────────
-            var editIconFromItemFinder = find.byTooltip(lds.editFromDashboardItemTooltipLabel);
-            await tester.tap(editIconFromItemFinder);
-            await tester.pumpAndSettle();
-
-            // ── EDITION: Verifying data present and editing  ─────────────────
-            // ────────────────────────────────────────────────────────────────────
-
-            // ── Verifying data present ────────────────────────────
-            // ──────────────────────────────────────────────────────
-
-            // Opening the expansion tiles
-              // Getting the build context
-            await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(context, tester);
-
-            // ── Verifying checkbox data present ────────────────────────────
-            var checkboxesFinder = find.byType(Checkbox);
-            var totalCheckboxes = checkboxesFinder.evaluate().length;
-
-            logt("totalCheckboxes: $totalCheckboxes");
-
-            for (var cbIndex = 0; cbIndex < totalCheckboxes; cbIndex++)
-            {
-              // cbIndex = 1: keywords: skipping the text field
-              if (cbIndex != 1) 
-              {
-                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxesValues[cbIndex]);
-              }
-            }
-
-            // ── Verifying segmented button data present ────────────────────────────
-            var segmentedButtonsFinder = 
-              find.descendant(
-                of: find.byType(ExpansionTile).last, 
-                matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-              );
-
-            var totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-
-            logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
-
-            for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
-            {
-                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonsValues[sbIndex]);
-            }
-
-            // ── Verifying text field data present ────────────────────────────
-            var textFieldsFinder = find.byType(TextField);
-            var totalTextFields = textFieldsFinder.evaluate().length;
-
-            logt("totalTextFields: $totalTextFields (expected: 16)");
-
-            // null for keywords
-            // Should have 16 values
-            // 1 + 1 + 7 + 1
-            // + 1 + 4 + 1
-            var expectedData = [title, null, ...checkboxesTextFieldValues, indivAnotherIssueStrValue,
-                                groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues, fileName1WithoutExtension];
-
-            for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
-            {
-              // Skipping: 1 (keywords text field), 12 (file name text field)
-              if 
-              (
-                // keywords
-                tfIndex != 1 
-                && tfIndex != 12
-              ) 
-              {
-                expect(tester.widget<TextField>(textFieldsFinder.at(tfIndex)).controller!.text, expectedData[tfIndex]);
-              }
-            }
-
-
-            // ── Editing data ────────────────────────────
-            // ────────────────────────────────────────────
-
-            // ── Leaving the checkboxes as is ────────────────────────────
- 
-            // ── Editing data in the segmented buttons ────────────────────────────
-            // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
-            List<Set<String>> newsegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow ,los.no, los.yes}];
-            List<String> segmentedButtonsAddedValues = [los.no, los.yes, los.yes, los.iDontKnow];
-
-            segmentedButtonsFinder = find.descendant(
-              of: find.byType(ExpansionTile).last, 
-              matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-            );
-
-            totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-
-            logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
-
-            var optionsToSelect = [los.yes,los.no,los.iDontKnow];
-            for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
-            {
-              var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
-
-              for (var option in optionsToSelect)
-              {
-                // additional option to tap
-                var currentSegmentedButtonAddedValue = segmentedButtonsAddedValues[sbIndex];
-
-                if (currentSegmentedButtonAddedValue.contains(option))
-                {
-                  var optionFinder = find.descendant
-                                      (of: currentSegmentedButtonFinder,
-                                        matching: find.text(option));
-
-                  await tester.scrollUntilVisible(currentSegmentedButtonFinder, 45, scrollable: find.byType(Scrollable).last);
-                  await tester.pumpAndSettle();
-                  await tester.tap(optionFinder);
-                  await tester.pumpAndSettle();
-                }
-              }     
-            }
-
-            // ── Editing data in the text fields ────────────────────────────
-
-            List<String> newcheckboxesTextFieldValues = 
-            [for (var value in checkboxesTextFieldValues) "${value}${editionSuffix}"]; 
-
-            String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
-
-            String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
-
-            List<String> newsegmentedButtonsTextFieldValues = 
-            [ for (var value in segmentedButtonsTextFieldValues) "${value}${editionSuffix}" ]; 
-
-            textFieldsFinder = find.byType(TextField);
-            totalTextFields = textFieldsFinder.evaluate().length;
-
-            logt("totalTextFields: $totalTextFields (expected: 16)");
-
-            // null for keywords and file name
-            // Should have 16 values
-            // 1 + 1 + 7 + 1
-            // + 1 + 4 + 1
-            var dataList = [title, null, ...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue,
-                                newGroupProblemsToSolveStrValue, ...newsegmentedButtonsTextFieldValues, null];
-
-            for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
-            {
-              if 
-              (
-                // keywords text field untouched
-                tfIndex != 1 
-                // file name unedited
-                && tfIndex != 15
-              ) 
-              {
-                logt("tfIndex: $tfIndex");
-                logt("dataList[tfIndex]!: ${dataList[tfIndex]!}");
-
-                var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
-                await tester.ensureVisible(currentTextFieldFinder);
-                await tester.pumpAndSettle();
-                await tester.tap(currentTextFieldFinder);
-                await tester.pumpAndSettle();
-                await tester.enterText(currentTextFieldFinder, dataList[tfIndex]!);
-                await tester.pumpAndSettle();
-                // data entered only
-              }
-            }
-
-            // ── Submitting edited data ──────────────────
-            // ────────────────────────────────────────────
-
-            Finder fileNameWidgetFinder =  find.byType(SessionFileNameOnMobilePlatforms);
-            await tester.ensureVisible(fileNameWidgetFinder);
-            await tester.pumpAndSettle();
-            await tester.tap(fileNameWidgetFinder);
-            await tester.pumpAndSettle();
-            // data is already entered
-            await tester.testTextInput.receiveAction(TextInputAction.done);
-            await tester.pumpAndSettle();  
-
-            // await tester.pump(const Duration(seconds: 2));
-
-            // ── Verifying the edited data present ──────────────────
-            // ───────────────────────────────────────────────────────
-          
-            // ── Opening the preview ──────────────────
-            var previewFinder = find.byTooltip(lds.previewTooltipLabel);
-            await tester.ensureVisible(previewFinder);
-            await tester.pumpAndSettle();
-            await tester.tap(previewFinder);
-            await tester.pumpAndSettle();
-
-            // await tester.pump(const Duration(seconds: 5));
-
-            var textToFind = "a7$editionSuffix";
-
-            logt("Scrolling toward textToFind: $textToFind for screen copy");
-
-            var textToFindFinder = find.textContaining(textToFind);
-            await tester.scrollUntilVisible
-            (
-              textToFindFinder, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 5));
-
-            logt("Scrolled to $textToFind");
-
-            textToFind = "b1$editionSuffix";
-
-            logt("Scrolling toward textToFind: $textToFind for screen copy");
-  
-            textToFindFinder = find.textContaining(textToFind);
-            await tester.scrollUntilVisible
-            (
-              textToFindFinder, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-            await tester.pumpAndSettle();
-            expect(textToFindFinder, findsOne);
-
-            logt("Scrolled to $textToFind");
-
-            // await tester.pump(const Duration(seconds: 5));
-
-            logt("Scrolling toward title for preview");
-
-            // Scrolling up
-            var scrollableFinder = find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ).first;
-
-            await tester.scrollUntilVisible
-            (
-              find.text(title).first, 
-              -40, // getting up the list
-              scrollable: scrollableFinder
-            );
-            await tester.pumpAndSettle();
-            
-            logt("Scrolled to title");
-
-            // await tester.pump(const Duration(seconds: 3));
-
-            // ── Verifying the edited data present ──────────────────            
-            await caTestPreview
-            (
-              context: context,
-              tester: tester, 
-              title: title,
-              checkboxesValues: checkboxesValues,
-              individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
-              groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
-              segmentedButtonsValues: newsegmentedButtonsValues 
-            );          
-          } // platform-related if
-
-        });
-
-      testWidgets("Edition data is not retained in next process \n",
+      testWidgets("Context analysis data edition (from dashboard)",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -2069,15 +1530,19 @@ Future<void> main() async {
 
             // Getting the localized strings
             var context = tester.element(find.byType(Scaffold).first);
-            LocalizedDashboardStrings lds = .new(context);
-            LocalizedCAFormQuestions? lfq = .new(context);
             LocalizedCAOtherStrings los= .new(context);
             LocalizedTestingStrings lts = .new(context);
 
-            // ── ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
-            // ───────────────────────────────────────────────────────────────────
-            var title = lts.caTitleRoot;
+            // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+
+            // ── 1.a Title  ──────────────────────────────────
+            var title = "CA title";
             
+            // ── 1.b Keywords  ──────────────────────────────────
+            var keywords = kwsList2Keywords;
+            
+            // ── 1.c Form data  ──────────────────────────────────
             // Individual perspective testing values
             // All checkboxes checked
             List<bool> checkboxesValues = List.filled(7, true);
@@ -2094,291 +1559,189 @@ Future<void> main() async {
             // Values from b2 to b5 for the segmented button text fields
             List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
 
+            // ── 1.d Link to external notes  ──────────────────────────────────
+            String linkToExternalNotes = "https://ext-notes.com";
+
             await caEnterNewProcessDataOnMobile
             (
               tester: tester, 
               title: title,
-              kwsList: kwsList2Keywords,
+              kwsList: keywords,
               checkboxesValues: checkboxesValues,
               checkboxesTextFieldValues: checkboxesTextFieldValues,
               indivAnotherIssueStrValue: indivAnotherIssueStrValue,
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
               segmentedButtonsValues: segmentedButtonsValues,
               segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-              fileNameWithoutExtension: fileName1WithoutExtension
+              linkToExternalNotes: linkToExternalNotes,
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
 
-            // await tester.pump(const Duration(seconds: 2));
+            await tester.pump(const Duration(seconds: 2));
 
-            // ── CLICKING ON THE EDIT ICON  ─────────────────────────────────
-            // ──────────────────────────────────────────────────────────────────
-            var editIconFromItemFinder = find.byTooltip(lds.editFromDashboardItemTooltipLabel);
-            await tester.tap(editIconFromItemFinder);
-            await tester.pumpAndSettle();
-
-            // ── EDITION: Verifying data present and editing  ─────────────────
-            // ────────────────────────────────────────────────────────────────────
-
-            // ── Verifying data present ────────────────────────────
-            // ──────────────────────────────────────────────────────
-
-            // Opening the expansion tiles
-              // Getting the build context
-            await caOpenIndividualExpansionTile(context, tester);
-            await caOpenGroupExpansionTile(context, tester);
-
-            // ── Verifying checkbox data present ────────────────────────────
-            var checkboxesFinder = find.byType(Checkbox);
-            var totalCheckboxes = checkboxesFinder.evaluate().length;
-
-            logt("totalCheckboxes: $totalCheckboxes");
-
-            for (var cbIndex = 0; cbIndex < totalCheckboxes; cbIndex++)
-            {
-              // cbIndex = 1: keywords: skipping the text field
-              if (cbIndex != 1) 
-              {
-                expect(tester.widget<Checkbox>(checkboxesFinder.at(cbIndex)).value, checkboxesValues[cbIndex]);
-              }
-            }
-
-            // ── Verifying segmented button data present ────────────────────────────
-            var segmentedButtonsFinder = 
-              find.descendant(
-                of: find.byType(ExpansionTile).last, 
-                matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-              );
-
-            var totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-
-            logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
-
-            for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
-            {
-                expect(tester.widget<CASegmentedButtonWithSanitizedAndPaddedTextField>(segmentedButtonsFinder.at(sbIndex)).segButtonStartValue, segmentedButtonsValues[sbIndex]);
-            }
-
-            // ── Verifying text field data present ────────────────────────────
-            var textFieldsFinder = find.byType(TextField);
-            var totalTextFields = textFieldsFinder.evaluate().length;
-
-            logt("totalTextFields: $totalTextFields (expected: 16)");
-
-            // null for keywords
-            // Should have 16 values
-            // 1 + 1 + 7 + 1
-            // + 1 + 4 + 1
-            var expectedData = [title, null, ...checkboxesTextFieldValues, indivAnotherIssueStrValue,
-                                groupProblemsToSolveStrValue, ...segmentedButtonsTextFieldValues, fileName1WithoutExtension];
-
-            for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
-            {
-              // Skipping: 1 (keywords text field), 12 (file name text field)
-              if 
-              (
-                // keywords
-                tfIndex != 1 
-                && tfIndex != 12
-              ) 
-              {
-                expect(tester.widget<TextField>(textFieldsFinder.at(tfIndex)).controller!.text, expectedData[tfIndex]);
-              }
-            }
-
-
-            // ── Editing data ────────────────────────────
-            // ────────────────────────────────────────────
-
-            // ── Leaving the checkboxes as is ────────────────────────────
- 
+            // ── 2. EDITION  ─────────────────
+            // ────────────────────────────────────────────────────────────────────           
             // ── Editing data in the segmented buttons ────────────────────────────
+            List<String> newKwsList = [kwMaintenance, kwLogistics];
+            List<bool>  newCheckboxesValues = [true, true, false, true, false, true, true];
             // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
-            List<Set<String>> newsegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow,los.no,los.yes}];
-            List<String> segmentedButtonsAddedValues = [los.no, los.yes, los.yes, los.iDontKnow];
-
-            segmentedButtonsFinder = find.descendant(
-              of: find.byType(ExpansionTile).last, 
-              matching: find.byType(CASegmentedButtonWithSanitizedAndPaddedTextField),
-            );
-
-            totalSegmentedButtons = segmentedButtonsFinder.evaluate().length;
-
-            logt("totalSegmentedButtons: $totalSegmentedButtons (4: expected)");
-
-            var optionsToSelect = [los.yes,los.no,los.iDontKnow];
-            for (var sbIndex = 0; sbIndex < totalSegmentedButtons; sbIndex++)
-            {
-              var currentSegmentedButtonFinder = segmentedButtonsFinder.at(sbIndex);
-
-              for (var option in optionsToSelect)
-              {
-                // additional option to tap
-                var currentSegmentedButtonAddedValue = segmentedButtonsAddedValues[sbIndex];
-
-                if (currentSegmentedButtonAddedValue.contains(option))
-                {
-                  var optionFinder = find.descendant
-                                      (of: currentSegmentedButtonFinder,
-                                        matching: find.text(option));
-
-                  await tester.ensureVisible(currentSegmentedButtonFinder);
-                  await tester.pumpAndSettle();
-                  await tester.tap(optionFinder);
-                  await tester.pumpAndSettle();
-                }
-              }     
-            }
-
-            // ── Editing data in the text fields ────────────────────────────
-
+            List<Set<String>> newSegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow , los.no, los.yes}];
             List<String> newcheckboxesTextFieldValues = 
-            [for (var value in checkboxesTextFieldValues) "${value}${editionSuffix}"]; 
-
-            String newIndivAnotherIssueStrValue = "a8$editionSuffix";   
-
-            String newGroupProblemsToSolveStrValue = "b1$editionSuffix";
-
+                          [for (var value in checkboxesTextFieldValues) "${value}${lts.editionSuffix}"]; 
+            String newIndivAnotherIssueStrValue = "a8${lts.editionSuffix}";  
+            String newGroupProblemsToSolveStrValue = "b1${lts.editionSuffix}";
             List<String> newsegmentedButtonsTextFieldValues = 
-            [ for (var value in segmentedButtonsTextFieldValues) "${value}${editionSuffix}" ]; 
+                          [ for (var value in segmentedButtonsTextFieldValues) "${value}${lts.editionSuffix}" ]; 
 
-            textFieldsFinder = find.byType(TextField);
-            totalTextFields = textFieldsFinder.evaluate().length;
-
-            logt("totalTextFields: $totalTextFields (expected: 16)");
-            
-            // null for keywords and file name
-            // Should have 16 values
-            // 1 + 1 + 7 + 1
-            // + 1 + 4 + 1
-            var dataList = [title, null, ...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue,
-                                newGroupProblemsToSolveStrValue, ...newsegmentedButtonsTextFieldValues, null];
-
-            for (var tfIndex = 0; tfIndex < totalTextFields; tfIndex++)
-            {
-              if 
-              (
-                // keywords text field untouched
-                tfIndex != 1 
-                // file name unedited
-                && tfIndex != 15
-              ) 
-              {
-                logt("tfIndex: $tfIndex");
-                logt("dataList[tfIndex]!: ${dataList[tfIndex]!}");
-
-                var currentTextFieldFinder = textFieldsFinder.at(tfIndex);
-                await tester.ensureVisible(currentTextFieldFinder);
-                await tester.pumpAndSettle();
-                await tester.tap(currentTextFieldFinder);
-                await tester.pumpAndSettle();
-                await tester.enterText(currentTextFieldFinder, dataList[tfIndex]!);
-                await tester.pumpAndSettle();
-                // data entered only
-              }
-            }
-
-            // ── Submitting edited data ──────────────────
-            // ────────────────────────────────────────────
-
-            Finder fileNameWidgetFinder =  find.byType(SessionFileNameOnMobilePlatforms);
-            await tester.ensureVisible(fileNameWidgetFinder);
-            await tester.pumpAndSettle();
-            await tester.tap(fileNameWidgetFinder);
-            await tester.pumpAndSettle();
-            // data is already entered
-            await tester.testTextInput.receiveAction(TextInputAction.done);
-            await tester.pumpAndSettle();  
-
-            // await tester.pump(const Duration(seconds: 2));
-
-            // ── Verifying the edited data present ──────────────────
-            // ───────────────────────────────────────────────────────
-          
-            // ── Opening the preview ──────────────────
-            var previewFinder = find.byTooltip(lds.previewTooltipLabel, skipOffstage: false);
-            await tester.ensureVisible(previewFinder);
-            await tester.pumpAndSettle();
-            await tester.tap(previewFinder);
-            await tester.pumpAndSettle();
-
-            await tester.pump(const Duration(seconds: 5));
-
-            var textToFind = "a7$editionSuffix";
-
-            logt("Scrolling toward textToFind: $textToFind for screen copy");
-
-            var textToFindFinder = find.textContaining(textToFind);
-            await tester.scrollUntilVisible
-            (
-              textToFindFinder, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-            await tester.pumpAndSettle();
-            // await tester.pump(const Duration(seconds: 10));
-
-            logt("Scrolled to $textToFind");
-
-            textToFind = "b1$editionSuffix";
-
-            logt("Scrolling toward textToFind: $textToFind for screen copy");
-
-            textToFindFinder = find.textContaining(textToFind);
-            await tester.scrollUntilVisible
-            (
-              textToFindFinder, 
-              45, 
-              scrollable: find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ),
-            );            
-            await tester.pumpAndSettle();
-            expect(textToFindFinder, findsOne);
-
-            logt("Scrolled to $textToFind");
-
-            // await tester.pump(const Duration(seconds: 10));
-
-            logt("Scrolling toward title for preview");
-
-            // Scrolling up
-            var scrollableFinder = find.descendant
-                        (
-                          of: find.byKey(const Key("context-analysis-preview-scrollview")), 
-                          matching: find.byType(Scrollable)
-                        ).first;
-
-            await tester.scrollUntilVisible
-            (
-              find.text(title).first, 
-              -40, // getting up the list
-              scrollable: scrollableFinder
+            await caEditDataOnMobile(
+              tester: tester, 
+              title: title, 
+              kwsList: keywords, 
+              newKwsList: newKwsList, 
+              checkboxesValues: checkboxesValues, 
+              newCheckboxesValues: newCheckboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues, 
+              indivAnotherIssueStrValue: indivAnotherIssueStrValue, 
+              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue, 
+              segmentedButtonsValues: segmentedButtonsValues, 
+              newSegmentedButtonsValues: newSegmentedButtonsValues, 
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues, 
+              linkToExternalNotes: linkToExternalNotes,
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
-            await tester.pumpAndSettle();
-            
-            logt("Scrolled to title");
 
-            // await tester.pump(const Duration(seconds: 3));
-
-            // ── Verifying the edited data present ──────────────────            
+            // ── 3. VERIFYING THE EDITED DATA PRESENT  ─────────────────────────────────  
             await caTestPreview
             (
-              context: context,
+              context: context, 
               tester: tester, 
               title: title,
-              checkboxesValues: checkboxesValues,
+              linkToExternalNotes: linkToExternalNotes,
+              checkboxesValues: newCheckboxesValues,
               individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
               groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
-              segmentedButtonsValues: newsegmentedButtonsValues              
-            ); 
+              segmentedButtonsValues: newSegmentedButtonsValues,              
+            );          
+          } // platform-related if
 
-            // ── STARTING A NEW CA PROCESS ──────────────────
+        });
+
+      testWidgets("Edition data is not retained in next process",
+        (WidgetTester tester) async {
+          // Setting mock values for SharedPreferences
+          SharedPreferences.setMockInitialValues
+          ({
+            // Setting value for the first-run modal to be absent,
+            "wasFirstRunModalAcknowledged": true,
+            // and to have the context analysis page, with the dashboard.
+            "wasCASessionDataSaved": true,
+            // Temporary test dir as application folder path
+            "applicationFolderPath": testTmpDir!.path
+          });
+
+          if (Platform.isAndroid || Platform.isIOS)
+          {
+            // Pumping the CAPage        
+            await tester.pumpWidget(buildTestableCAPage());
+            await tester.pumpAndSettle();
+
+            // Getting the localized strings
+            var context = tester.element(find.byType(Scaffold).first);
+            LocalizedCAOtherStrings los= .new(context);
+            LocalizedTestingStrings lts = .new(context);
+            LocalizedCAFormQuestions lfq = .new(context);
+
+            // ── 1. ENTERING NEW CA PROCESS DATA  ──────────────────────────────────
+            // ──────────────────────────────────────────────────────────────────────
+
+            // ── 1.a Title  ──────────────────────────────────
+            var title = "CA title";
+            
+            // ── 1.b Keywords  ──────────────────────────────────
+            var keywords = kwsList2Keywords;
+            
+            // ── 1.c Form data  ──────────────────────────────────
+            // Individual perspective testing values
+            // All checkboxes checked
+            List<bool> checkboxesValues = List.filled(7, true);
+            // Values from a1 to a7 for the checkboxes text fields
+            List<String> checkboxesTextFieldValues = List.generate(7, (i) => "a${i+1}");  
+            // a8 for the text field only (indiv. persp.)        
+            String indivAnotherIssueStrValue = "a8";        
+
+            // Group/teams perspective testing values
+            // b1 for the text field only (group persp.)
+            String groupProblemsToSolveStrValue = "b1";
+            // 4 values are necessary for the segmented buttons
+            List<Set<String>> segmentedButtonsValues = [{los.yes},{los.no},{los.iDontKnow},{los.yes,los.no}];
+            // Values from b2 to b5 for the segmented button text fields
+            List<String> segmentedButtonsTextFieldValues = List.generate(4, (i) => "b${i+2}");
+
+            // ── 1.d Link to external notes  ──────────────────────────────────
+            String linkToExternalNotes = "https://ext-notes.com";
+
+            await caEnterNewProcessDataOnMobile
+            (
+              tester: tester, 
+              title: title,
+              kwsList: keywords,
+              checkboxesValues: checkboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues,
+              indivAnotherIssueStrValue: indivAnotherIssueStrValue,
+              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
+              segmentedButtonsValues: segmentedButtonsValues,
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
+              linkToExternalNotes: linkToExternalNotes,
+              fileNameWithoutExtension: fileNameWithoutExtension
+            );
+
+            await tester.pump(const Duration(seconds: 2));
+
+            // ── 2. EDITION  ─────────────────
+            // ────────────────────────────────────────────────────────────────────           
+            // ── Editing data in the segmented buttons ────────────────────────────
+            List<String> newKwsList = [kwMaintenance, kwLogistics];
+            List<bool>  newCheckboxesValues = [true, true, false, true, false, true, true];
+            // Original values: List<Set<String>> segmentedButtonsValues = [{"los.yes"},{"los.no"},{"I don't know"},{"los.yes","los.no"}];
+            List<Set<String>> newSegmentedButtonsValues = [{los.no,los.yes},{los.no,los.yes},{los.iDontKnow,los.yes},{los.iDontKnow , los.no, los.yes}];
+            List<String> newcheckboxesTextFieldValues = 
+                          [for (var value in checkboxesTextFieldValues) "${value}${lts.editionSuffix}"]; 
+            String newIndivAnotherIssueStrValue = "a8${lts.editionSuffix}";  
+            String newGroupProblemsToSolveStrValue = "b1${lts.editionSuffix}";
+            List<String> newsegmentedButtonsTextFieldValues = 
+                          [ for (var value in segmentedButtonsTextFieldValues) "${value}${lts.editionSuffix}" ]; 
+
+            await caEditDataOnMobile(
+              tester: tester, 
+              title: title, 
+              kwsList: keywords, 
+              newKwsList: newKwsList, 
+              checkboxesValues: checkboxesValues, 
+              newCheckboxesValues: newCheckboxesValues,
+              checkboxesTextFieldValues: checkboxesTextFieldValues, 
+              indivAnotherIssueStrValue: indivAnotherIssueStrValue, 
+              groupProblemsToSolveStrValue: groupProblemsToSolveStrValue, 
+              segmentedButtonsValues: segmentedButtonsValues, 
+              newSegmentedButtonsValues: newSegmentedButtonsValues, 
+              segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues, 
+              linkToExternalNotes: linkToExternalNotes,
+              fileNameWithoutExtension: fileNameWithoutExtension
+            );
+
+            // ── 3. VERIFYING THE EDITED DATA PRESENT  ─────────────────────────────────  
+            await caTestPreview
+            (
+              context: context, 
+              tester: tester, 
+              title: title,
+              linkToExternalNotes: linkToExternalNotes,
+              checkboxesValues: newCheckboxesValues,
+              individualStringValues: [...newcheckboxesTextFieldValues, newIndivAnotherIssueStrValue], 
+              groupStringValues: [newGroupProblemsToSolveStrValue,...newsegmentedButtonsTextFieldValues],
+              segmentedButtonsValues: newSegmentedButtonsValues,              
+            );
+
+            // ── 4. STARTING A NEW CA PROCESS ──────────────────
             // ───────────────────────────────────────────────
             var newProcessButtonFinder = find.byType(NewProcessButton);
             await tester.tap(newProcessButtonFinder);
@@ -2483,13 +1846,11 @@ Future<void> main() async {
             
           } // platform-related if
         });
-
-
       }); 
 
-    group("Visual Tests: Mobile: \n", ()
+    group("Visual Tests: Mobile:", ()
     {
-      testWidgets("Sharing \n",
+      testWidgets("Sharing",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -2523,7 +1884,7 @@ Future<void> main() async {
                 title: testAnalysisTitle1,
                 kwsList: [],
                 formToFill: false,
-                fileNameWithoutExtension: fileName1WithoutExtension
+                fileNameWithoutExtension: fileNameWithoutExtension
               );
 
               // ── 2. CLICKING ON THE DASHBOARD TO PREVIEW ───────────────────────────────────────
@@ -2544,7 +1905,7 @@ Future<void> main() async {
           }
         });
 
-      testWidgets("Complex data \n",
+      testWidgets("Complex data",
         (WidgetTester tester) async {
           // Setting mock values for SharedPreferences
           SharedPreferences.setMockInitialValues
@@ -2594,7 +1955,7 @@ Future<void> main() async {
               groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
               segmentedButtonsValues: segmentedButtonsValues,
               segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
-              fileNameWithoutExtension: fileName1WithoutExtension
+              fileNameWithoutExtension: fileNameWithoutExtension
             );
            
             // Opening the preview

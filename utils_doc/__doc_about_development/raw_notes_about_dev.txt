@@ -67,7 +67,7 @@ flutter_lints
 Contains the flutter rule set, which the Flutter team encourages you to use in Flutter apps, packages, and plugins. This rule set is a superset of the recommended set, which is itself a superset of the core set that partially determines the score of packages uploaded to pub.dev.
 
 ------------------------------------------------
-A potential priority for the companionship: to maintain a household organization favoring companionship 
+
 
 A potential priority for the workplace appreciability: to maintain a household organization favoring workplace appreciability 
 
@@ -77,7 +77,7 @@ Some themes:
 - learning by doing
 - credentials
 - maintenance, logistics 
-- companionship, workplace appreciability, legacy
+- workplace appreciability, legacy
 
 -----------
 Learning by doing:
@@ -85,7 +85,7 @@ to avoid lack of inspiration: top folder labels suggested for import at first ru
 sub-folder not suggested
 
 To avoid 3 clicks on Android to access folder-structured storage
-To monitor new files on the phone (downloads, pictures,...) for potential tagging/retrieval related to the folder-structured storage (companionship/memories/source pictures), without having to move the file
+To monitor new files on the phone (downloads, pictures,...) for potential tagging/retrieval related to the folder-structured storage (memories/source pictures), without having to move the file
 An accessible dashboard (using the folder structure + substructures if preferred), potentially pointing to a to-do list (potentially using folder labels in potential field notes/keywords), potentially pointing to the structured folders/on-line files + assisted group problem-solving 
 Stored/loaded from user text files (to keep the data if the app is deleted) + import feature
 Plain text file storage 
@@ -100,7 +100,7 @@ Supportive technology for sound priorities (dashboard+todos)
 ------------------------------------------
 Let's suppose that we have the ability, assisted or not:
 
-- to identify the main priorities of our companionships, and of our workplace appreciability.
+- to identify the main priorities of our harmonies, and of our workplace appreciability.
 - to identify solutions for those priorities.
 - to evaluate those solutions in order to identify the solutions of best value.
 - to identify the steps, and tasks, sufficient to implement the solutions of best value.
@@ -124,7 +124,6 @@ Potential life improvements:
 ------------------------------------------
 What makes the journey nicer to the persons in a place of dwelling 
 (
-    - with "companionship": making the journey nicer on those we live with -
     - categories: maybe about all the categories involved in our lives: 
                     cooking, cleaning, but also communication, logistics,...
     - the type of personality the persons like to live with when under pressure

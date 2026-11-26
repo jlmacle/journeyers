@@ -47,10 +47,10 @@
     ,"@ca_process_individual_perspective_balance_helping_others_household": {"description": "La question relative à un problème d'équilibre entre aider les autres et la vie de famille, pour la perspective individuelle"}  
     ,"ca_process_individual_perspective_workplace_issue_section_question": "Un problème au travail ?"
     ,"@ca_process_individual_perspective_workplace_issue_section_question": {"description": "La question de section relative à un problème au travail, pour la perspective individuelle"}
-    ,"ca_process_individual_perspective_workplace_more_appreciated": "Le besoin d'être plus apprécié(e) au travail ?"
-    ,"@ca_process_individual_perspective_workplace_more_appreciated": {"description": "La question relative au besoin d'être plus apprécié(e) au travail, pour la perspective individuelle"} 
-    ,"ca_process_individual_perspective_workplace_to_remain_appreciated": "Le besoin de rester apprécié(e) au travail ?"
-    ,"@ca_process_individual_perspective_workplace_to_remain_appreciated": {"description": "La question relative au besoin de rester apprécié(e) au travail, pour la perspective individuelle"} 
+    ,"ca_process_individual_perspective_workplace_more_appreciated": "Le besoin d'être plus appréciable au travail ?"
+    ,"@ca_process_individual_perspective_workplace_more_appreciated": {"description": "La question relative au besoin d'être plus appréciable au travail, pour la perspective individuelle"} 
+    ,"ca_process_individual_perspective_workplace_to_remain_appreciated": "Le besoin de rester appréciable au travail ?"
+    ,"@ca_process_individual_perspective_workplace_to_remain_appreciated": {"description": "La question relative au besoin de rester appréciable au travail, pour la perspective individuelle"} 
     ,"ca_process_individual_perspective_legacy_issue_section_question": "Un problème\navec mon histoire de vie ?"
     ,"@ca_process_individual_perspective_legacy_issue_section_question": {"description": "La question de section relative à un problème avec mon histoire de vie, pour la perspective individuelle"}
     ,"ca_process_individual_perspective_legacy_better_legacy": "Avoir une histoire de vie de meilleure qualité à laisser à mes enfants/aux autres ?"
@@ -65,10 +65,14 @@
     ,"@ca_process_group_perspective_solving_same_problems": {"description": "La question relative au fait de résoudre les mêmes problèmes que mes groupes/équipes"}
     ,"ca_process_group_perspective_harmony_home": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec l'harmonie dans le foyer ?"
     ,"@ca_process_group_perspective_harmony_home": {"description": "La question relative à la cohérence avec l'harmonie au foyer"}
-    ,"ca_process_group_perspective_appreciability_work": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?"
-    ,"@ca_process_group_perspective_appreciability_work": {"description": "La question relative à la cohérence avec être apprécié(e) au travail"}
+    ,"ca_process_group_perspective_appreciability_work": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester appréciable au travail ?"
+    ,"@ca_process_group_perspective_appreciability_work": {"description": "La question relative à la cohérence avec être appréciable au travail"}
     ,"ca_process_group_perspective_earning_ability": "Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?"
     ,"@ca_process_group_perspective_earning_ability": {"description": "La question relative à la cohérence avec la capacité à générer un revenu"}
+    ,"ca_process_external_link_title": "Lien vers des notes externes :"
+    ,"@ca_process_external_link_title": {"description": "Le titre pour le lien vers des notes externes"}
+    ,"ca_process_external_link_text_field_hint": "Veuillez entrer un lien vers d'autres notes\nsi pertinent."
+    ,"@ca_process_external_link_text_field_hint": {"description":  "Le placeholder du champ de texte, pour le lien vers des notes"}
     ,"ca_process_file_name_save_button_text_on_desktop": "Veuillez cliquer pour sauvegarder les données en CSV,\nun format compatible avec les logiciels tableurs."
     ,"@ca_process_file_name_save_button_text_on_desktop": {"description": "l10n pour le texte du bouton de sauvegarde des données, durant le processus d'analyse de contexte (sur desktop)"}   
     ,"ca_new_process_button": "Veuillez cliquer pour démarrer\nune nouvelle analyse de contexte."
@@ -77,6 +81,8 @@
     ,"@ca_unfilled_analysis_title": {"description": "La valeur par défaut du titre d'une analyse de contexte"}   
     ,"ca_dashboard_title": "Analyses précédentes"
     ,"@ca_dashboard_title": {"description": "Le titre du tableau de bord"}
+    ,"ca_preview_external_link": "Lien vers des notes supplémentaires :" 
+    ,"@ca_preview_external_link": {"description": "Le titre pour le lien vers des notes supplémentaires dans l'aperçu"}
     ,"ca_preview_notes_introduction": "Notes: "
     ,"@ca_preview_notes_introduction": {"description": "l10n pour Notes:"}
     ,"ca_preview_answers_introduction": "Réponse(s): "

@@ -14,6 +14,7 @@ import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/1_context_analysis_title_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/2_context_analysis_keywords_declaration.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3_context_analysis_form.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/4_context_analysis_external_link.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_ca_form.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
@@ -44,6 +45,9 @@ class CAProcess extends StatefulWidget {
   /// A DTOCAForm instance used at edition time.
   final DTOCAForm? dtoCAFormWhenEdition;
 
+  /// Value for the link to the external notes at edition time.
+  final String? linkToExternalNotesWhenEdition;
+
   /// The file name value (without extension) at edition time.
   final String fileNameWithoutExtensionWhenEdition;
 
@@ -63,6 +67,7 @@ class CAProcess extends StatefulWidget {
     this.titleWhenEdition = "",
     this.keywordsWhenEdition = const {},
     this.dtoCAFormWhenEdition,
+    this.linkToExternalNotesWhenEdition = "",
     this.fileNameWithoutExtensionWhenEdition = "",
     this.filePathWhenEdition = "",
     required this.caPageCallbackFunctionToRefreshThePage,
@@ -123,6 +128,15 @@ class CAProcessState extends State<CAProcess> {
       analysisKeywords,
     );
   }
+
+  // LINK TO EXTERNAL NOTES
+  String analysisLinkToExternalNotes = "";
+  void _analysisLinkToExternalNotesUpdate(String linkToExternalNotesValue) {
+    // removing potential " from copying file paths
+    analysisLinkToExternalNotes = linkToExternalNotesValue.replaceAll('"', "");
+    logm("CAProcess: _analysisLinkToExternalNotesUpdate: analysisLinkToExternalNotes", analysisLinkToExternalNotes);
+  }
+
 
   // FILE NAME
   // Used in CAForm.
@@ -274,6 +288,17 @@ class CAProcessState extends State<CAProcess> {
                     parentCallbackFunctionToSetFocusabilityOfBottomBarItems: widget
                         .caPageCallbackFunctionToSetFocusabilityOfBottomBarItems,
                   ),
+
+                  CALinkToExternalNotes
+                  (
+                    linkToExternalNotesWhenEdition: widget.linkToExternalNotesWhenEdition,
+                    onLinkToExternalNotesUpdatedProcessCallbackFunction: 
+                    (value) => _analysisLinkToExternalNotesUpdate(value)
+                  ),
+
+                  const Gap(preAndPostLevel2DividerGap),
+                  const Divider(thickness: betweenLevel2DividerThickness),
+                  const Gap(preAndPostLevel2DividerGap),
 
                   // ─── DATA SAVING ───────────────────────────────────────
                   Center(

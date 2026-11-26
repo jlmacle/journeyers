@@ -82,6 +82,7 @@ class CAFormState extends State<CAForm> {
   String _fileName = "";
   Set<String> _keywords = {};
   String _analysisTitle = "";
+  String _analysisLinkToExternalNotes = "";
 
   // Method used to update a DTOCheckboxWithTextField text
   Future<void> _onDTOCheckboxWithTextFieldUpdate(
@@ -188,6 +189,7 @@ class CAFormState extends State<CAForm> {
               "Issue with the default title value for a context analysis"
         : caProcessKey.currentState!.analysisTitle.trim();
     _keywords = caProcessKey.currentState!.analysisKeywords;
+    _analysisLinkToExternalNotes = caProcessKey.currentState!.analysisLinkToExternalNotes;
     _fileName = caProcessKey.currentState!.analysisFileName;
 
     // Building the data structure
@@ -252,12 +254,14 @@ class CAFormState extends State<CAForm> {
       //.add_jm() to add this hour:minutes format: 5:08 PM
       var formatter = DateFormat.yMMMMd(languageCode).add_jm();
       var formattedDate = formatter.format(now);
+
       await du.saveDashboardMetadata(
         context: context,
         typeOfDashboardContext: DashboardUtils.caContext,
         title: _analysisTitle,
         keywords: _keywords.toList(),
         formattedDate: formattedDate,
+        linkToExternalNotes: _analysisLinkToExternalNotes,
         filePath: pathToCSVFile,
       );
       await rtdu.saveWasSessionDataSaved(

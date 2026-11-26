@@ -65,7 +65,7 @@ class LocalizedCAFormQuestions
 
   // Heading level 3 without sub items
   /// Question asked in the form: Am I trying to solve the same problem(s) as my groups/teams?
-  String level3TitleSameProblem = "";
+  String level3TitleSameProblems = "";
 
   // Heading level 3 without sub items
   /// Question asked in the form: Is entering the group problem-solving process consistent with harmony at home?
@@ -187,7 +187,7 @@ class LocalizedCAFormQuestions
 
     // Heading level 3 without sub items
     /// Question asked in the form: Am I trying to solve the same problem(s) as my groups/teams?
-    level3TitleSameProblem = AppLocalizations.of(context)?.ca_process_group_perspective_solving_same_problems ?? "Issue with the question related to solving the same problem(s) as the groups/teams";
+    level3TitleSameProblems = AppLocalizations.of(context)?.ca_process_group_perspective_solving_same_problems ?? "Issue with the question related to solving the same problem(s) as the groups/teams";
 
     // Heading level 3 without sub items
     /// Question asked in the form: Is entering the group problem-solving process consistent with harmony at home?
@@ -223,7 +223,7 @@ class LocalizedCAFormQuestions
       // group problematics
       level3TitleGroupsProblematicsForDataSaving: labelTextField,
       // same problem?
-      level3TitleSameProblem: labelSegmentedButton,
+      level3TitleSameProblems: labelSegmentedButton,
       // harmony at home
       level3TitleHarmonyAtHome: labelSegmentedButton,
       // appreciability at work
@@ -257,7 +257,7 @@ class LocalizedCAFormQuestions
     /// The set of the titles level 3 related to a group/team perspective.
     level3TitlesGroup = {
       level3TitleGroupsProblematics,
-      level3TitleSameProblem,
+      level3TitleSameProblems,
       level3TitleHarmonyAtHome,
       level3TitleAppreciabilityAtWork,
       level3TitleIncomeEarningAbility,
@@ -265,7 +265,7 @@ class LocalizedCAFormQuestions
 
     level3TitlesGroupForPreview = {
       lineReturnToSpace(level3TitleGroupsProblematics)!,
-      lineReturnToSpace(level3TitleSameProblem)!,
+      lineReturnToSpace(level3TitleSameProblems)!,
       lineReturnToSpace(level3TitleHarmonyAtHome)!,
       lineReturnToSpace(level3TitleAppreciabilityAtWork)!,
       lineReturnToSpace(level3TitleIncomeEarningAbility)!,
@@ -273,7 +273,7 @@ class LocalizedCAFormQuestions
 
     /// The set of the titles level 3 related to a group/team perspective that are answered with segmented buttons.
     level3TitlesGroupCustomSegmentedButtons = {
-      level3TitleSameProblem,
+      level3TitleSameProblems,
       level3TitleHarmonyAtHome,
       level3TitleAppreciabilityAtWork,
       level3TitleIncomeEarningAbility,

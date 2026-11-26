@@ -122,7 +122,7 @@ Future<void> main() async {
         // Getting the localized strings
         var context = tester.element(find.byType(Scaffold).first);
         LocalizedGPSStrings lgps = .new(context);
-        LocalizedTestingStrings lts = .new(context);
+        LocalizedTestingStrings lts = .new(context);        
 
         // ── 1. ENTERING NEW CA PROCESS DATA ────────────────────────────────────────────
         // ───────────────────────────────────────────────────────────────────────────────
@@ -484,7 +484,8 @@ Future<void> main() async {
             4,
             (i) => "b${i + 2}",
           );
-
+          var linkToExternalNotes = "https://ext-notes.com";
+          var linksToExternalNotes = List.generate(totalEntries, (i)=> "linkToExternalNotes${i}");
           var fileNamesWithoutExtensionList = List.generate(
             totalEntries,
             (i) => "${lts.fileNameWithoutExtensionRoot}_${i}",
@@ -502,6 +503,7 @@ Future<void> main() async {
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
             segmentedButtonValues: segmentedButtonsValues,
             segmentedButtonTextFieldValues: segmentedButtonTextFieldValues,
+            linksToExternalNotes: linksToExternalNotes,
             fileNamesWithoutExtensionList: fileNamesWithoutExtensionList,
           );
 
@@ -583,6 +585,7 @@ Future<void> main() async {
               tester: tester,
               previewFinder: previewFinder,
               title: titlesList[i],
+              linkToExternalNotes: linkToExternalNotes,
               individualStringValues: individualStringValues,
               groupStringValues: groupStringValues,
               segmentedButtonsValues: segmentedButtonsValues, 
@@ -679,6 +682,7 @@ Future<void> main() async {
           );
 
           var title = lts.caTitleRoot;
+          var linkToExternalNotes = "https://ext-notes.com";
           var kwsList = kwsLists[0];
           var fileNameWithoutExtension = lts.fileNameWithoutExtensionRoot;
 
@@ -692,6 +696,7 @@ Future<void> main() async {
             groupProblemsToSolveStrValue: groupProblemsToSolveStrValue,
             segmentedButtonsValues: segmentedButtonsValues,
             segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
+            linkToExternalNotes: linkToExternalNotes,
             fileNameWithoutExtension: fileNameWithoutExtension,
           );
 
@@ -726,10 +731,11 @@ Future<void> main() async {
             segmentedButtonsValues: segmentedButtonsValues,
             newSegmentedButtonsValues: newSegmentedButtonsValues,
             segmentedButtonsTextFieldValues: segmentedButtonsTextFieldValues,
+            linkToExternalNotes: linkToExternalNotes,
             fileNameWithoutExtension: fileNameWithoutExtension,
           );
 
-          await tester.pump(const Duration(seconds: 2));
+          // await tester.pump(const Duration(seconds: 10));
 
           // ── 4. TESTING THE EDITED CA KEYWORDS DATA ────────────────────────────────────────────
           // ───────────────────────────────────────────────────────────────────────────────
@@ -764,6 +770,7 @@ Future<void> main() async {
             context: context,
             tester: tester,
             title: title,
+            linkToExternalNotes: linkToExternalNotes,
             checkboxesValues: newCheckboxesValues,
             individualStringValues: individualStringValuesEdited,
             segmentedButtonsValues: newSegmentedButtonsValues,

@@ -13,6 +13,7 @@ import "package:journeyers/l10n/localized_ca_other_strings.dart";
 import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/utils/generic/accessibility/accessibility_utils.dart";
+import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
 import "package:journeyers/utils/generic/dev/test_externalized_strings.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 import "package:journeyers/utils/generic/testing/test_utils.dart";
@@ -48,6 +49,7 @@ class _CAPreviewState extends State<CAPreview> {
   bool _previewDataLoading = true;
   final Map<String, dynamic> _sectionsIndividual = {};
   final Map<String, dynamic> _sectionsGroup = {};
+  String _linkToExternalNotes = "";
 
   @override
   void didUpdateWidget(covariant CAPreview oldWidget) {
@@ -84,9 +86,20 @@ class _CAPreviewState extends State<CAPreview> {
     }
 
     try {
+      // Getting the perspectives data
       Map<String, List<dynamic>> perspectiveData =
           await _caCSVFileToPreviewPerspectiveData(widget.pathToStoredData);
       await _perspectiveDataToDataStructures(perspectiveData);
+    
+      // Getting the link to the external notes
+      Map<String, dynamic> sessionDataRetrieved = await du.getSpecificDashboardMetadata
+      (
+        typeOfDashboardContext: DashboardUtils.caContext,
+        storedDatafilePath: widget.pathToStoredData
+      );
+      _linkToExternalNotes = sessionDataRetrieved[DashboardUtils.keyExternalNotes];
+      logm("CAPreview: _fetchingData: _linkToExternalNotes", _linkToExternalNotes);
+
     } catch (e, s) {
       pu.printd("Error: CAPreview: _fetchingData: $e: $s");
     }

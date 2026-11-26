@@ -1,10 +1,13 @@
 import "package:material_ui/material_ui.dart";
 
 import "package:share_plus/share_plus.dart";
+import "package:url_launcher/url_launcher.dart";
 
 import "package:journeyers/app_themes.dart";
 import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/app_localizations.dart";
+import "package:journeyers/l10n/localized_ca_other_strings.dart";
+import "package:journeyers/l10n/localized_dashboard_strings.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_preview_widget.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_preview_widget.dart";
 import "package:journeyers/utils/generic/dashboard/dashboard_utils.dart";
@@ -295,7 +298,13 @@ class _SessionsListItemState extends State<SessionsListItem> {
     Map<String, dynamic> sessionMetadata,
     ValueChanged<String> updateTmpFilePath,
   ) async {
+
     String title = sessionMetadata[DashboardUtils.keyTitle];
+    String linkToExternalNotes = sessionMetadata[DashboardUtils.keyExternalNotes] ?? "";
+    
+    // Accessing the localized strings
+    LocalizedDashboardStrings lds = .new(context);
+
     await showGeneralDialog(
       context: context,
       transitionDuration: const Duration(milliseconds: 300),
@@ -303,6 +312,9 @@ class _SessionsListItemState extends State<SessionsListItem> {
         // Moving StatefulBuilder to wrap the Scaffold so setLocalState is available everywhere inside
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setLocalState) {
+            // Accessing the localized data
+            LocalizedCAOtherStrings los = .new(context);
+
             return Scaffold(
               appBar: AppBar(
                 centerTitle: true,
@@ -319,11 +331,7 @@ class _SessionsListItemState extends State<SessionsListItem> {
                 leading: Row(
                   children: [
                     IconButton(
-                      tooltip:
-                          AppLocalizations.of(
-                            context,
-                          )?.dashboard_tooltip_edit_session_data ??
-                          "Issue with the l10n for the 'Edit session data' tooltip",
+                      tooltip: lds.editFromPreviewTooltipLabel,
                       icon: const Icon(Icons.edit),
                       color: appBarWhite,
                       onPressed: () async {
@@ -403,14 +411,40 @@ class _SessionsListItemState extends State<SessionsListItem> {
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: (sessionMetadata[DashboardUtils.keyFilePath] != null)
                         ? (dashboardContext == DashboardUtils.caContext)
-                              ? CAPreview(
-                                  context: context,
-                                  pathToStoredData:
-                                      sessionMetadata[DashboardUtils
-                                          .keyFilePath],
-                                  caPreviewCallbackFunctionToUpdateTmpFilePath:
-                                      updateTmpFilePath,
-                                )
+                              ?                               
+                              Column(
+                                crossAxisAlignment: .start,
+                                children: [
+                                  // additional notes
+                                  Padding(
+                                    padding: const EdgeInsets.only(left:12.0, right:12.0, top: 16.0),
+                                    child: Text(los.caPreviewExternalLink, style:TextStyle(fontSize: 16, fontWeight: .bold),),
+                                  ),                           
+                                  TextButton
+                                  (
+                                    onPressed: () async
+                                    {
+                                      try{
+                                        await launchUrl(Uri.parse(linkToExternalNotes));
+                                      }
+                                      catch (err) {
+                                        pu.printd("url_launcher threw an error: $err. ");
+                                      }
+                                    }, 
+                                    child: Text(linkToExternalNotes)
+                                  ),
+                                  const Divider(thickness: 3, color: Colors.black), 
+                                  // preview data                                      
+                                  CAPreview(
+                                      context: context,
+                                      pathToStoredData:
+                                          sessionMetadata[DashboardUtils
+                                              .keyFilePath],
+                                      caPreviewCallbackFunctionToUpdateTmpFilePath:
+                                          updateTmpFilePath,
+                                    )
+                                ],
+                              )
                               : GPSPreview(
                                   gpsPreviewPathToStoredData:
                                       sessionMetadata[DashboardUtils
