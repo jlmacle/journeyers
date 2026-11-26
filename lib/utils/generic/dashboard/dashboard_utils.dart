@@ -38,6 +38,9 @@ class DashboardUtils {
   /// The key for the session date using ISO 8601 format (for sorting).
   static const keyDateISO8601 = "dateISO8601";
 
+  /// The key for the link to external notes.
+  static const keyExternalNotes = "externalNotes";
+
   /// The key for the session file path.
   static const keyFilePath = "filePath";
 
@@ -89,6 +92,7 @@ class DashboardUtils {
     required String? title,
     required List<String> keywords,
     required String formattedDate,
+    String? linkToExternalNotes,
     required String filePath,
   }) async {
     logd("formattedDate", formattedDate);
@@ -118,6 +122,7 @@ class DashboardUtils {
       keyKeywords: keywords,
       keyDate: formattedDate,
       keyDateISO8601: _toIso8601(DateUtils.sanitizeDate(formattedDate)),
+      keyExternalNotes: linkToExternalNotes ?? "",
       keyFilePath: filePath,
     };
 
@@ -142,6 +147,7 @@ class DashboardUtils {
 
     logm("new session metadata: $sessionMetadata saved to", file.path);
   }
+
 
   /// Method used to parse a French or US English date to ISO 8601.
   /// Tries the French format first, then falls back to US English.
@@ -208,6 +214,25 @@ class DashboardUtils {
     await sortSessionByDate(list: sessionData, byAscendingDate: true);
 
     return sessionData;
+  }
+
+  /// Method used to get specific dashboard metadata, either for a context analysis, or for a group problem-solving.
+  Future<Map<String, dynamic>> getSpecificDashboardMetadata
+  ({
+    required String typeOfDashboardContext, 
+    required String storedDatafilePath
+  }) async {
+    List allDashboardMetadata = await retrieveAllDashboardMetadata(typeOfDashboardContext: typeOfDashboardContext);
+    var specificMetadata =
+      allDashboardMetadata
+              .where(
+                (session) =>
+                    session[DashboardUtils.keyFilePath] == storedDatafilePath,
+              )
+              .first
+          as Map<String, dynamic>;
+    logm("getSpecificDashboardMetadata", specificMetadata);
+    return specificMetadata; 
   }
 
   /// Method used to delete a specific session from the dashboard metadata file.

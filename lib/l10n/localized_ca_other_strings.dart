@@ -15,12 +15,15 @@ class LocalizedCAOtherStrings
 
   // ─── CA Form ───────────────────────────────────────
   var invitationToUnfoldExpansionTile = "";
-
-  // Text field hints
+    // Text field hints
   var pastOutcomesHouseholdTextFieldHint = "";
   var pastOutcomesWorkplaceTextFieldHint = "";
   var helpingAndHouseholdTextFieldHint = "";
   var caFormPleaseDevelopTextFieldHint = "";
+
+  // ─── External link ───────────────────────────────────────
+  var caProcessExternalLinkTitle = "";
+  var caProcessExternalLinkTextFieldHint = "";
 
   // Submit button label
   var caSubmitButtonLabel = "";
@@ -36,6 +39,7 @@ class LocalizedCAOtherStrings
 
 
   // CA Preview
+  var caPreviewExternalLink = "";
   var caPreviewNoDataInIndividualPerspective = ""; 
   var caPreviewNotesIntroduction  = "";     
   var caPreviewAnswersIntroduction  = "";
@@ -54,12 +58,16 @@ class LocalizedCAOtherStrings
    
     // ─── CA Form ───────────────────────────────────────
     invitationToUnfoldExpansionTile = _l10n?.ca_process_invitation_to_unfold_expansion_tile ?? "Issue with the l10n for 'Please click to unfold'";
-  
-    // Text field hints
+      // Text field hints
     pastOutcomesHouseholdTextFieldHint = _l10n?.ca_process_past_outcomes_household_text_field_hint ?? "Issue with the text field hint, for the past outcomes of the problem for the household";
     pastOutcomesWorkplaceTextFieldHint = _l10n?.ca_process_past_outcomes_workplace_text_field_hint ?? "Issue with the text field hint, for the past outcomes of the problem for the workplace";
     helpingAndHouseholdTextFieldHint = _l10n?.ca_process_helping_household_text_field_hint ?? "Issue with the text field hint, for the reasons and potential impacts of an imbalance between faithfulness towards your own and consideration towards others";
     caFormPleaseDevelopTextFieldHint = _l10n?.ca_process_please_develop_text_field_hint ?? "Issue with the text field hint inviting to develop";
+   
+    // ─── External link ───────────────────────────────────────
+    caProcessExternalLinkTitle = _l10n?.ca_process_external_link_title ?? "Issue with the title for the link to the external notes";
+    caProcessExternalLinkTextFieldHint = _l10n?.ca_process_external_link_text_field_hint ?? "Issue with the text field hint inviting to add a link towards external notes";
+
 
     yes =  _l10n?.l10n_yes ?? "Issue with the l10n for 'Yes'";
     no = _l10n?.l10n_no ?? "Issue with the l10n for 'No'";
@@ -78,6 +86,7 @@ class LocalizedCAOtherStrings
     caPreviewNoDataInIndividualPerspective = _l10n?.ca_preview_no_data_stored ?? "Issue with the l10n for 'No question checked and no data in the last text field.'";
     caPreviewNotesIntroduction = _l10n?.ca_preview_notes_introduction ?? "Issue with the l10n for Notes:";
     caPreviewAnswersIntroduction = _l10n?.ca_preview_answers_introduction ?? "Issue with the l10n for Answer(s): ";
+    caPreviewExternalLink = _l10n?.ca_preview_external_link ?? "Issue with the title for the link to the external notes in the preview";
   }
 
 }

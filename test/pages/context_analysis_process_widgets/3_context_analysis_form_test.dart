@@ -426,14 +426,14 @@ void main() {
           (
             tester: tester, 
             label: "level3TitleWorkplaceIssueItem1",
-            expectedTexts: {"en":"To solve a need to be more appreciated at work?", "fr":"Le besoin d'être plus apprécié(e) au travail ?"}, 
+            expectedTexts: {"en":"To solve a need to be more appreciated at work?", "fr":"Le besoin d'être plus appréciable au travail ?"}, 
             onScreenValue: lfq.level3TitleWorkplaceIssueItem1,          
           );
           verifyLocalizedStringAsExpected
           (
             tester: tester, 
             label: "level3TitleWorkplaceIssueItem2",
-            expectedTexts: {"en":"To solve a need to remain appreciated at work?", "fr":"Le besoin de rester apprécié(e) au travail ?"}, 
+            expectedTexts: {"en":"To solve a need to remain appreciated at work?", "fr":"Le besoin de rester appréciable au travail ?"}, 
             onScreenValue: lfq.level3TitleWorkplaceIssueItem2,          
           );
 
@@ -681,7 +681,7 @@ void main() {
             tester: tester, 
             label: "groupPerspectiveSameProblems",
             expectedTexts: {"en":"Am I trying to solve the same problem(s) as my groups/teams?", "fr":"Est-ce que j'essaie de résoudre les mêmes problèmes que mes groupes/équipes ?"}, 
-            onScreenValue: lfq.level3TitleSameProblem,          
+            onScreenValue: lfq.level3TitleSameProblems,          
           );
           verifyLocalizedStringAsExpected
           (
@@ -694,7 +694,7 @@ void main() {
           (
             tester: tester, 
             label: "groupPerspectiveAppreciabilityWork",
-            expectedTexts: {"en":"Is entering the group problem-solving process consistent with appreciability at work?", "fr":"Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?"}, 
+            expectedTexts: {"en":"Is entering the group problem-solving process consistent with appreciability at work?", "fr":"Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester appréciable au travail ?"}, 
             onScreenValue: lfq.level3TitleAppreciabilityAtWork,          
           );
           verifyLocalizedStringAsExpected
@@ -712,7 +712,7 @@ void main() {
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(3)).data,
-            lfq.level3TitleSameProblem,
+            lfq.level3TitleSameProblems,
           );
           expect(
             tester.widget<Text>(customHeadingTextsFinder.at(4)).data,

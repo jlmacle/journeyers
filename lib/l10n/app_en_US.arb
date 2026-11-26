@@ -69,6 +69,10 @@
   ,"@ca_process_group_perspective_appreciability_work": {"description": "The question related to the consistency with appreciability at work"}
   ,"ca_process_group_perspective_earning_ability": "Is entering the group problem-solving process consistent with my income earning ability?"
   ,"@ca_process_group_perspective_earning_ability": {"description": "The question related to the consistency with earning ability"}
+  ,"ca_process_external_link_title": "Link to external notes:"
+  ,"@ca_process_external_link_title": {"description": "The title for the link to the external notes"}
+  ,"ca_process_external_link_text_field_hint": "Please enter a link towards external notes\nif relevant."
+  ,"@ca_process_external_link_text_field_hint": {"description":  "The text field hint inviting to add a link towards external notes"}    
   ,"ca_process_file_name_save_button_text_on_desktop": "Click to save your data in CSV,\nspreadsheet-compatible format"
   ,"@ca_process_file_name_save_button_text_on_desktop": {"description": "l10n for the save button text, in the c.a. process (on desktop)"}  
   ,"ca_new_process_button": "Please click to start\na new context analysis."
@@ -76,7 +80,9 @@
   ,"ca_unfilled_analysis_title": "Untitled"
   ,"@ca_unfilled_analysis_title": {"description": "The default title value for a context analysis"}   
   ,"ca_dashboard_title": "Previous analyses"
-  ,"@ca_dashboard_title": {"description": "The dashboard title"}   
+  ,"@ca_dashboard_title": {"description": "The dashboard title"}  
+  ,"ca_preview_external_link": "Link to additional notes:" 
+  ,"@ca_preview_external_link": {"description": "The title for the link to the external notes in the preview"}
   ,"ca_preview_notes_introduction": "Notes: "
   ,"@ca_preview_notes_introduction": {"description": "l10n for Notes:"}
   ,"ca_preview_answers_introduction": "Answer(s): "

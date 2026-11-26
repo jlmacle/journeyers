@@ -12,7 +12,7 @@ import "package:journeyers/utils/generic/dev/type_defs.dart";
 import "package:journeyers/utils/generic/dev/utility_classes_import.dart";
 
 /// {@category Group problem-solving}
-/// A widget used to monitor the moods of the stakeholders involved in the group problem-solving process.
+/// A widget used to monitor the moods of the participants involved in the group problem-solving process.
 class GPSGroupMoods extends StatefulWidget {
   /// The number of the column where the GPSGroupMoods instance is located (1 for the left side of the UI, 2 for the right side).
   final int columnNumber;
@@ -23,22 +23,22 @@ class GPSGroupMoods extends StatefulWidget {
   /// The key for the second GPSGroupMoods widget.
   final GlobalKey groupMoodsKey2;
 
-  /// The list of stakeholders identifiers for the first column.
+  /// The list of participants identifiers for the first column.
   final List<String> identifiersCol1;
 
-  /// The list of stakeholders identifiers for the second column.
+  /// The list of participants identifiers for the second column.
   final List<String> identifiersCol2;
 
-  /// The list of stakeholders identifiers' colors for the first column.
+  /// The list of participants identifiers' colors for the first column.
   final List<Color> identifiersColors1;
 
-  /// The list of stakeholders identifiers' colors for the second column.
+  /// The list of participants identifiers' colors for the second column.
   final List<Color> identifiersColors2;
 
-  /// Mode for editing a stakeholder identifier.
+  /// Mode for editing a participant identifier.
   final bool isEditMode;
 
-  /// Mode for deleting a stakeholder identifier.
+  /// Mode for deleting a participant identifier.
   final bool isDeleteMode;
 
   /// A callback function called to refresh the process page.
@@ -67,7 +67,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods> {
   bool? _wasARightSwipe;
 
   // Used in GPSProcess.
-  // Function used to delete all stakeholder identifiers
+  // Function used to delete all participant identifiers
   void identifiersClearAll() {
     widget.identifiersCol1.clear();
     widget.identifiersCol2.clear();
@@ -75,7 +75,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods> {
     widget.groupMoodsKey2.currentState?.setState(() {});
   }
 
-  // Function used to remove a stakeholder identifier
+  // Function used to remove a participant identifier
   void _identifierRemove({int? index}) => setState(() {
     if (widget.columnNumber == 1) {
       widget.identifiersCol1.removeAt(index!);
@@ -86,7 +86,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods> {
     }
   });
 
-  // Function used to edit a stakeholder identifier
+  // Function used to edit a participant identifier
   void _identifierEdit({int? index}) {
     // Getting the localized strings
     LocalizedGPSStrings lgps = .new(context);
@@ -145,7 +145,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods> {
     );
   }
 
-  // Function used to change a stakeholder identifier's color
+  // Function used to change a participant identifier's color
   void _identifierChangeColor({
     required int index,
     required Color currentColor,
@@ -264,7 +264,7 @@ class GPSGroupMoodsState extends State<GPSGroupMoods> {
   }
 }
 
-// Class for the stakeholders" identifiers
+// Class for the participants' identifiers
 class IdentifierWidget extends StatelessWidget {
   final String identifierValue;
   final Color identifierCircleColor;

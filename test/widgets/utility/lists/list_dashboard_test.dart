@@ -50,6 +50,7 @@ void main() {
                   required String titleWhenEdition,
                   required Set<String> keywordsWhenEdition,
                   required Object dtoWhenEdition,
+                  String? linkToExternalNotesWhenEdition,
                   required String fileNameWithoutExtensionWhenEdition,
                   required String filePathWhenEdition,
                 }) {},

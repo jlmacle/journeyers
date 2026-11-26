@@ -36,9 +36,11 @@ Future<void> retrieveCASessionData({
   List<String> keywordsWhenEdition =
       (sessionToEdit[DashboardUtils.keyKeywords] as List).cast<String>();
 
+  String linkToExternalNotesWhenEdition = sessionToEdit[DashboardUtils.keyExternalNotes];
+
   // Getting the CSV content
   String fileNameWithExtension = path.basename(filePathWhenEdition);
-  String fileNameWithoutExtension = fileNameWithExtension.split(".").first;
+  String fileNameWithoutExtensionWhenEdition = fileNameWithExtension.split(".").first;
   String csvContent = await fu.readTextFile(filePath: filePathWhenEdition);
 
   // Loading the data from the CSV into a DTO
@@ -49,18 +51,19 @@ Future<void> retrieveCASessionData({
   loge("retrieveCASessionData: titleWhenEdition: $titleWhenEdition");
   loge("retrieveCASessionData: keywordsWhenEdition: $keywordsSetWhenEdition");
   loge("retrieveCASessionData: dtoWhenEdition:");
-
+  loge("retrieveCASessionData: linkToExternalNotesWhenEdition: $linkToExternalNotesWhenEdition");
   if (editDebug) dtoWhenEdition.printToConsole();
-  loge("retrieveCASessionData: fileNameWithoutExtension: $fileNameWithoutExtension");
+  loge("retrieveCASessionData: fileNameWithoutExtensionWhenEdition: $fileNameWithoutExtensionWhenEdition");
 
   // CA process page re-build with the loaded data
   onRetrievedCASessionDataBeforeEditionCallbackFunction(
     dashboardContext: dashboardContext,
     isSessionDataBeingEdited: true,
-    dtoWhenEdition: dtoWhenEdition,
-    fileNameWithoutExtensionWhenEdition: fileNameWithoutExtension,
     titleWhenEdition: titleWhenEdition,
     keywordsWhenEdition: keywordsSetWhenEdition,
+    dtoWhenEdition: dtoWhenEdition,    
+    linkToExternalNotesWhenEdition: linkToExternalNotesWhenEdition,
+    fileNameWithoutExtensionWhenEdition: fileNameWithoutExtensionWhenEdition,
     filePathWhenEdition: filePathWhenEdition,
   );
 }
@@ -108,10 +111,10 @@ Future<void> retrieveGPSSessionData({
   onRetrievedGPSSessionDataBeforeEditionCallbackFunction(
     dashboardContext: dashboardContext,
     isSessionDataBeingEdited: true,
-    dtoWhenEdition: dtoWhenEdition,
-    fileNameWithoutExtensionWhenEdition: fileNameWithoutExtension,
     titleWhenEdition: titleWhenEdition,
     keywordsWhenEdition: keywordsSetWhenEdition,
+    dtoWhenEdition: dtoWhenEdition,
+    fileNameWithoutExtensionWhenEdition: fileNameWithoutExtension,
     filePathWhenEdition: filePathWhenEdition,
   );
 }

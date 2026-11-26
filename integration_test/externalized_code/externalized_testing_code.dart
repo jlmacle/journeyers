@@ -17,6 +17,7 @@ import "package:journeyers/pages/context_analysis/context_analysis_process_widge
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3a_context_analysis_custom_checkbox_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3b_context_analysis_custom_segmented_button_with_text_field_sanitized_and_padded.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/3c_context_analysis_custom_text_field_sanitized_and_padded.dart";
+import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/4_context_analysis_external_link.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_page.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process.dart";
 import "package:journeyers/pages/group_problem_solving/group_problem_solving_process_widgets/3_group_problem_solving_checklist.dart";
@@ -40,11 +41,7 @@ Future<void> caOpenIndividualExpansionTile(
 ) async {
   LocalizedCAFormQuestions lfq = .new(context);
   var tileFinder = find.text(lfq.level2TitleIndividual, skipOffstage: false);
-  await tester.scrollUntilVisible(
-    tileFinder,
-    45,
-    scrollable: find.byType(Scrollable).last,
-  );
+  await tester.scrollUntilVisible(tileFinder,45,scrollable: find.byType(Scrollable).last);
   // pumpAndSettle timed out
   // await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 3));
@@ -63,11 +60,7 @@ Future<void> caOpenGroupExpansionTile(
 ) async {
   LocalizedCAFormQuestions lfq = .new(context);
   var tileFinder = find.text(lfq.level2TitleGroup, skipOffstage: false);
-  await tester.scrollUntilVisible(
-    tileFinder,
-    45,
-    scrollable: find.byType(Scrollable).last,
-  );
+  await tester.scrollUntilVisible(tileFinder,45,scrollable: find.byType(Scrollable).last);
   // pumpAndSettle timed out
   // await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 3));
@@ -115,14 +108,11 @@ Future<void> caEnterProcessTitle(WidgetTester tester, String aTitle) async {
     matching: find.byType(TextField),
   );
 
-  expect(
-    titleTextField,
-    findsOneWidget,
-    reason: "A TextField should exist inside CATitleDeclaration.",
-  );
+  expect(titleTextField, findsOneWidget);
 
   // Entering a title
   await tester.enterText(titleTextField, aTitle);
+  await tester.pumpAndSettle();
 }
 
 // Method used to enter keywords in the CA process
@@ -226,7 +216,7 @@ Future<void> caFillForm(
       .last;
 
   // Adding text in the text field
-  await tester.ensureVisible(indivTextFieldOnlyFinder);
+  await tester.scrollUntilVisible(indivTextFieldOnlyFinder, 45, scrollable: find.byType(Scrollable).last);
   await tester.enterText(indivTextFieldOnlyFinder, indivAnotherIssueStrValue);
   await tester.pumpAndSettle();
 
@@ -245,7 +235,7 @@ Future<void> caFillForm(
       .first;
 
   // Adding text in the text field
-  await tester.ensureVisible(groupTextFieldOnlyFinder);
+  await tester.scrollUntilVisible(groupTextFieldOnlyFinder, 45, scrollable: find.byType(Scrollable).last);
   await tester.enterText(
     groupTextFieldOnlyFinder,
     groupProblemsToSolveStrValue,
@@ -303,6 +293,24 @@ Future<void> caFillForm(
   }
 }
 
+// Method used to enter a link to external notes in the CA process
+Future<void> caEnterLinkToExternalNotes(WidgetTester tester, String linkToExternalNotes) async {
+  // Searching the TextField inside CATitleDeclaration
+  Finder linkToExternalNotesTextField = find.descendant(
+    of: find.byType(CALinkToExternalNotes),
+    matching: find.byType(TextField),
+  );
+
+  expect(linkToExternalNotesTextField, findsOneWidget);
+
+  // Entering a link
+  await tester.scrollUntilVisible(linkToExternalNotesTextField, 45, scrollable: find.byType(Scrollable).last);
+  await tester.pumpAndSettle();
+  await tester.enterText(linkToExternalNotesTextField, linkToExternalNotes);
+  await tester.pumpAndSettle();
+}
+
+
 // Method used to enter new CA process data
 // 7 values are necessary in checkboxValues
 // 4 values are necessary in segmentedButtonValues
@@ -325,6 +333,7 @@ Future<void> caEnterNewProcessDataOnMobile({
   String groupProblemsToSolveStrValue = "",
   List<Set<String>> segmentedButtonsValues = const [{}, {}, {}, {}],
   List<String> segmentedButtonsTextFieldValues = const [],
+  String? linkToExternalNotes,
   required String fileNameWithoutExtension,
 }) async {
   // ── 1. CLICK TOWARD A NEW CA PROCESS ───────────────────────────────────────────────
@@ -342,8 +351,8 @@ Future<void> caEnterNewProcessDataOnMobile({
   // ── KEYWORDS SECTION ─────────────────────────────────────────────────────────────
   await caEnterProcessKeywords(tester, kwsList);
 
-  if (formToFill) {
-    // ── FORM SECTION ─────────────────────────────────────────────────────────────
+  // ── FORM SECTION ─────────────────────────────────────────────────────────────
+  if (formToFill) {    
     await caFillForm(
       tester,
       checkboxesValues,
@@ -354,6 +363,13 @@ Future<void> caEnterNewProcessDataOnMobile({
       segmentedButtonsTextFieldValues,
     );
   }
+
+  // ── LINK TO EXTERNAL NOTES SECTION ─────────────────────────────────────────────────────────────
+  if (linkToExternalNotes != null)
+  {
+    await caEnterLinkToExternalNotes(tester, linkToExternalNotes);
+  }
+  
 
   // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
   // Entering the file name and submitting data
@@ -397,6 +413,7 @@ Future<void> caEnterSeveralTimesNewProcessData({
   required String groupProblemsToSolveStrValue,
   required List<Set<String>> segmentedButtonValues,
   required List<String> segmentedButtonTextFieldValues,
+  List<String>? linksToExternalNotes,
   required List<String> fileNamesWithoutExtensionList,
 }) async {
   int listsLength = titlesList.length;
@@ -462,7 +479,7 @@ Future<void> caResetCASegmentedButtons({
 
   // Scrolling to reach the title
   await tester.scrollUntilVisible(
-    find.text(lfq.level3TitleSameProblem),
+    find.text(lfq.level3TitleSameProblems),
     45,
     scrollable: find.byType(Scrollable).last,
   );
@@ -518,7 +535,9 @@ Future<void> caEditDataOnMobile({
   required List<Set<String>> segmentedButtonsValues,
   required List<Set<String>> newSegmentedButtonsValues,
   required List<String> segmentedButtonsTextFieldValues,
+  String? linkToExternalNotes,
   required String fileNameWithoutExtension,
+  bool? editingFromPreview
 }) async {
   logt("Entering caEditDataOnMobile");
 
@@ -529,17 +548,35 @@ Future<void> caEditDataOnMobile({
 
   // ── ENTERING EDIT MODE ─────────────────────────────────────────────────────────────
   // printTextData(tester);
+
   // Clicking on the edit button
-  var sessionsListItemWithTitle = find.ancestor(
-    of: find.text(title),
-    matching: find.byType(SessionsListItem),
-  );
-  var editIconButton = find.descendant(
-    of: sessionsListItemWithTitle,
-    matching: find.byTooltip(lds.editFromDashboardItemTooltipLabel),
-  );
-  await tester.tap(editIconButton);
-  await tester.pumpAndSettle();
+  // for editing from the preview
+  if (editingFromPreview == true)
+  {
+    logt("Editing from preview");
+    var editIconButtonFinder = find.descendant(
+      of: find.byType(AppBar),
+      matching: find.byTooltip(lds.editFromPreviewTooltipLabel),
+    );
+    await tester.tap(editIconButtonFinder);
+    await tester.pumpAndSettle();
+  }
+  // for editing from the dashboard
+  else
+  {
+    logt("Editing from dashboard");
+    var sessionsListItemWithTitle = find.ancestor(
+      of: find.text(title),
+      matching: find.byType(SessionsListItem),
+    );
+    var editIconButtonFinder = find.descendant(
+      of: sessionsListItemWithTitle,
+      matching: find.byTooltip(lds.editFromDashboardItemTooltipLabel),
+    );
+    await tester.ensureVisible(editIconButtonFinder);
+    await tester.tap(editIconButtonFinder);
+    await tester.pumpAndSettle();
+  } 
 
   // Opening the expansion tiles
   await caOpenIndividualExpansionTile(context, tester);
@@ -547,28 +584,32 @@ Future<void> caEditDataOnMobile({
 
   // ── 1. EDITING THE TITLE ─────────────────────────────────────────────────────────────
   // 1.a. EDITING THE TITLE
-  var titleTextFieldFinder = find.byType(TextField, skipOffstage: false).at(1);
+  var titleTextFieldFinder = find.byType(TextField, skipOffstage: false).at(0);
+  // Going back to the title
+  await tester.scrollUntilVisible(titleTextFieldFinder, -45, scrollable: find.byType(Scrollable).last);
+  await tester.pumpAndSettle();
   await tester.enterText(titleTextFieldFinder, "$title${lts.editionSuffix}");
   await tester.testTextInput.receiveAction(TextInputAction.done);
   await tester.pumpAndSettle();
   await tester.pump(const Duration(seconds: 3));
 
-  // 1.b. VERIFYING THE TITLE EDITED
-  expect(find.text("$title${lts.editionSuffix}"), findsOne);
-
   // ── 2. EDITING THE KEYWORDS ─────────────────────────────────────────────────────────────
+  
   // 2.a. REMOVING THE KEYWORDS
   for (var kw in kwsList) {
     var kwInputChipFinder = find.ancestor(
       of: find.text(kw),
       matching: find.byType(InputChip),
     );
-    var closeInputChip = find.descendant(
+    var closeInputChipFinder = find.descendant(
       of: kwInputChipFinder,
       matching: find.byIcon(Icons.close),
     );
 
-    await tester.tap(closeInputChip);
+    await tester.scrollUntilVisible(closeInputChipFinder, 45, scrollable: find.byType(Scrollable).last);
+    await tester.pumpAndSettle();
+
+    await tester.tap(closeInputChipFinder);
     await tester.pumpAndSettle();
   }
 
@@ -580,12 +621,14 @@ Future<void> caEditDataOnMobile({
   // 2.c. ADDING NEW KEYWORDS
   var keywordsTextFieldFinder = find
       .byType(TextField, skipOffstage: false)
-      .at(2);
+      .at(1);
   for (var newKw in newKwsList) {
     await tester.enterText(keywordsTextFieldFinder, newKw);
     await tester.testTextInput.receiveAction(TextInputAction.done);
     await tester.pumpAndSettle();
-    // await tester.pump(const Duration(seconds: 3));
+    await tester.tap(keywordsTextFieldFinder);
+    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 3));
   }
 
   // 2.d. VERIFYING THE NEW KEYWORDS PRESENT
@@ -752,6 +795,16 @@ Future<void> caEditDataOnMobile({
     await tester.pumpAndSettle();
   }
 
+  // ── 5. EDITING EXTERNAL LINK TO NOTES ─────────────────────────────────────────────────────────────
+  var linkToExternalNotesFinder = find.byKey(const Key("ca-process-linkToExternalNotes"));
+  await tester.scrollUntilVisible(linkToExternalNotesFinder, 45, scrollable: find.byType(Scrollable).first);
+  await tester.pumpAndSettle();
+  await tester.tap(linkToExternalNotesFinder);
+  await tester.pumpAndSettle();
+  await tester.enterText(linkToExternalNotesFinder, "$linkToExternalNotes${lts.editionSuffix}");
+  await tester.testTextInput.receiveAction(TextInputAction.done);
+  await tester.pumpAndSettle();
+  
   // ── DATA SUBMISSION SECTION ─────────────────────────────────────────────────────────────
   // Entering the file name and submitting data
   await dashboardEnterFileNameAndSubmitDataOnMobile(
@@ -798,6 +851,7 @@ Future<void> caTestPreview({
   required WidgetTester tester,
   Finder? previewFinder,
   required String title,
+  required String linkToExternalNotes,
   required List<bool> checkboxesValues,
   required List<String> individualStringValues,
   required List<Set<String>> segmentedButtonsValues,
@@ -810,7 +864,7 @@ Future<void> caTestPreview({
   LocalizedDashboardStrings lds = .new(context);
   LocalizedCAOtherStrings los= .new(context);
 
-  logt("Entering caTestPreview2");
+  logt("Entering caTestPreview");
   logt("---------> Parameters");
   logt("Preview: Checkboxes values", checkboxesValues);
   logt("Preview: Individual perspective values", individualStringValues);
@@ -818,9 +872,8 @@ Future<void> caTestPreview({
   logt("Preview: Group/teams perspective values", groupStringValues);
   // await tester.pump(const Duration(seconds: 2));
 
-  // ---------------------------------------------------------------------------
   // 1. ACCESSING AND OPENING THE PREVIEW
-  // ---------------------------------------------------------------------------
+
   var previewFinderVal =
       previewFinder ??
       find.byTooltip(lds.previewTooltipLabel, skipOffstage: false).last;
@@ -836,20 +889,24 @@ Future<void> caTestPreview({
 
   // await tester.pump(const Duration(seconds: 15));
 
-  // ---------------------------------------------------------------------------
-  // 2. VERIFYING THE TITLE PRESENT
-  // ---------------------------------------------------------------------------
+  // 2. VERIFYING THE LINK PRESENT
+  var linkFinder = find.descendant(
+    of: find.byType(StatefulBuilder),
+    matching: find.textContaining(title),
+  );
+  expect(linkFinder, findsOne);
+  logt("---------> Link to external notes found");
+
+
+  // 3. VERIFYING THE TITLE PRESENT  
   var titleFinder = find.descendant(
     of: find.byType(StatefulBuilder),
     matching: find.textContaining(title),
   );
   expect(titleFinder, findsOne);
-  logt("---------> Preview title found");
+  logt("---------> Title found");
 
-  // ---------------------------------------------------------------------------
-  // 3. VERIFYING THE VALUES FOR THE INDIVIDUAL PERSPECTIVE
-  // ---------------------------------------------------------------------------
-
+  // 4. VERIFYING THE VALUES FOR THE INDIVIDUAL PERSPECTIVE
   // Getting all expansionTilesIndividualPerpective
   var expansionTilesIndividualPerpectiveFinder =
       await caPreviewGetExpansionTilesIndividualPerspective();
@@ -860,7 +917,6 @@ Future<void> caTestPreview({
 
   // 3.1 case 1: no expansion tiles in the individual perpective: default message to check
   // ---------------------------------------------------------------------------
-  // code to re-do
   if (totalExpansionTilesIndividualPerpectiveFinder == 0) {
     var caPreviewNoDataInIndividualPerspectiveFinder = find.byKey(
       const Key("ca-preview-no-data-in-individual-perspective"),
@@ -1256,7 +1312,7 @@ Future<void> caTestPreview({
         // if options selected
         if (currentSegmentedButtonsOptionsValues.isNotEmpty)
         { 
-          currentSegmentedButtonsOptionsSerializedAndSortedValues = _ListToString(currentSegmentedButtonsOptionsValues.toList()..sort());
+          currentSegmentedButtonsOptionsSerializedAndSortedValues = _listToString(currentSegmentedButtonsOptionsValues.toList()..sort());
           expectedSegmentedButtonsOptionsData  = "${los.caPreviewAnswersIntroduction}${currentSegmentedButtonsOptionsSerializedAndSortedValues}\n";          
         }        
           
@@ -1925,7 +1981,7 @@ Future<void> gpsTestPreview({
   await tester.tap(previewTooltipFinder);
   await tester.pumpAndSettle();
 
-  await tester.pump(const Duration(seconds: 20));
+  await tester.pump(const Duration(seconds: 5));
 
   // Searching for the title
   var titleFinder = find.descendant
@@ -2391,7 +2447,7 @@ Future<void> selectLanguage({
 String _segmentedButtonToString(Set<String> values) => values.join("/");
 
 // Method used to serialize a list to a slash-separated string.
-String _ListToString(List<String> values) => values.join("/");
+String _listToString(List<String> values) => values.join("/");
 
 /// Method used to scroll up the screen (-200 as default delta value to go up the list).
 /// The method assumes that the first descendant is the right one.

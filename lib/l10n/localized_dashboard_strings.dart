@@ -30,6 +30,7 @@ class LocalizedDashboardStrings
 
   // ─── DATA EDITION ───────────────────────────────────────
   var editFromDashboardItemTooltipLabel = "";
+  var editFromPreviewTooltipLabel = "";
 
   // ─── KEYWORDS EDITION ───────────────────────────────────────
   var keywordsTextFieldLabel = "";
@@ -70,7 +71,7 @@ class LocalizedDashboardStrings
     
     // ─── DATA EDITION ───────────────────────────────────────
     editFromDashboardItemTooltipLabel = _l10n?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip";
-    
+    editFromPreviewTooltipLabel  = _l10n?.dashboard_tooltip_edit_session_data ?? "Issue with the l10n for the 'Edit session data' tooltip";
     // ─── KEYWORDS EDITION ───────────────────────────────────────
     keywordsTextFieldLabel = _l10n?.dashboard_edit_keywords_sheet_label_text ?? "Issue with the l10n for the 'Keywords Edition' label text";
     keywordsTooltipLabel = _l10n?.dashboard_tooltip_edit_keywords ?? "Issue with the l10n for the 'Edit Keywords' tooltip";

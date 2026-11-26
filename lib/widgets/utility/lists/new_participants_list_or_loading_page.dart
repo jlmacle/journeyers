@@ -87,6 +87,7 @@ class NewParticipantsListOrLoadingPage extends StatelessWidget {
                               required Object dtoWhenEdition,
                               required String
                               fileNameWithoutExtensionWhenEdition,
+                              String? linkToExternalNotesWhenEdition,
                               required String filePathWhenEdition,
                             }) {},
                         onParticipantsLoadedCallbackFunction:

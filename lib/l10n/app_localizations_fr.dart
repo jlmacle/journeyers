@@ -97,12 +97,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
-      'Le besoin d\'être plus apprécié(e) au travail ?';
+      'Le besoin d\'être plus appréciable au travail ?';
 
   @override
   String
   get ca_process_individual_perspective_workplace_to_remain_appreciated =>
-      'Le besoin de rester apprécié(e) au travail ?';
+      'Le besoin de rester appréciable au travail ?';
 
   @override
   String get ca_process_individual_perspective_legacy_issue_section_question =>
@@ -134,11 +134,18 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_process_group_perspective_appreciability_work =>
-      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?';
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester appréciable au travail ?';
 
   @override
   String get ca_process_group_perspective_earning_ability =>
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
+
+  @override
+  String get ca_process_external_link_title => 'Lien vers des notes externes :';
+
+  @override
+  String get ca_process_external_link_text_field_hint =>
+      'Veuillez entrer un lien vers d\'autres notes\nsi pertinent.';
 
   @override
   String get ca_process_file_name_save_button_text_on_desktop =>
@@ -153,6 +160,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get ca_dashboard_title => 'Analyses précédentes';
+
+  @override
+  String get ca_preview_external_link =>
+      'Lien vers des notes supplémentaires :';
 
   @override
   String get ca_preview_notes_introduction => 'Notes: ';
@@ -658,12 +669,12 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_individual_perspective_workplace_more_appreciated =>
-      'Le besoin d\'être plus apprécié(e) au travail ?';
+      'Le besoin d\'être plus appréciable au travail ?';
 
   @override
   String
   get ca_process_individual_perspective_workplace_to_remain_appreciated =>
-      'Le besoin de rester apprécié(e) au travail ?';
+      'Le besoin de rester appréciable au travail ?';
 
   @override
   String get ca_process_individual_perspective_legacy_issue_section_question =>
@@ -695,11 +706,18 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_process_group_perspective_appreciability_work =>
-      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester apprécié(e) au travail ?';
+      'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec rester appréciable au travail ?';
 
   @override
   String get ca_process_group_perspective_earning_ability =>
       'Est-ce que participer à ce processus de résolution de problème en groupe est cohérent avec ma capacité à générer un revenu ?';
+
+  @override
+  String get ca_process_external_link_title => 'Lien vers des notes externes :';
+
+  @override
+  String get ca_process_external_link_text_field_hint =>
+      'Veuillez entrer un lien vers d\'autres notes\nsi pertinent.';
 
   @override
   String get ca_process_file_name_save_button_text_on_desktop =>
@@ -714,6 +732,10 @@ class AppLocalizationsFrFr extends AppLocalizationsFr {
 
   @override
   String get ca_dashboard_title => 'Analyses précédentes';
+
+  @override
+  String get ca_preview_external_link =>
+      'Lien vers des notes supplémentaires :';
 
   @override
   String get ca_preview_notes_introduction => 'Notes: ';

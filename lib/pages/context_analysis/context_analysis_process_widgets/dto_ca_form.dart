@@ -8,7 +8,6 @@ import "package:flutter/services.dart";
 import "package:file_picker/file_picker.dart";
 import "package:path/path.dart" as path;
 
-import "package:journeyers/debug_constants.dart";
 import "package:journeyers/l10n/localized_ca_form_questions.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/_context_analysis_form_misc_constants.dart";
 import "package:journeyers/pages/context_analysis/context_analysis_process_widgets/dto_custom_checkbox_with_text_field.dart";
@@ -149,7 +148,7 @@ class DTOCAForm {
           lineReturnToSpace(lfq.labelTextField): groupProblemsToSolveStr,
         }),
 
-        lineReturnToSpace(lfq.level3TitleSameProblem):
+        lineReturnToSpace(lfq.level3TitleSameProblems):
             await _segmentedDataToMap(context, groupSameProblemsToSolve),
 
         lineReturnToSpace(lfq.level3TitleHarmonyAtHome):
@@ -976,7 +975,7 @@ class DTOCAForm {
 
       if (content == lineReturnToSpace(lfq.level3TitleGroupsProblematics)) {
         if (marker == "X") dto.groupProblemsToSolveStr = readNotes();
-      } else if (content == lineReturnToSpace(lfq.level3TitleSameProblem)) {
+      } else if (content == lineReturnToSpace(lfq.level3TitleSameProblems)) {
         if (marker == "X") {
           final sel = readSelection();
           dto.groupSameProblemsToSolve.selection = sel.isNotEmpty

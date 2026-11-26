@@ -140,6 +140,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_process_external_link_title => 'Link to external notes:';
+
+  @override
+  String get ca_process_external_link_text_field_hint =>
+      'Please enter a link towards external notes\nif relevant.';
+
+  @override
   String get ca_process_file_name_save_button_text_on_desktop =>
       'Click to save your data in CSV,\nspreadsheet-compatible format';
 
@@ -152,6 +159,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get ca_dashboard_title => 'Previous analyses';
+
+  @override
+  String get ca_preview_external_link => 'Link to additional notes:';
 
   @override
   String get ca_preview_notes_introduction => 'Notes: ';
@@ -693,6 +703,13 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
       'Is entering the group problem-solving process consistent with my income earning ability?';
 
   @override
+  String get ca_process_external_link_title => 'Link to external notes:';
+
+  @override
+  String get ca_process_external_link_text_field_hint =>
+      'Please enter a link towards external notes\nif relevant.';
+
+  @override
   String get ca_process_file_name_save_button_text_on_desktop =>
       'Click to save your data in CSV,\nspreadsheet-compatible format';
 
@@ -705,6 +722,9 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String get ca_dashboard_title => 'Previous analyses';
+
+  @override
+  String get ca_preview_external_link => 'Link to additional notes:';
 
   @override
   String get ca_preview_notes_introduction => 'Notes: ';

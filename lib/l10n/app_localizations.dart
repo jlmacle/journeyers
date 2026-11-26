@@ -299,6 +299,18 @@ abstract class AppLocalizations {
   /// **'Is entering the group problem-solving process consistent with my income earning ability?'**
   String get ca_process_group_perspective_earning_ability;
 
+  /// The title for the link to the external notes
+  ///
+  /// In en, this message translates to:
+  /// **'Link to external notes:'**
+  String get ca_process_external_link_title;
+
+  /// The text field hint inviting to add a link towards external notes
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a link towards external notes\nif relevant.'**
+  String get ca_process_external_link_text_field_hint;
+
   /// l10n for the save button text, in the c.a. process (on desktop)
   ///
   /// In en, this message translates to:
@@ -322,6 +334,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Previous analyses'**
   String get ca_dashboard_title;
+
+  /// The title for the link to the external notes in the preview
+  ///
+  /// In en, this message translates to:
+  /// **'Link to additional notes:'**
+  String get ca_preview_external_link;
 
   /// l10n for Notes:
   ///
