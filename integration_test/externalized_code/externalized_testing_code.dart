@@ -932,7 +932,7 @@ Future<void> caTestPreview({
     logt("Found placeholder text for absence of individual data in preview");
   }
   // 3.2 case 2: expansion tiles in the group perpective: text field values to check
-  // ---------------------------------------------------------------------------
+  
   else {
     // First 4 values: balance issue
     // Next 2 values: work issue
